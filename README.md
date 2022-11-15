@@ -1,3 +1,6 @@
-# Proyecto-Progra-II
-Proyecto Final Vehiculo con movimiento por teclado
-Brendan Rubilar / Tomas Cid / Pedro Muñoz
+## Proyecto Semestral:
+### Tema 5
+### Integrantes:
+###  > Brendan Rubilar Vivanco
+###  > Pedro Muñoz Solano
+###  > Tomás Cid Muñoz
