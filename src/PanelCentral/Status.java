@@ -1,34 +1,40 @@
-
 package PanelCentral;
 
-import ControlGUI.VControl;
 import java.awt.CardLayout;
 import java.awt.Color;
-import java.awt.Image;
+import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.event.*;
 
-
 public class Status extends JPanel implements ActionListener{
     
-    JPanel Panels,Menu,Running;
+    //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
+    JPanel Panels,Menu;
     JButton Iniciar,Salir;
     JFrame target;
     CardLayout c1 = new CardLayout();
+
+    
+    
+    InGame enjuego = new InGame(); //Panel in game
+
+
     boolean appIsRunning=false;
 
 
     public Status(JFrame target){
+
         this.target = target;
         
         InitPanels();
         InitMenuComponents();
         InitRunningComponents();
-        
+
         target.add(Panels);
         
 
     }
+    
     
     public void InitPanels(){
         //Panel contenedor, se utiliza CardLayout para hacer cambio entre los paneles internos.
@@ -38,15 +44,15 @@ public class Status extends JPanel implements ActionListener{
         //Creamos los paneles de Menu y ProgramaIniciado
         Menu = new JPanel();
         Menu.setLayout(null);
-        Running = new JPanel();
-        Running.setLayout(null);
-       
+
         //Se agregan estos paneles al panel contenedor
         Panels.add(Menu,"1");
-        Panels.add(Running,"2");
-        
+        Panels.add(enjuego,"2");
+
     }
    
+    
+
     
     public void InitMenuComponents(){
         //Creamos los botones del menu
@@ -68,15 +74,12 @@ public class Status extends JPanel implements ActionListener{
         test.setOpaque(true);
         test.setBackground(Color.red);
         test.setBounds(100,100,50,50);
-        Running.add(test);
+        enjuego.add(test);
         
-        Vehicle car = new Vehicle(Running);
-     
-       
-       
-
-     
     }
+    
+    
+
     
     @Override
     public void actionPerformed(ActionEvent e){
@@ -84,13 +87,15 @@ public class Status extends JPanel implements ActionListener{
         if(e.getSource()==Iniciar){
           //Cambiamos al panel ProgramaIniciado
           c1.show(Panels, "2");
+          enjuego.requestFocus();
           appIsRunning=true;
 
         }
         if(e.getSource()==Salir){
             System.exit(0);
         }
-            
+          
     }
+     
     
 }

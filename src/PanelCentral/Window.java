@@ -1,8 +1,10 @@
 package PanelCentral;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import javax.swing.*;
 
-public class Window extends JFrame{
+public class Window extends JFrame {
     
     
     public Window(){
@@ -14,7 +16,7 @@ public class Window extends JFrame{
         setResizable(false);
         
         Status StatusController = new Status(this);
-       
+        
 
         
         
@@ -22,6 +24,8 @@ public class Window extends JFrame{
         setVisible(true);
         
     }
+    
+    
     
     
 }

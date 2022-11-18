@@ -1,36 +1,46 @@
 package PanelCentral;
-import ControlGUI.VControl;
-import javax.swing.*;
-import java.awt.Image;
+import java.awt.*;
 
 
-
-public class Vehicle extends JLabel{
-    JPanel target;
-    JLabel vehicle = new JLabel();
+public class Vehicle {
     
-
-    public Vehicle(JPanel target){
-        this.target = target;
-        ImageIcon vehicleImage = new ImageIcon("Images//car.png");
-        vehicle.setBounds(500,100,50,50);
-        vehicle.setIcon(new ImageIcon(vehicleImage.getImage().getScaledInstance(vehicle.getWidth(),vehicle.getHeight(),Image.SCALE_SMOOTH)));
-        
+    private int X=250,Y=195;
+    private Color colorAuto;
+ 
+    
+    public Vehicle(){
      
+    }
+    
+    public void paint(Graphics g) {
+    Graphics2D g2d = (Graphics2D) g;
 
-        target.add(vehicle);
+    g2d.setColor(Color.yellow);
+    g2d.fillRect(X, Y, 80, 60);
+
+
     }
     
     public void SetPosition(int x, int y){
-        vehicle.setLocation(x,y);
+        
     }
     
     public void MoveUp(){
-        vehicle.setLocation(vehicle.getX(),vehicle.getY()+10);
+         Y=Y-5;
     }
     
-    public JLabel getLabel(){
-        return vehicle;
+     public void MoveRight(){
+         X=X+5;
     }
     
+    public void MoveLeft(){
+         X=X-5;
+    }
+     
+    public void MoveDown(){
+         Y=Y+5;
+
+        
+    }
+
 }
