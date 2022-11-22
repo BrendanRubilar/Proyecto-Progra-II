@@ -16,16 +16,9 @@ public class Window extends JFrame {
         setResizable(false);
         
         Status StatusController = new Status(this);
-        
-
-        
-        
-                
+                    
         setVisible(true);
         
     }
-    
-    
-    
     
 }

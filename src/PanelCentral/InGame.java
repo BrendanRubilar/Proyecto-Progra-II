@@ -1,5 +1,6 @@
 
 package PanelCentral;
+import Otros.Generator;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -13,13 +14,16 @@ import java.awt.event.KeyListener;
 public class InGame extends JPanel implements KeyListener{
     
     Vehicle vehicle;
+    boolean aux = true;
+    JLabel rayas = new JLabel();
+    Generator generador = new Generator();
     
     public InGame(){
         this.setLayout(null);
         vehicle = new Vehicle();
         this.addKeyListener(this);
         this.setFocusable(true);
-    
+        generador.start();
     }
 
     //DIBUJAR EN EL PANEL 
@@ -27,14 +31,19 @@ public class InGame extends JPanel implements KeyListener{
         super.paint(g);
         
         //TEST DE UNA PISTA
-        int x=200,y=5;
+        int x=250,y=0;
+        
+        g.setColor(Color.GREEN); 
+        g.fillRect(0,0, 1000, 700);
 
-        g.setColor(new Color(159, 159, 159));
-        g.fillOval(x, y, 500, 500);
-        g.setColor(new Color(24, 129, 55));
-        g.fillOval(x + 150, y + 150, 200, 200);
-        g.setColor(Color.WHITE); 
+        g.setColor(Color.GRAY);
+        g.fillRect(x, y, 500, 1000);
+        
+        
+        
         vehicle.paint(g);
+
+
     }
     
     
