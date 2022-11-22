@@ -4,7 +4,8 @@ import java.awt.*;
 
 public class Vehicle {
 
-    private int X = 250, Y = 195, H = 80, W = 60, giro = 0;
+    private int X = 250, Y = 195, H = 80, W = 60;
+    private double  giro = 0;
     private Color colorAuto;
 
     public Vehicle() {
@@ -23,7 +24,12 @@ public class Vehicle {
     public void SetPosition(int x, int y) {
 
     }
-
+    public int x_locate(){
+        return X;
+    }
+        public int y_locate(){
+        return Y;
+    }
     public void MoveUp() {
         if (Y >= 20) {
             Y = Y - 5;
@@ -32,15 +38,15 @@ public class Vehicle {
 
     public void MoveRight() {
         if (X <= 1000) {
-            //X = X + 5;
-            giro = giro - 1;
+             X = X + 5;
+            giro = giro - 0.175;
         }
     }
 
     public void MoveLeft() {
         if (X >= 20) {
-            //X = X - 5;
-            giro = giro + 1;
+            X = X - 5;
+            giro = giro + 0.175;
 
         }
     }

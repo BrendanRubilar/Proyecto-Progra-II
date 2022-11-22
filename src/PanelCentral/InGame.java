@@ -66,7 +66,7 @@ public class InGame extends JPanel implements KeyListener {
 
                 vehicle.MoveRight();
                 repaint();
-
+                System.out.println("Coordenadas:"+vehicle.x_locate()+" , " + vehicle.y_locate());
                 break;
             case 40:
                 vehicle.MoveDown();
