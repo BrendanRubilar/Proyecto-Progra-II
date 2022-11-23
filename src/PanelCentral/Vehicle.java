@@ -51,7 +51,7 @@ public class Vehicle {
     }
     public void MoveUp() {
         if (Y >= 20) {
-            Y = Y - 8;
+            Y = Y - 1;
             if(giro>0.4){
                 giro=giro-0.5;
             }else if(giro<-0.4){
@@ -64,7 +64,7 @@ public class Vehicle {
 
     public void MoveRight() {
         if (X <= 1000) {
-             X = X + 8;
+             X = X + 1;
              if(giro>=-5){
                 giro = giro - 0.4;
             }
@@ -73,7 +73,7 @@ public class Vehicle {
 
     public void MoveLeft() {
         if (X >= 20) {
-            X = X - 8;
+            X = X - 1;
             if(giro<=5){
                 giro = giro + 0.4;
             }
@@ -82,7 +82,7 @@ public class Vehicle {
 
     public void MoveDown() {
         if (Y <= 600) {
-            Y = Y + 8;
+            Y = Y + 1 ;
             if(giro>0.4){
                 giro=giro-0.5;
             }else if(giro<-0.4){

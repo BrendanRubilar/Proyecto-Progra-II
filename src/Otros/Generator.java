@@ -27,6 +27,7 @@ public class Generator extends Thread {
         public void run() {
             System.out.println("XD " + new Date());
             cars.add(new Car());
+            
         }
 
     };

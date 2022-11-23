@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class InGame extends JPanel implements KeyListener {
 
     Vehicle vehicle;
-    boolean aux = false;
+    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown;
     JLabel rayas = new JLabel();
     Generator generador;
     private ArrayList<Car> cars; 
@@ -31,6 +31,9 @@ public class InGame extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.setFocusable(true);
         generador.start();
+        
+        
+        
     }
 
     //DIBUJAR EN EL PANEL 
@@ -51,13 +54,27 @@ public class InGame extends JPanel implements KeyListener {
             
         for (int i = 0; i < cars.size(); i++) {
             cars.get(i).paint(g);
-            
         }
         
         vehicle.paint(g);
-  
         
+        if(MoveLeft){
+           vehicle.MoveLeft();
+        }
+        if(MoveUp){
+           vehicle.MoveUp();
+        }
+        
+        if(MoveRight){
+           vehicle.MoveRight();
+        }
+        
+        if(MoveDown){
+            vehicle.MoveDown();
+        }
+                        
 
+        repaint();
     }
             
 
@@ -74,24 +91,23 @@ public class InGame extends JPanel implements KeyListener {
         switch (e.getKeyCode()) {
 
             case 37:
-                vehicle.MoveLeft();
-                repaint();
+                MoveLeft = true;
                 break;
 
             case 38:
-                vehicle.MoveUp();
-                repaint();
-
+                
+                MoveUp = true;
+                
                 break;
             case 39:
 
-                vehicle.MoveRight();
-                repaint();
-                System.out.println("Coordenadas:"+vehicle.x_locate()+" , " + vehicle.y_locate());
+                MoveRight = true;
+                
                 break;
             case 40:
-                vehicle.MoveDown();
-                repaint();
+                
+                MoveDown = true;
+                
                 break;
 
             case 27:
@@ -104,6 +120,33 @@ public class InGame extends JPanel implements KeyListener {
     public void keyReleased(KeyEvent e) {
         //BANDERA
         System.out.println("You released key char: " + e.getKeyChar());
+        
+        switch (e.getKeyCode()) {
+
+            case 37:
+                MoveLeft = false;
+                break;
+
+            case 38:
+                
+                MoveUp = false;
+                
+                break;
+            case 39:
+
+                MoveRight = false;
+                
+                break;
+            case 40:
+                
+                MoveDown = false;
+                
+                break;
+
+            case 27:
+
+                break;
+        }
 
     }
 
