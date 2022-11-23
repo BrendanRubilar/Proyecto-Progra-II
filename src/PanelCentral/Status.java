@@ -5,10 +5,17 @@ import java.awt.Color;
 import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.event.*;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.File;
+import javax.sound.sampled.FloatControl;
 
 public class Status extends JPanel implements ActionListener {
 
     //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
+    private Clip menu_theme;
+    private Clip inGame_theme;
     JPanel Panels, Menu;
     JButton Iniciar, Salir;
     JFrame target;
@@ -21,10 +28,11 @@ public class Status extends JPanel implements ActionListener {
     public Status(JFrame target) {
 
         this.target = target;
-
+        InitMusic();
         InitPanels();
         InitMenuComponents();
         InitRunningComponents();
+        
 
         target.add(Panels);
 
@@ -69,11 +77,62 @@ public class Status extends JPanel implements ActionListener {
 
     }
 
+    private void InitMusic(){
+        try {
+ 
+            // Se obtiene un Clip de sonido
+            menu_theme = AudioSystem.getClip();
+            inGame_theme = AudioSystem.getClip();
+ 
+            // Se carga con un fichero wav
+            menu_theme.open(AudioSystem.getAudioInputStream(new File("Multimedia//main_theme.wav")));
+            inGame_theme.open(AudioSystem.getAudioInputStream(new File("Multimedia//ingameTheme.wav")));
+            setVolumeMenu(0.15f);
+            setVolumeGame(0.15f);
+            // Comienza la reproducción
+            
+            menu_theme.loop(0);
+            
+            /*
+             *Aqui vá tu código de ordenamiento
+             */
+        } catch (Exception e) {
+            System.out.println("No funcionó xd" + e);
+        }
+    }
+
+//Codigo para ajustar el volumen-------------------------------------------------------------------
+    public float getVolumeMenu() {
+        FloatControl gainControl = (FloatControl) menu_theme.getControl(FloatControl.Type.MASTER_GAIN);        
+        return (float) Math.pow(10f, gainControl.getValue() / 20f);
+    }
+
+    public void setVolumeMenu(float volume) {
+        if (volume < 0f || volume > 1f)
+            throw new IllegalArgumentException("Volume not valid: " + volume);
+        FloatControl gainControl = (FloatControl) menu_theme.getControl(FloatControl.Type.MASTER_GAIN);        
+        gainControl.setValue(20f * (float) Math.log10(volume));
+    }
+    public float getVolumeGame() {
+        FloatControl gainControl = (FloatControl) inGame_theme.getControl(FloatControl.Type.MASTER_GAIN);        
+        return (float) Math.pow(10f, gainControl.getValue() / 20f);
+    }
+
+    public void setVolumeGame(float volume) {
+        if (volume < 0f || volume > 1f)
+            throw new IllegalArgumentException("Volume not valid: " + volume);
+        FloatControl gainControl = (FloatControl) inGame_theme.getControl(FloatControl.Type.MASTER_GAIN);        
+        gainControl.setValue(20f * (float) Math.log10(volume));
+    }
+//-------------------------------------------------------------------------------------------------
+
     @Override
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == Iniciar) {
             //Cambiamos al panel ProgramaIniciado
+            menu_theme.stop();
+            inGame_theme.loop(0);
             c1.show(Panels, "2");
             enjuego.requestFocus();
             appIsRunning = true;
