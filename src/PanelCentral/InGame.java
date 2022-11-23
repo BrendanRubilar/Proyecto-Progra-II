@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class InGame extends JPanel implements KeyListener {
 
     Vehicle vehicle;
-    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown;
+    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown,carsOnMovement=true;
     JLabel rayas = new JLabel();
     Generator generador;
     private ArrayList<Car> cars; 
@@ -54,6 +54,9 @@ public class InGame extends JPanel implements KeyListener {
             
         for (int i = 0; i < cars.size(); i++) {
             cars.get(i).paint(g);
+            if(carsOnMovement){
+                 cars.get(i).moveDown();
+            }
         }
         
         vehicle.paint(g);

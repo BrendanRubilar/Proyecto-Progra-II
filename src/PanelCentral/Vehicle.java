@@ -4,8 +4,7 @@ import java.awt.*;
 
 public class Vehicle {
 
-    private int X = 250, Y = 195, H = 80, W = 60;
-    private double  giro = 0;
+    private double X = 250, Y = 195, H = 80, W = 60, Velocity = 0.15, giro = 0;
 
     public Vehicle() {
 
@@ -20,38 +19,33 @@ public class Vehicle {
 
         wheel1.rotate(Math.toRadians(giro), X+30, Y+10);
         wheel1.setColor(Color.BLACK);
-        wheel1.fillRect(X-5, Y+10, W-50, H-60);
+        wheel1.fillRect((int)X-5, (int)Y+10, (int)W-50, (int)H-60);
 
         wheel2.rotate(Math.toRadians(giro), X+30, Y+10);
         wheel2.setColor(Color.BLACK);
-        wheel2.fillRect(X+55, Y+10, W-50, H-60);
+        wheel2.fillRect((int)X+55, (int)Y+10, (int)W-50, (int)H-60);
 
         wheel3.rotate(Math.toRadians(-giro), X+30, Y+50);
         wheel3.setColor(Color.BLACK);
-        wheel3.fillRect(X-5, Y+50, W-50, H-60);
+        wheel3.fillRect((int)X-5, (int)Y+50, (int)W-50, (int)H-60);
 
         wheel4.rotate(Math.toRadians(-giro), X+30, Y+50);
         wheel4.setColor(Color.BLACK);
-        wheel4.fillRect(X+55, Y+50, W-50, H-60);
+        wheel4.fillRect((int)X+55, (int)Y+50, (int)W-50, (int)H-60);
 
         car.rotate(Math.toRadians(-giro), X + 30, Y+80);
         car.setColor(Color.yellow);
-        car.fillRect(X, Y, W, H);
+        car.fillRect((int)X, (int)Y, (int)W, (int)H);
 
     }
 
     public void SetPosition(int x, int y) {
 
     }
-    public int x_locate(){
-        return X;
-    }
-        public int y_locate(){
-        return Y;
-    }
+
     public void MoveUp() {
         if (Y >= 20) {
-            Y = Y - 1;
+            Y = Y - Velocity;
             if(giro>0.4){
                 giro=giro-0.5;
             }else if(giro<-0.4){
@@ -64,7 +58,7 @@ public class Vehicle {
 
     public void MoveRight() {
         if (X <= 1000) {
-             X = X + 1;
+             X = X + Velocity;
              if(giro>=-5){
                 giro = giro - 0.4;
             }
@@ -73,7 +67,7 @@ public class Vehicle {
 
     public void MoveLeft() {
         if (X >= 20) {
-            X = X - 1;
+            X = X - Velocity;
             if(giro<=5){
                 giro = giro + 0.4;
             }
@@ -82,7 +76,7 @@ public class Vehicle {
 
     public void MoveDown() {
         if (Y <= 600) {
-            Y = Y + 1 ;
+            Y = Y + Velocity ;
             if(giro>0.4){
                 giro=giro-0.5;
             }else if(giro<-0.4){
