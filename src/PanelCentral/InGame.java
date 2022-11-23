@@ -1,5 +1,6 @@
 package PanelCentral;
 
+import Otros.Car;
 import Otros.Generator;
 
 import java.awt.Color;
@@ -8,16 +9,23 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 //ESTA CLASE ES UN PANEL QUE REPRESENTARÁ IN GAME, SE HACE COMO CLASE PARA PODER USAR EL METODO PAINT 
 public class InGame extends JPanel implements KeyListener {
 
     Vehicle vehicle;
-    boolean aux = true;
+    boolean aux = false;
     JLabel rayas = new JLabel();
-    Generator generador = new Generator();
+    Generator generador;
+    private ArrayList<Car> cars; 
+    
 
     public InGame() {
+        cars = new ArrayList<Car>();
+        generador = new Generator(cars);
+
+        
         this.setLayout(null);
         vehicle = new Vehicle();
         this.addKeyListener(this);
@@ -37,13 +45,26 @@ public class InGame extends JPanel implements KeyListener {
 
         g.setColor(Color.GRAY);
         g.fillRect(x, y, 500, 1000);
+        
 
+     
+            
+        for (int i = 0; i < cars.size(); i++) {
+            cars.get(i).paint(g);
+            
+        }
+        
         vehicle.paint(g);
+  
+        
 
     }
+            
+
 
     @Override
     public void keyTyped(KeyEvent e) {
+        
     }
 
     //Control del teclado LISTA DE CODIGOS: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list
