@@ -88,4 +88,8 @@ public class Vehicle {
 
     }
 
+    public void Jump(){
+        
+    }
+
 }

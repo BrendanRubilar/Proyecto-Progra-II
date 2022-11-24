@@ -2,6 +2,8 @@ package PanelCentral;
 
 import Otros.Car;
 import Otros.Generator;
+import Otros.Tree;
+import Otros.Colisions;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -15,15 +17,17 @@ import java.util.ArrayList;
 public class InGame extends JPanel implements KeyListener {
 
     Vehicle vehicle;
-    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown,carsOnMovement=true;
+    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown,objetsOnMovement=true, Jump;
     JLabel rayas = new JLabel();
     Generator generador;
     private ArrayList<Car> cars; 
-    
+    private ArrayList<Tree> trees;
 
     public InGame() {
         cars = new ArrayList<Car>();
-        generador = new Generator(cars);
+        trees = new ArrayList<Tree>();
+
+        generador = new Generator(cars, trees);
 
         
         this.setLayout(null);
@@ -50,12 +54,16 @@ public class InGame extends JPanel implements KeyListener {
         g.fillRect(x, y, 500, 1000);
         
 
-     
-            
         for (int i = 0; i < cars.size(); i++) {
             cars.get(i).paint(g);
-            if(carsOnMovement){
+            if(objetsOnMovement){
                  cars.get(i).moveDown();
+            }
+        }
+        for (int i = 0; i < trees.size(); i++) {
+            trees.get(i).paint(g);
+            if(objetsOnMovement){
+                 trees.get(i).moveDown();
             }
         }
         
@@ -75,6 +83,10 @@ public class InGame extends JPanel implements KeyListener {
         if(MoveDown){
             vehicle.MoveDown();
         }
+        if(Jump){
+            vehicle.Jump();
+        }
+        
                         
 
         repaint();
