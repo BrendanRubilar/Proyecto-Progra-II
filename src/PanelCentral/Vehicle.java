@@ -20,21 +20,21 @@ public class Vehicle {
 
         wheel1.rotate(Math.toRadians(giro), X+30, Y+10);
         wheel1.setColor(Color.BLACK);
-        wheel1.fillRect((int)X-5, (int)Y+10, (int)W-50, (int)H-60);
+        wheel1.fillRect((int)X-5, (int)Y+5, (int)W-50, (int)H-60);
 
         wheel2.rotate(Math.toRadians(giro), X+30, Y+10);
         wheel2.setColor(Color.BLACK);
-        wheel2.fillRect((int)X+55, (int)Y+10, (int)W-50, (int)H-60);
+        wheel2.fillRect((int)X+55, (int)Y+5, (int)W-50, (int)H-60);
 
-        wheel3.rotate(Math.toRadians(-giro), X+30, Y+50);
+        wheel3.rotate(Math.toRadians(giro), X+30, Y+50);
         wheel3.setColor(Color.BLACK);
         wheel3.fillRect((int)X-5, (int)Y+50, (int)W-50, (int)H-60);
 
-        wheel4.rotate(Math.toRadians(-giro), X+30, Y+50);
+        wheel4.rotate(Math.toRadians(giro), X+30, Y+50);
         wheel4.setColor(Color.BLACK);
         wheel4.fillRect((int)X+55, (int)Y+50, (int)W-50, (int)H-60);
 
-        car.rotate(Math.toRadians(-giro), X + 30, Y+80);
+        car.rotate(Math.toRadians(giro), X + 30, Y+70);
         car.setColor(Color.yellow);
         car.fillRect((int)X, (int)Y, (int)W, (int)H);
 
@@ -58,10 +58,10 @@ public class Vehicle {
     }
 
     public void MoveRight() {
-        if (X <= 1000) {
+        if (X <= 980) {
              X = X + Velocity;
-             if(giro>=-5){
-                giro = giro - 0.4;
+             if(giro<=1){
+                giro = giro + 0.01;
             }
         }
     }
@@ -69,14 +69,14 @@ public class Vehicle {
     public void MoveLeft() {
         if (X >= 20) {
             X = X - Velocity;
-            if(giro<=5){
-                giro = giro + 0.4;
+            if(giro>=-1){
+                giro = giro - 0.01;
             }
         }
     }
 
     public void MoveDown() {
-        if (Y <= 600) {
+        if (Y <= 580) {
             Y = Y + Velocity ;
             if(giro>0.4){
                 giro=giro-0.5;
@@ -88,6 +88,7 @@ public class Vehicle {
         }
 
     }
+
 
     public void Jump(InGame auxInGame){
         

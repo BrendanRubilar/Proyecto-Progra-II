@@ -146,6 +146,7 @@ public class InGame extends JPanel implements KeyListener {
             case 32:
 
                 if(!Jump) Jump=true;
+                //jump_clip.start();
                 break;
         }
     }
