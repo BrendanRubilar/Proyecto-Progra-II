@@ -7,5 +7,4 @@ public class Main {
         Window ventana = new Window();
 
     }
-
 }

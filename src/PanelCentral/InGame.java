@@ -11,15 +11,17 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.security.PublicKey;
 import java.util.ArrayList;
 
 //ESTA CLASE ES UN PANEL QUE REPRESENTARÁ IN GAME, SE HACE COMO CLASE PARA PODER USAR EL METODO PAINT 
 public class InGame extends JPanel implements KeyListener {
 
     Vehicle vehicle;
-    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown,objetsOnMovement=true, Jump;
+    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown,objetsOnMovement=true, Jump=false;
     JLabel rayas = new JLabel();
     Generator generador;
+    double timerAuxiliar=0;
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
 
@@ -27,8 +29,7 @@ public class InGame extends JPanel implements KeyListener {
         cars = new ArrayList<Car>();
         trees = new ArrayList<Tree>();
 
-        generador = new Generator(cars, trees);
-
+        generador = new Generator(this);
         
         this.setLayout(null);
         vehicle = new Vehicle();
@@ -36,9 +37,16 @@ public class InGame extends JPanel implements KeyListener {
         this.setFocusable(true);
         generador.start();
         
-        
-        
     }
+
+    public ArrayList getArrayCars(){
+        return cars;
+    }
+
+    public ArrayList getArrayTrees(){
+        return trees;
+    }
+
 
     //DIBUJAR EN EL PANEL 
     public void paint(Graphics g) {
@@ -84,19 +92,29 @@ public class InGame extends JPanel implements KeyListener {
             vehicle.MoveDown();
         }
         if(Jump){
-            vehicle.Jump();
+            timerAuxiliar= timerAuxiliar+0.002;
+            vehicle.Jump(this);
+      
+        }else if(!Jump){
+            vehicle.setSize(80, 60);
+            timerAuxiliar=0;
+
         }
         
-                        
-
         repaint();
     }
+
+    public double getTimerAuxiliar(){
+        return timerAuxiliar;
+    }
+
+    public void setJumpFalse(){
+        Jump = false;
+    }
             
-
-
     @Override
     public void keyTyped(KeyEvent e) {
-        
+      
     }
 
     //Control del teclado LISTA DE CODIGOS: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list
@@ -125,8 +143,9 @@ public class InGame extends JPanel implements KeyListener {
                 
                 break;
 
-            case 27:
+            case 32:
 
+                if(!Jump) Jump=true;
                 break;
         }
     }

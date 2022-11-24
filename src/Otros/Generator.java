@@ -1,6 +1,6 @@
 package Otros;
 
-
+import PanelCentral.InGame;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Date;
@@ -11,11 +11,13 @@ public class Generator extends Thread {
     Timer timer = new Timer();
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
+    private InGame InGamePointer;
 
+    public Generator(InGame a) {
+        InGamePointer = a;
+        cars  = InGamePointer.getArrayCars();
+        trees = InGamePointer.getArrayTrees();
 
-    public Generator(ArrayList cars, ArrayList trees) {
-        this.cars = cars;
-        this.trees = trees;
     }
 
     @Override
@@ -42,5 +44,7 @@ public class Generator extends Thread {
             
         }
     };
+
+
 
 }

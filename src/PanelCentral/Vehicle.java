@@ -1,6 +1,7 @@
 package PanelCentral;
 
 import java.awt.*;
+import java.awt.Rectangle;
 
 public class Vehicle {
 
@@ -88,8 +89,23 @@ public class Vehicle {
 
     }
 
-    public void Jump(){
+    public void Jump(InGame auxInGame){
         
+        if(W>=60) W= Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+60;
+        if(H>=80) H= Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+80;
+        
+        if(H<=80 || W<=60){
+            auxInGame.setJumpFalse();
+        }
+
     }
 
-}
+    public void setSize(double H, double W){
+        this.H=H;
+        this.W=W; 
+    }
+
+
+
+
+}   
