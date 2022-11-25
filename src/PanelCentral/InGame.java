@@ -14,29 +14,37 @@ import java.awt.event.KeyListener;
 import java.security.PublicKey;
 import java.util.ArrayList;
 
+
 //ESTA CLASE ES UN PANEL QUE REPRESENTARÁ IN GAME, SE HACE COMO CLASE PARA PODER USAR EL METODO PAINT 
 public class InGame extends JPanel implements KeyListener {
 
     Vehicle vehicle;
-    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown,objetsOnMovement=true, Jump=false;
+    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown, Jump=false;
+    public static boolean objetsOnMovement=false;
     JLabel rayas = new JLabel();
     Generator generador;
     double timerAuxiliar=0;
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
 
+    long last_time = System.currentTimeMillis();
+    public static double delta_time = 0; 
+
+    public static double x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista
+
+
     public InGame() {
         cars = new ArrayList<Car>();
         trees = new ArrayList<Tree>();
 
         generador = new Generator(this);
-        
         this.setLayout(null);
         vehicle = new Vehicle();
         this.addKeyListener(this);
         this.setFocusable(true);
         generador.start();
         
+
     }
 
     public ArrayList getArrayCars(){
@@ -51,29 +59,42 @@ public class InGame extends JPanel implements KeyListener {
     //DIBUJAR EN EL PANEL 
     public void paint(Graphics g) {
         super.paint(g);
+        objetsOnMovement=true;
 
         //TEST DE UNA PISTA
-        int x = 290, y = 0;
+        
 
         g.setColor(Color.GREEN);
         g.fillRect(0, 0, 1080, 720);
 
         g.setColor(Color.GRAY);
-        g.fillRect(x, y, 500, 1000);
+        g.fillRect((int)x, (int)y, (int)w, (int)h);
         
-
-        for (int i = 0; i < cars.size(); i++) {
-            cars.get(i).paint(g);
-            if(objetsOnMovement){
-                 cars.get(i).moveDown();
+        if(!cars.isEmpty()){
+            for (int i = 0; i < cars.size(); i++) {
+                cars.get(i).paint(g);
+                if(cars.get(i).deleteTime()){
+                    cars.remove(i);
+                }
+                if(objetsOnMovement){
+                     cars.get(i).moveDown();
+                }
+                // System.out.println("ARRAYLIST  "+cars.size()); //Contabiliza la cantidad de autos activos
             }
         }
-        for (int i = 0; i < trees.size(); i++) {
-            trees.get(i).paint(g);
-            if(objetsOnMovement){
-                 trees.get(i).moveDown();
+        
+        if(!trees.isEmpty()){
+            for (int i = 0; i < trees.size(); i++) {
+                trees.get(i).paint(g);
+                //if(trees.get(i).deleteTime()){ AQUI HAY UN BUG CRITICO, lo fixeare luego
+                  //  trees.remove(i);
+                //}
+                if(objetsOnMovement){
+                     trees.get(i).moveDown();
+                }
             }
         }
+        
         
         vehicle.paint(g);
         
@@ -92,7 +113,7 @@ public class InGame extends JPanel implements KeyListener {
             vehicle.MoveDown();
         }
         if(Jump){
-            timerAuxiliar= timerAuxiliar+0.002;
+            timerAuxiliar= timerAuxiliar+0.017;
             vehicle.Jump(this);
       
         }else if(!Jump){
@@ -100,7 +121,24 @@ public class InGame extends JPanel implements KeyListener {
             timerAuxiliar=0;
 
         }
-        
+
+        //Control de fps
+        long time = System.currentTimeMillis();
+        int milisegundos = (int) (time - last_time);
+        int milisegundos_para_completar = 16 - milisegundos;
+        delta_time = (time - last_time) / 1000.0;
+        last_time = time;
+
+        try {
+            Thread.sleep(milisegundos_para_completar);
+        } catch (Exception e) {
+
+        }
+
+        repaint();
+    }
+    
+    public void Redraw(){
         repaint();
     }
 
@@ -153,8 +191,8 @@ public class InGame extends JPanel implements KeyListener {
 
     @Override
     public void keyReleased(KeyEvent e) {
-        //BANDERA
-        System.out.println("You released key char: " + e.getKeyChar());
+        
+        //System.out.println("You released key char: " + e.getKeyChar());
         
         switch (e.getKeyCode()) {
 

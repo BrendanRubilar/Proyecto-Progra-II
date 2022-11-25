@@ -5,7 +5,7 @@ import java.awt.Rectangle;
 
 public class Vehicle {
 
-    private double X = 250, Y = 195, H = 80, W = 60, Velocity = 0.15, giro = 0;
+    private double X = 250, Y = 195, H = 80, W = 60, Velocity = 400, giro = 0;
 
     public Vehicle() {
 
@@ -46,7 +46,7 @@ public class Vehicle {
 
     public void MoveUp() {
         if (Y >= 20) {
-            Y = Y - Velocity;
+            Y = Y - Velocity * InGame.delta_time;
             if(giro>0.4){
                 giro=giro-0.5;
             }else if(giro<-0.4){
@@ -58,26 +58,44 @@ public class Vehicle {
     }
 
     public void MoveRight() {
+<<<<<<< HEAD
+        if (X <= 1000) {
+             X = X + Velocity  * InGame.delta_time;
+             if(giro>=-5){
+                giro = giro - 0.4;
+=======
         if (X <= 980) {
              X = X + Velocity;
              if(giro<=1){
                 giro = giro + 0.01;
+>>>>>>> 8b039c4dbfde2a5ab0159414e781784fe1076e1c
             }
         }
     }
 
     public void MoveLeft() {
         if (X >= 20) {
+<<<<<<< HEAD
+            X = X - Velocity  * InGame.delta_time;
+            if(giro<=5){
+                giro = giro + 0.4;
+=======
             X = X - Velocity;
             if(giro>=-1){
                 giro = giro - 0.01;
+>>>>>>> 8b039c4dbfde2a5ab0159414e781784fe1076e1c
             }
         }
     }
 
     public void MoveDown() {
+<<<<<<< HEAD
+        if (Y <= 600) {
+            Y = Y + Velocity  * InGame.delta_time;
+=======
         if (Y <= 580) {
             Y = Y + Velocity ;
+>>>>>>> 8b039c4dbfde2a5ab0159414e781784fe1076e1c
             if(giro>0.4){
                 giro=giro-0.5;
             }else if(giro<-0.4){
