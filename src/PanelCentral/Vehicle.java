@@ -47,10 +47,10 @@ public class Vehicle {
     public void MoveUp() {
         if (Y >= 20) {
             Y = Y - Velocity * InGame.delta_time;
-            if(giro>0.4){
-                giro=giro-0.5;
-            }else if(giro<-0.4){
-                giro=giro+0.5;
+            if(giro>0.2){
+                giro=giro-0.02;
+            }else if(giro<-0.2){
+                giro=giro+0.02;
             }else{
                 giro=0;
             }
@@ -58,53 +58,34 @@ public class Vehicle {
     }
 
     public void MoveRight() {
-<<<<<<< HEAD
-        if (X <= 1000) {
-             X = X + Velocity  * InGame.delta_time;
-             if(giro>=-5){
-                giro = giro - 0.4;
-=======
         if (X <= 980) {
-             X = X + Velocity;
+             X = X + Velocity  * InGame.delta_time;
              if(giro<=1){
-                giro = giro + 0.01;
->>>>>>> 8b039c4dbfde2a5ab0159414e781784fe1076e1c
+                giro = giro + 0.05;
             }
         }
     }
 
     public void MoveLeft() {
         if (X >= 20) {
-<<<<<<< HEAD
             X = X - Velocity  * InGame.delta_time;
-            if(giro<=5){
-                giro = giro + 0.4;
-=======
-            X = X - Velocity;
             if(giro>=-1){
-                giro = giro - 0.01;
->>>>>>> 8b039c4dbfde2a5ab0159414e781784fe1076e1c
+                giro = giro - 0.05;
             }
         }
     }
 
     public void MoveDown() {
-<<<<<<< HEAD
         if (Y <= 600) {
             Y = Y + Velocity  * InGame.delta_time;
-=======
-        if (Y <= 580) {
-            Y = Y + Velocity ;
->>>>>>> 8b039c4dbfde2a5ab0159414e781784fe1076e1c
-            if(giro>0.4){
-                giro=giro-0.5;
-            }else if(giro<-0.4){
-                giro=giro+0.5;
+            if(giro>0.2){
+                giro=giro-0.02;
+            }else if(giro<-0.2){
+                giro=giro+0.02;
             }else{
                 giro=0;
             }
         }
-
     }
 
 
@@ -123,8 +104,5 @@ public class Vehicle {
         this.H=H;
         this.W=W; 
     }
-
-
-
 
 }   
