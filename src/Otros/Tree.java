@@ -9,7 +9,7 @@ import PanelCentral.InGame;
 public class Tree {
 
     double X=40,Y=0;
-    static double Velocity=200;
+    static double Velocity=300;
 
     public Tree(){
 

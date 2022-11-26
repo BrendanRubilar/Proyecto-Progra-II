@@ -13,6 +13,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.security.PublicKey;
 import java.util.ArrayList;
+//import javax.sound.sampled.Clip;
 
 
 //ESTA CLASE ES UN PANEL QUE REPRESENTARÁ IN GAME, SE HACE COMO CLASE PARA PODER USAR EL METODO PAINT 
@@ -32,7 +33,6 @@ public class InGame extends JPanel implements KeyListener {
 
     public static double x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista
 
-
     public InGame() {
         cars = new ArrayList<Car>();
         trees = new ArrayList<Tree>();
@@ -44,7 +44,6 @@ public class InGame extends JPanel implements KeyListener {
         this.setFocusable(true);
         generador.start();
         
-
     }
 
     public ArrayList getArrayCars(){
@@ -55,15 +54,12 @@ public class InGame extends JPanel implements KeyListener {
         return trees;
     }
 
-
     //DIBUJAR EN EL PANEL 
     public void paint(Graphics g) {
         super.paint(g);
         objetsOnMovement=true;
 
         //TEST DE UNA PISTA
-        
-
         g.setColor(Color.GREEN);
         g.fillRect(0, 0, 1080, 720);
 
@@ -94,7 +90,6 @@ public class InGame extends JPanel implements KeyListener {
                 }
             }
         }
-        
         
         vehicle.paint(g);
         
@@ -183,8 +178,11 @@ public class InGame extends JPanel implements KeyListener {
 
             case 32:
 
-                if(!Jump) Jump=true;
-                //jump_clip.start();
+                if(!Jump){ 
+                    Jump=true;
+                    //Status.jump_clip.loop(1);
+                }
+                
                 break;
         }
     }

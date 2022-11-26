@@ -1,7 +1,6 @@
 package Otros;
 
-import java.awt.Color;
-import java.awt.Graphics;
+import java.awt.*;
 import java.util.Random;
 
 import PanelCentral.InGame;
@@ -27,8 +26,26 @@ public class Car{
     }
 
     public void paint(Graphics g){
+        Graphics2D wheel1 = (Graphics2D) g;
+        Graphics2D wheel2 = (Graphics2D) g;
+        Graphics2D wheel3 = (Graphics2D) g;
+        Graphics2D wheel4 = (Graphics2D) g;
+
+        wheel1.setColor(Color.BLACK);
+        wheel1.fillRoundRect((int)carX-5, (int)carY+5, 10, 20,5,10);
+
+        wheel2.setColor(Color.BLACK);
+        wheel2.fillRoundRect((int)carX+55, (int)carY+10, 10, 20,5,10);
+
+        wheel3.setColor(Color.BLACK);
+        wheel3.fillRoundRect((int)carX-5, (int)carY+50, 10, 20,5,10);
+
+        wheel4.setColor(Color.BLACK);
+        wheel4.fillRoundRect((int)carX+55, (int)carY+50, 10, 20,5,10);
+        
         g.setColor(Color.BLUE);
-        g.fillRect((int)carX, (int)carY, 60, 80);
+        g.fillRoundRect((int)carX, (int)carY, (int)60, (int)85,(int)55,(int)15);
+
     }
 
     public void moveDown(){
