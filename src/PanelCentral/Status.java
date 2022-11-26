@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.event.*;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.BooleanControl;
 import javax.sound.sampled.Clip;
 import java.io.File;
 import javax.sound.sampled.FloatControl;
@@ -16,8 +17,9 @@ public class Status extends JPanel implements ActionListener {
     //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
     private Clip menu_theme, inGame_theme;
     JPanel Panels, Menu;
-    JButton Iniciar, Salir;
+    JButton Iniciar, Salir,Dificultad;
     JFrame target;
+    public static int dificultad=1; // 0-Facil | 1-Medio | 2-Dificil
     CardLayout c1 = new CardLayout();
 
     InGame enjuego = new InGame(); //Panel in game
@@ -59,8 +61,14 @@ public class Status extends JPanel implements ActionListener {
         Iniciar.addActionListener(this);
         Menu.add(Iniciar);
 
+        Dificultad = new JButton();
+        Dificultad.setBounds(350, 200, 300, 50);
+        Dificultad.setText("Dificultad: Media");
+        Dificultad.addActionListener(this);
+        Menu.add(Dificultad);
+
         Salir = new JButton();
-        Salir.setBounds(350, 200, 300, 50);
+        Salir.setBounds(350, 300, 300, 50);
         Salir.setText("Salir");
         Salir.addActionListener(this);
         Menu.add(Salir);
@@ -137,6 +145,17 @@ public class Status extends JPanel implements ActionListener {
             appIsRunning = true;
 
         }
+        if (e.getSource() == Dificultad){
+
+            dificultad++;
+            if(dificultad>=3) dificultad=0;
+            if(dificultad==0) Dificultad.setText("Dificultad: Facil");
+            if(dificultad==1) Dificultad.setText("Dificultad: Media");
+            if(dificultad==2) Dificultad.setText("Dificultad: Dificil");
+            System.out.println(dificultad);
+
+        }
+
         if (e.getSource() == Salir) {
             System.exit(0);
         }

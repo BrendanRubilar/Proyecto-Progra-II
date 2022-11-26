@@ -11,18 +11,26 @@ public class Tree {
     double X=40,Y=0;
     static double Velocity=300;
 
-    public Tree(){
+    public Tree(int aux){
 
         Random r = new Random();
-        int aux = r.nextInt(2);
-       
+
         if(aux==0){
 
-            X = r.nextDouble();
+            double aux2=r.nextDouble(200-90)+90;
+            aux2=aux2 * -1;
+            Y = aux2;
+
+            X = r.nextDouble(InGame.x-80);
 
         }else if(aux==1){
+            double aux2 = InGame.x + InGame.w;
+
+            X = r.nextDouble(1020-aux2)+aux2;
 
         }
+
+
     }
    
     public void paint(Graphics g){
@@ -35,7 +43,7 @@ public class Tree {
     }
 
     public Boolean deleteTime(){
-        if(Y>=1200){
+        if(Y>=2000){
             return true;
         }else{
             return false;

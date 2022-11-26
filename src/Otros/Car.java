@@ -14,13 +14,24 @@ public class Car{
 
     public Car(int a){
         
-        if(a==1){ //Crea autos mas arriba, asi se pueden crear dos autos con un solo timer y no chocan entre ellos
+        //Estos condicionales indican a que altura se generaran los autos, asi no chocan entre ellos
+        if(a==1){ 
             double aux=r.nextDouble(200-90)+90;
             aux=aux * -1;
             carY = aux;
         }
+        if(a==2){ 
+            double aux=r.nextDouble(300-285)+285;
+            aux=aux * -1;
+            carY = aux;
+        }
+        if(a==3){ 
+            double aux=r.nextDouble(400-385)+385;
+            aux=aux * -1;
+            carY = aux;
+        }
 
-        double aux = InGame.w+InGame.x-90; //Punto maximo en donde puede aparecer
+        double aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
         double aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
         carX = r.nextDouble(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
     }
@@ -53,7 +64,7 @@ public class Car{
     }
 
     public Boolean deleteTime(){
-        if(carY>=1200){
+        if(carY>=2000){
             return true;
         }else{
             return false;

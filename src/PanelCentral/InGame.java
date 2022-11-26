@@ -29,11 +29,11 @@ public class InGame extends JPanel implements KeyListener {
     private Clip jump_clip;
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
-
+    
     long last_time = System.currentTimeMillis();
     public static double delta_time = 0; 
 
-    public static double x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista
+    public static double x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista, (ancho minimo 200)
 
     public InGame() {
         cars = new ArrayList<Car>();
@@ -45,7 +45,6 @@ public class InGame extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.setFocusable(true);
         generador.start();
-        
     }
 
     public ArrayList getArrayCars(){
@@ -61,11 +60,11 @@ public class InGame extends JPanel implements KeyListener {
         super.paint(g);
         objetsOnMovement=true;
 
-        //TEST DE UNA PISTA
-        g.setColor(Color.GREEN);
+       
+        g.setColor(Color.GREEN); //Cesped
         g.fillRect(0, 0, 1080, 720);
 
-        g.setColor(Color.GRAY);
+        g.setColor(Color.GRAY); //Pista
         g.fillRect((int)x, (int)y, (int)w, (int)h);
         
         if(!cars.isEmpty()){
@@ -84,12 +83,13 @@ public class InGame extends JPanel implements KeyListener {
         if(!trees.isEmpty()){
             for (int i = 0; i < trees.size(); i++) {
                 trees.get(i).paint(g);
-                //if(trees.get(i).deleteTime()){ AQUI HAY UN BUG CRITICO, lo fixeare luego
-                  //  trees.remove(i);
-                //}
+                if(trees.get(i).deleteTime()){ 
+                   trees.remove(i);
+                }
                 if(objetsOnMovement){
                      trees.get(i).moveDown();
                 }
+                //System.out.println("Arraylist: "+trees.size());
             }
         }
         
