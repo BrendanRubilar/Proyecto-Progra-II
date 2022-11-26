@@ -13,7 +13,7 @@ public class Window extends JFrame {
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setTitle("FORZA HORIZON 5");
         setResizable(false);
-        setIconImage(new ImageIcon("Multimedia//iconoTemporal.jpeg").getImage());
+        setIconImage(new ImageIcon("Multimedia//icono.jpg").getImage());
         Status StatusController = new Status(this);
         setVisible(true);
 

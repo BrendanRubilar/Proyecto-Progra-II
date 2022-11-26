@@ -23,8 +23,6 @@ public class Tree {
         }else if(aux==1){
 
         }
-  
-
     }
    
     public void paint(Graphics g){
@@ -42,6 +40,5 @@ public class Tree {
         }else{
             return false;
         }
-    }
-    
+    }   
 }

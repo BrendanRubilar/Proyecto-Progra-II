@@ -24,12 +24,8 @@ public class Generator extends Thread {
     @Override
     public void run() {
         timer.schedule(carGenerator, 0, 1000); //Genera autos 
- 
-        
-
         timer.schedule(treeGenerator, 0, 8000); //Genera arboles
         timer.schedule(velocityController, 0, 3000); //Aumenta velocidad de autos
-        
        
     }
 
@@ -41,7 +37,6 @@ public class Generator extends Thread {
                 cars.add(new Car(0));
                 cars.add(new Car(1));
             }
-
         }
     };
 
@@ -53,8 +48,6 @@ public class Generator extends Thread {
                 System.out.println("Arbol generado " + new Date());
                 trees.add(new Tree());
             }
-
-            
         }
     };
 
@@ -70,8 +63,6 @@ public class Generator extends Thread {
                 Tree.Velocity = Tree.Velocity+8;
                 //System.out.println("VelocityUP! to" + Tree.Velocity);
             }
-
         }   
     };
-
 }

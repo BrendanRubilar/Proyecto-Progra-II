@@ -5,15 +5,16 @@ import Otros.Generator;
 import Otros.Tree;
 import Otros.Colisions;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.security.PublicKey;
 import java.util.ArrayList;
-//import javax.sound.sampled.Clip;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioSystem;
+import java.io.File;
 
 
 //ESTA CLASE ES UN PANEL QUE REPRESENTARÁ IN GAME, SE HACE COMO CLASE PARA PODER USAR EL METODO PAINT 
@@ -25,6 +26,7 @@ public class InGame extends JPanel implements KeyListener {
     JLabel rayas = new JLabel();
     Generator generador;
     double timerAuxiliar=0;
+    private Clip jump_clip;
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
 
@@ -114,7 +116,6 @@ public class InGame extends JPanel implements KeyListener {
         }else if(!Jump){
             vehicle.setSize(80, 60);
             timerAuxiliar=0;
-
         }
 
         //Control de fps
@@ -143,6 +144,17 @@ public class InGame extends JPanel implements KeyListener {
 
     public void setJumpFalse(){
         Jump = false;
+    }
+
+     //Efectos sonido------------------------------------------------------------
+     private void JumpSound(){
+        try{
+        jump_clip = AudioSystem.getClip();
+        jump_clip.open(AudioSystem.getAudioInputStream(new File("Multimedia//Salto.wav")));
+        jump_clip.start();
+        }catch(Exception e){
+            System.out.println("No funcionó, verifique si tiene el archivo de audio en carpeta Multimedia " + e);
+        }
     }
             
     @Override
@@ -180,7 +192,7 @@ public class InGame extends JPanel implements KeyListener {
 
                 if(!Jump){ 
                     Jump=true;
-                    //Status.jump_clip.loop(1);
+                    JumpSound();
                 }
                 
                 break;

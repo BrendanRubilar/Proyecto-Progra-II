@@ -14,7 +14,7 @@ import javax.sound.sampled.FloatControl;
 public class Status extends JPanel implements ActionListener {
 
     //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
-    private Clip menu_theme, inGame_theme, jump_clip;
+    private Clip menu_theme, inGame_theme;
     JPanel Panels, Menu;
     JButton Iniciar, Salir;
     JFrame target;
@@ -32,7 +32,6 @@ public class Status extends JPanel implements ActionListener {
         InitMenuComponents();
         InitRunningComponents();
         
-
         target.add(Panels);
 
     }
@@ -56,11 +55,13 @@ public class Status extends JPanel implements ActionListener {
         //Creamos los botones del menu
         Iniciar = new JButton();
         Iniciar.setBounds(350, 100, 300, 50);
+        Iniciar.setText("Jugar");
         Iniciar.addActionListener(this);
         Menu.add(Iniciar);
 
         Salir = new JButton();
         Salir.setBounds(350, 200, 300, 50);
+        Salir.setText("Salir");
         Salir.addActionListener(this);
         Menu.add(Salir);
 
@@ -82,17 +83,17 @@ public class Status extends JPanel implements ActionListener {
             // Se obtiene un Clip de sonido
             menu_theme = AudioSystem.getClip();
             inGame_theme = AudioSystem.getClip();
-            jump_clip = AudioSystem.getClip();
+            
  
             // Se carga con un fichero wav
             menu_theme.open(AudioSystem.getAudioInputStream(new File("Multimedia//main_theme.wav")));
             inGame_theme.open(AudioSystem.getAudioInputStream(new File("Multimedia//ingameTheme.wav")));
-            jump_clip.open(AudioSystem.getAudioInputStream(new File("Multimedia//Salto.wav")));
+            
             setVolumeMenu(0.15f);
             setVolumeGame(0.15f);
 
             // Comienza la reproducción
-            menu_theme.loop(0);
+            menu_theme.loop(-1);
 
         } catch (Exception e) {
             System.out.println("No funcionó, verifique si tiene el archivo de audio en carpeta Multimedia " + e);
@@ -130,7 +131,7 @@ public class Status extends JPanel implements ActionListener {
         if (e.getSource() == Iniciar) {
             //Cambiamos al panel ProgramaIniciado
             menu_theme.stop();
-            inGame_theme.loop(0);
+            inGame_theme.loop(-1);
             c1.show(Panels, "2");
             enjuego.requestFocus();
             appIsRunning = true;
