@@ -16,7 +16,7 @@ public class Status extends JPanel implements ActionListener {
 
     //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
     private Clip menu_theme, inGame_theme;
-    JPanel Panels, Menu;
+    JPanel Panels, Menu, GameOver;
     JButton Iniciar, Salir,Dificultad;
     JFrame target;
     public static int dificultad=1; // 0-Facil | 1-Medio | 2-Dificil
@@ -47,9 +47,13 @@ public class Status extends JPanel implements ActionListener {
         Menu = new JPanel();
         Menu.setLayout(null);
 
+        //GameOver = new JPanel();
+        //GameOver.setLayout(null);
+
         //Se agregan estos paneles al panel contenedor
         Panels.add(Menu, "1");
         Panels.add(enjuego, "2");
+        //Panels.add(GameOver, "3");
 
     }
 
@@ -74,6 +78,12 @@ public class Status extends JPanel implements ActionListener {
         Menu.add(Salir);
 
     }
+    /*public void InitGOComponents(){
+        ImageIcon G_Over = new ImageIcon("Multimedia//GameOver.png");
+        JLabel screen =new JLabel();
+        screen.setBounds(0,0,1080,720);
+        screen.setIcon(new ImageIcon(G_Over.getImage()));
+    }*/
 
     public void InitRunningComponents() {
         //Creamos todos los elementos del panel ProgramaIniciado

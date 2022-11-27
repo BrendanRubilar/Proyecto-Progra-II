@@ -85,7 +85,6 @@ public class InGame extends JPanel implements KeyListener {
         g.setColor(Color.gray); //Medidor de combustible
         g.fillRect(800, 10, 200, 30);
 
-        
         g.setColor(Color.red); 
         g.fillRect(800, 10, (int)gasAmount, 30);
 
@@ -99,7 +98,6 @@ public class InGame extends JPanel implements KeyListener {
 
             if(gasOut){
                 Vehicle.Velocity--;
-                Car.Velocity--;
                 Tree.Velocity--;
             } 
 
@@ -112,7 +110,7 @@ public class InGame extends JPanel implements KeyListener {
             
             g.drawString("FIN DE LA PARTIDA", 400,300);
             isPlaying = false;
-            //boton.setBounds(400,400,200,100); ESTOY TESTEANDO CREAR UN BOTON PARA VOLVER AL MENU (No olviden Reiniciar booleanos si quieren intentarlo)
+            //boton.setBounds(400,400,200,100); //ESTOY TESTEANDO CREAR UN BOTON PARA VOLVER AL MENU (No olviden Reiniciar booleanos si quieren intentarlo)
             //this.add(boton);
 
         }
@@ -163,8 +161,6 @@ public class InGame extends JPanel implements KeyListener {
             }
         }
 
-        
-        
         vehicle.paint(g);
 
         if(objetsOnMovement==true){
