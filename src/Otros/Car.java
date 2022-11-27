@@ -9,7 +9,7 @@ public class Car{
     boolean c = false;
     Vehicle vehicle;
     double carX=300,carY=0;
-    static double Velocity=300;
+    public static double Velocity=300;
     Random r = new Random();
 
     public Car(int a){
@@ -60,7 +60,19 @@ public class Car{
     }
 
     public void moveDown(){
-        if(carY<=1205) carY= carY + Velocity * InGame.delta_time;
+        if(carY<=2000){
+            carY= carY + Velocity * InGame.delta_time;
+
+            if(((Vehicle.X >= carX && Vehicle.X < carX + 60) && (Vehicle.Y >= carY && Vehicle.Y < carY + 85)) || (Vehicle.X == carX && Vehicle.Y == carY)){
+                //System.out.println("COLISIOOOOOON!!!!!");
+
+                InGame.objetsOnMovement = false;
+
+            }
+
+        } 
+
+
     }
 
     public Boolean deleteTime(){

@@ -44,7 +44,7 @@ public class Generator extends Thread {
     TimerTask carGenerator = new TimerTask() {
         @Override
         public void run() {
-            if(InGame.objetsOnMovement){
+            if(InGame.isPlaying){
 
                 if(Status.dificultad==0){
                     //System.out.println("Auto generado " + new Date()); 
@@ -71,7 +71,7 @@ public class Generator extends Thread {
     TimerTask treeGenerator = new TimerTask() {
         @Override
         public void run() {
-            if(InGame.objetsOnMovement){
+            if(InGame.isPlaying){
                 //System.out.println("Arbol generado " + new Date());
                 trees.add(new Tree(0));
                 trees.add(new Tree(1));
@@ -83,13 +83,15 @@ public class Generator extends Thread {
         @Override
         public void run(){
             //Aumenta de manera progresiva la velocidad de los vehiculos 
-            if(Car.Velocity<=800){ //Limite en un punto que aun sea jugable...
-                Car.Velocity = Car.Velocity+8;
-                //System.out.println("VelocityUP! to" + Car.Velocity);
-            }
-            if(Tree.Velocity<=700){
-                Tree.Velocity = Tree.Velocity+8;
-                //System.out.println("VelocityUP! to" + Tree.Velocity);
+            if(InGame.isPlaying){
+                if(Car.Velocity<=800){ //Limite en un punto que aun sea jugable...
+                    Car.Velocity = Car.Velocity+8;
+                    //System.out.println("VelocityUP! to" + Car.Velocity);
+                }
+                if(Tree.Velocity<=700){
+                    Tree.Velocity = Tree.Velocity+8;
+                    //System.out.println("VelocityUP! to" + Tree.Velocity);
+                }
             }
         }   
     };
@@ -97,7 +99,7 @@ public class Generator extends Thread {
         @Override
         public void run() {
 
-            if(InGame.objetsOnMovement){
+            if(InGame.isPlaying){
 
                 int aux = r.nextInt(2);
                 if(aux==1){

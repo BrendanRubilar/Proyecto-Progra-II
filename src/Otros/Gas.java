@@ -8,8 +8,6 @@ import javax.swing.ImageIcon;
 import PanelCentral.InGame;
 import PanelCentral.Vehicle;
 
-
-
 public class Gas {
     
     double GasX=40, GasY=0;
@@ -34,16 +32,27 @@ public class Gas {
     }
 
     public void moveDown(){
-        if(GasY<=1205){
+        if(GasY<=2000){
             GasY= GasY + Velocity * InGame.delta_time;
             
-            if(((Vehicle.X > GasX && Vehicle.X < GasX + 60) && (Vehicle.Y > GasY && Vehicle.Y < GasY + 60)) || (Vehicle.X == GasX && Vehicle.Y == GasY)){
-                System.out.println("COLISIOOOOOON!!!!!");
+            if(((Vehicle.X >= GasX && Vehicle.X < GasX + 60) && (Vehicle.Y >= GasY && Vehicle.Y < GasY + 60)) || (Vehicle.X == GasX && Vehicle.Y == GasY)){
+                //System.out.println("COLISIOOOOOON!!!!!");
+                GasY = 1990;
+                InGame.gasAmount = InGame.gasAmount + 50;
+                if(InGame.gasAmount>200) InGame.gasAmount=200;
 
             }
 
         }
 
+    }
+
+    public Boolean deleteTime(){
+        if(GasY>=2000){
+            return true;
+        }else{
+            return false;
+        }
     }
 
 }

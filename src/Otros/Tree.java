@@ -1,5 +1,7 @@
 package Otros;
 
+import PanelCentral.Vehicle;
+
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Image;
@@ -10,7 +12,7 @@ import PanelCentral.InGame;
 public class Tree {
 
     double X=40,Y=0;
-    static double Velocity=300;
+    public static double Velocity=300;
 
     public Tree(int aux){
 
@@ -42,7 +44,15 @@ public class Tree {
     }
     
     public void moveDown(){
-        if(Y<=1205) Y= Y + Velocity * InGame.delta_time;
+        if(Y<=2000) Y= Y + Velocity * InGame.delta_time;
+
+        if(((Vehicle.X >= X && Vehicle.X < X + 60) && (Vehicle.Y >= Y && Vehicle.Y < Y + 60)) || (Vehicle.X == X && Vehicle.Y == Y)){
+            System.out.println("COLISIOOOOOON!!!!!");
+
+            InGame.objetsOnMovement = false;
+
+        }
+        
     }
 
     public Boolean deleteTime(){

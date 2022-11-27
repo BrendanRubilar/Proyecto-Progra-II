@@ -23,7 +23,7 @@ public class InGame extends JPanel implements KeyListener {
 
     Vehicle vehicle;
     boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown, Jump=false;
-    public static boolean objetsOnMovement=false;
+    public static boolean objetsOnMovement=true, isPlaying = false;
     JLabel rayas = new JLabel();
     Generator generador;
     double timerAuxiliar=0;
@@ -31,11 +31,17 @@ public class InGame extends JPanel implements KeyListener {
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
     private ArrayList<Gas> gasList;
+
     
     long last_time = System.currentTimeMillis();
+    //Esto se puede reordenar arriba mas tarde
     public static double delta_time = 0; 
+    public static double gasAmount = 200;
+    public static boolean gasOut = false;
 
     public static double x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista, (ancho minimo 200)
+
+    Button boton = new Button("Volver al menu");
 
     public InGame() {
         cars = new ArrayList<Car>();
@@ -48,6 +54,9 @@ public class InGame extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.setFocusable(true);
         generador.start();
+
+
+
     }
 
     public ArrayList getArrayCars(){
@@ -64,37 +73,76 @@ public class InGame extends JPanel implements KeyListener {
     //DIBUJAR EN EL PANEL 
     public void paint(Graphics g) {
         super.paint(g);
-        objetsOnMovement=true;
+        isPlaying = true;
+  
 
-       
         g.setColor(Color.GREEN); //Cesped
         g.fillRect(0, 0, 1080, 720);
 
         g.setColor(Color.GRAY); //Pista
         g.fillRect((int)x, (int)y, (int)w, (int)h);
+       
+        g.setColor(Color.gray); //Medidor de combustible
+        g.fillRect(800, 10, 200, 30);
+
         
+        g.setColor(Color.red); 
+        g.fillRect(800, 10, (int)gasAmount, 30);
+
+        g.setColor(Color.black); 
+        g.drawString("Combustible: "+(int)gasAmount, 850,30);
+        
+        //Control de combustible, detener vehiculo de manera progresiva
+        if(objetsOnMovement){
+            if(gasAmount>0) gasAmount=gasAmount-0.05;
+            if(gasAmount<=0) gasOut=true;
+
+            if(gasOut){
+                Vehicle.Velocity--;
+                Car.Velocity--;
+                Tree.Velocity--;
+            } 
+
+            if(Vehicle.Velocity<=0) objetsOnMovement = false;
+
+        }
+
+
+        if(!objetsOnMovement){
+            
+            g.drawString("FIN DE LA PARTIDA", 400,300);
+            isPlaying = false;
+            //boton.setBounds(400,400,200,100); ESTOY TESTEANDO CREAR UN BOTON PARA VOLVER AL MENU (No olviden Reiniciar booleanos si quieren intentarlo)
+            //this.add(boton);
+
+        }
+
         if(!cars.isEmpty()){
             for (int i = 0; i < cars.size(); i++) {
                 cars.get(i).paint(g);
-                if(cars.get(i).deleteTime()){
-                    cars.remove(i);
-                }
+
                 if(objetsOnMovement){
                      cars.get(i).moveDown();
                 }
-                // System.out.println("ARRAYLIST  "+cars.size()); //Contabiliza la cantidad de autos activos
+
+                if(cars.get(i).deleteTime()){
+                    cars.remove(i);
+                }
+                //System.out.println("ARRAYLIST  "+cars.size()); //Contabiliza la cantidad de autos activos
             }
         }
         
         if(!trees.isEmpty()){
             for (int i = 0; i < trees.size(); i++) {
                 trees.get(i).paint(g);
-                if(trees.get(i).deleteTime()){ 
-                   trees.remove(i);
-                }
+
                 if(objetsOnMovement){
                      trees.get(i).moveDown();
                 }
+               
+                if(trees.get(i).deleteTime()){ 
+                    trees.remove(i);
+                 }
                 //System.out.println("Arraylist: "+trees.size());
             }
         }
@@ -106,6 +154,11 @@ public class InGame extends JPanel implements KeyListener {
                 if(objetsOnMovement){
                     gasList.get(i).moveDown();
                 }
+
+                if(gasList.get(i).deleteTime()){ 
+                    gasList.remove(i);
+                 }
+                 //System.out.println("Arraylist: "+gasList.size());
                 
             }
         }
@@ -113,29 +166,32 @@ public class InGame extends JPanel implements KeyListener {
         
         
         vehicle.paint(g);
-        
-        if(MoveLeft){
-           vehicle.MoveLeft();
+
+        if(objetsOnMovement==true){
+            if(MoveLeft){
+                vehicle.MoveLeft();
+             }
+             if(MoveUp){
+                vehicle.MoveUp();
+             }
+             
+             if(MoveRight){
+                vehicle.MoveRight();
+             }
+             
+             if(MoveDown){
+                 vehicle.MoveDown();
+             }
+             if(Jump){
+                 timerAuxiliar= timerAuxiliar+0.017;
+                 vehicle.Jump(this);
+           
+             }else if(!Jump){
+                 vehicle.setSize(80, 60);
+                 timerAuxiliar=0;
+             }
         }
-        if(MoveUp){
-           vehicle.MoveUp();
-        }
-        
-        if(MoveRight){
-           vehicle.MoveRight();
-        }
-        
-        if(MoveDown){
-            vehicle.MoveDown();
-        }
-        if(Jump){
-            timerAuxiliar= timerAuxiliar+0.017;
-            vehicle.Jump(this);
-      
-        }else if(!Jump){
-            vehicle.setSize(80, 60);
-            timerAuxiliar=0;
-        }
+
 
         //Control de fps
         long time = System.currentTimeMillis();

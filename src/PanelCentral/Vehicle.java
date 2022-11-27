@@ -44,6 +44,7 @@ public class Vehicle {
     }
 
     public void MoveUp() {
+        
         if (Y >= 20 && X>=290 && X<=790) {
             Y = Y - Velocity * InGame.delta_time;
         }
