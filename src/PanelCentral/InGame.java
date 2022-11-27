@@ -4,6 +4,7 @@ import Otros.Car;
 import Otros.Generator;
 import Otros.Tree;
 import Otros.Colisions;
+import Otros.Gas;
 
 import javax.swing.*;
 import java.awt.*;
@@ -29,6 +30,7 @@ public class InGame extends JPanel implements KeyListener {
     private Clip jump_clip;
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
+    private ArrayList<Gas> gasList;
     
     long last_time = System.currentTimeMillis();
     public static double delta_time = 0; 
@@ -38,6 +40,7 @@ public class InGame extends JPanel implements KeyListener {
     public InGame() {
         cars = new ArrayList<Car>();
         trees = new ArrayList<Tree>();
+        gasList = new ArrayList<Gas>();
 
         generador = new Generator(this);
         this.setLayout(null);
@@ -53,6 +56,9 @@ public class InGame extends JPanel implements KeyListener {
 
     public ArrayList getArrayTrees(){
         return trees;
+    }
+    public ArrayList getArrayGas(){
+        return gasList;
     }
 
     //DIBUJAR EN EL PANEL 
@@ -92,6 +98,19 @@ public class InGame extends JPanel implements KeyListener {
                 //System.out.println("Arraylist: "+trees.size());
             }
         }
+
+        if(!gasList.isEmpty()){
+            for (int i = 0; i < gasList.size(); i++){
+                gasList.get(i).paint(g);
+
+                if(objetsOnMovement){
+                    gasList.get(i).moveDown();
+                }
+                
+            }
+        }
+
+        
         
         vehicle.paint(g);
         

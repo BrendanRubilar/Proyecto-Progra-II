@@ -6,6 +6,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Date;
 import java.util.ArrayList;
+import java.util.Random;
 
 /*Esta clase es de suma importancia en el juego ya que controla el tiempo en el que aparecen los objetos y
 aumenta la dificultad. Tener en cuenta que la generacion de objetos es capaz de detectar los limites de la 
@@ -15,12 +16,20 @@ public class Generator extends Thread {
     Timer timer = new Timer();
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
+    private ArrayList<Gas> gasList;
+
     private InGame InGamePointer;
+    Random r = new Random();
 
     public Generator(InGame a) {
         InGamePointer = a;
         cars  = InGamePointer.getArrayCars();
         trees = InGamePointer.getArrayTrees();
+        gasList = InGamePointer.getArrayGas();
+
+        
+        
+
 
     }
     @Override
@@ -28,7 +37,9 @@ public class Generator extends Thread {
         timer.schedule(carGenerator, 0, 2000); //Genera autos 
         timer.schedule(treeGenerator, 0, 1000); //Genera arboles
         timer.schedule(velocityController, 0, 3000); //Aumenta velocidad de autos
-       
+        timer.schedule(gasGenerator, 0, 4000); 
+
+        
     }
     TimerTask carGenerator = new TimerTask() {
         @Override
@@ -82,4 +93,22 @@ public class Generator extends Thread {
             }
         }   
     };
+    TimerTask gasGenerator = new TimerTask() {
+        @Override
+        public void run() {
+
+            if(InGame.objetsOnMovement){
+
+                int aux = r.nextInt(2);
+                if(aux==1){
+                    System.out.println("Se crea gas");
+                    gasList.add(new Gas());
+                }
+
+            }
+            
+
+        }
+    };
+
 }

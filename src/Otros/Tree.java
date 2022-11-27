@@ -6,9 +6,7 @@ import java.awt.Image;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
-
 import PanelCentral.InGame;
-
 public class Tree {
 
     double X=40,Y=0;
@@ -39,7 +37,7 @@ public class Tree {
     public void paint(Graphics g){
         ImageIcon tree = new ImageIcon("Multimedia//arbusto.png");
         
-        g.fillRect((int)X, (int)Y, 60, 60);  
+        //g.fillRect((int)X, (int)Y, 60, 60);  
         g.drawImage(tree.getImage(), (int)X, (int)Y,60,60,null); 
     }
     
