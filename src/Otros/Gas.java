@@ -37,9 +37,12 @@ public class Gas {
         if(GasY<=1205){
             GasY= GasY + Velocity * InGame.delta_time;
             
-        }
+            if(((Vehicle.X > GasX && Vehicle.X < GasX + 60) && (Vehicle.Y > GasY && Vehicle.Y < GasY + 60)) || (Vehicle.X == GasX && Vehicle.Y == GasY)){
+                System.out.println("COLISIOOOOOON!!!!!");
 
-        
+            }
+
+        }
 
     }
 

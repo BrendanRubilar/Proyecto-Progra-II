@@ -4,10 +4,9 @@ import java.awt.*;
 
 public class Vehicle {
 
-    private static double X = 250, Y = 195, H = 80, W = 60, Velocity = 300, giro = 0;
+    public static double X = 250, Y = 195, H = 80, W = 60, Velocity = 300, giro = 0;
 
     public Vehicle() {
-
 
     }
 
