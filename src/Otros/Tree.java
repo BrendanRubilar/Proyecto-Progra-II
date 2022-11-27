@@ -2,7 +2,10 @@ package Otros;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Image;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
 
 import PanelCentral.InGame;
 
@@ -34,8 +37,10 @@ public class Tree {
     }
    
     public void paint(Graphics g){
-        g.setColor(Color.PINK);
-        g.fillRect((int)X, (int)Y, 60, 60);   
+        ImageIcon tree = new ImageIcon("Multimedia//arbusto.png");
+        
+        g.fillRect((int)X, (int)Y, 60, 60);  
+        g.drawImage(tree.getImage(), (int)X, (int)Y,60,60,null); 
     }
     
     public void moveDown(){
