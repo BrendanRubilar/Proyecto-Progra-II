@@ -4,6 +4,8 @@ import Otros.Car;
 import Otros.Generator;
 import Otros.Tree;
 import Otros.Gas;
+import Otros.ShootPower;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -160,6 +162,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
              
              if(MoveDown){
                  vehicle.MoveDown();
+                 ShootPower shoot = new ShootPower();
+                 shoot.paint(g);
              }
              if(Jump){
                  timerAuxiliar= timerAuxiliar+0.017;

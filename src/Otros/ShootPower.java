@@ -17,12 +17,10 @@ import PanelCentral.Vehicle;
 
 public class ShootPower {
 
-
     Random r = new Random();
-    Point shoot = new Point(40,0);
-    private Clip gasPlus;
+    public static Point shoot = new Point(40,0);
+    int Velocity= 400;
     
-
     public ShootPower(){
 
         int aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
@@ -32,13 +30,15 @@ public class ShootPower {
     }
 
     public void paint(Graphics g){
-
-        ImageIcon tree = new ImageIcon("Multimedia//Gas.png");
-       // g.drawImage(tree.getImage(), (int)gas.x, (int) gas.y,60,60,null); 
-
+        ImageIcon tree = new ImageIcon("Multimedia//rocket.png");
+        g.drawImage(tree.getImage(), (int)shoot.x, (int) shoot.y,35,50,null); 
     }
 
+    public void moveUp(){
+        if(shoot.y>=-100){
 
+        }
+    }
 
     
 }

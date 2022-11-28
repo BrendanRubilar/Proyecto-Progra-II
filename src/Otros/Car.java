@@ -2,6 +2,9 @@ package Otros;
 
 import java.awt.*;
 import java.util.Random;
+
+import javax.swing.ImageIcon;
+
 import java.awt.Point;
 
 import PanelCentral.InGame;
@@ -12,6 +15,7 @@ public class Car{
     Point carPosition = new Point(300,0);
     public static double Velocity=300;
     Random r = new Random();
+    boolean destroy=false;
 
     public Car(int a){
         
@@ -43,20 +47,29 @@ public class Car{
         Graphics2D wheel3 = (Graphics2D) g;
         Graphics2D wheel4 = (Graphics2D) g;
 
-        wheel1.setColor(Color.BLACK);
-        wheel1.fillRoundRect((int)carPosition.x-5, (int)carPosition.y+5, 10, 20,5,10);
+        if(!destroy){
+            wheel1.setColor(Color.BLACK);
+            wheel1.fillRoundRect((int)carPosition.x-5, (int)carPosition.y+5, 10, 20,5,10);
+    
+            wheel2.setColor(Color.BLACK);
+            wheel2.fillRoundRect((int)carPosition.x+55, (int)carPosition.y+10, 10, 20,5,10);
+    
+            wheel3.setColor(Color.BLACK);
+            wheel3.fillRoundRect((int)carPosition.x-5, (int)carPosition.y+50, 10, 20,5,10);
+    
+            wheel4.setColor(Color.BLACK);
+            wheel4.fillRoundRect((int)carPosition.x+55, (int)carPosition.y+50, 10, 20,5,10);
 
-        wheel2.setColor(Color.BLACK);
-        wheel2.fillRoundRect((int)carPosition.x+55, (int)carPosition.y+10, 10, 20,5,10);
+            g.setColor(Color.BLUE);
+            g.fillRoundRect((int)carPosition.x, (int)carPosition.y, (int)60, (int)85,(int)55,(int)15);
+        }else{
+            ImageIcon tree = new ImageIcon("Multimedia//Explosion.png");
+            g.drawImage(tree.getImage(), (int)carPosition.x, (int) carPosition.y,100,100,null); 
+        }
 
-        wheel3.setColor(Color.BLACK);
-        wheel3.fillRoundRect((int)carPosition.x-5, (int)carPosition.y+50, 10, 20,5,10);
+      
 
-        wheel4.setColor(Color.BLACK);
-        wheel4.fillRoundRect((int)carPosition.x+55, (int)carPosition.y+50, 10, 20,5,10);
         
-        g.setColor(Color.BLUE);
-        g.fillRoundRect((int)carPosition.x, (int)carPosition.y, (int)60, (int)85,(int)55,(int)15);
 
     }
 
@@ -67,7 +80,11 @@ public class Car{
             if(!InGame.Jump){
 
                 if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
-                    InGame.isPlaying = false;   
+                    InGame.isPlaying = false;  
+                    destroy= true; 
+                }
+                if(new Rectangle(carPosition.x , carPosition.y, 60, 80).intersects(new Rectangle(ShootPower.shoot.x, ShootPower.shoot.y, 35, 50))){
+                    destroy=true;
                 }
 
             }
