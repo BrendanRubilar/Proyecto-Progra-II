@@ -41,7 +41,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public static double gasAmount = 200;
     public static boolean gasOut = false;
 
-    public static int x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista, (ancho minimo 200)
+    public static int x = 290, y = 0, w= 500, h=1000, points=0; //Ubicacion de la pista, (ancho minimo 200)
     JButton boton = new JButton();
 
     
@@ -62,7 +62,6 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         boton.setVisible(false);
         boton.addActionListener(this);
         
-
     }
 
     public ArrayList getArrayCars(){
@@ -79,6 +78,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     //DIBUJAR EN EL PANEL 
     public void paint(Graphics g) {
         super.paint(g);
+        
   
 
         g.setColor(Color.GREEN); //Cesped
@@ -87,8 +87,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         g.setColor(Color.GRAY); //Pista
         g.fillRect((int)x, (int)y, (int)w, (int)h);
        
-        g.setColor(Color.gray); //Medidor de combustible
-        g.fillRect(800, 10, 200, 30);
+
 
         g.setColor(Color.white); //Decoracion, falta añadir efecto de movimiento
         g.fillRect((int)x+(int)w/2, 10, 15, 70);
@@ -175,13 +174,18 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
 
         //Control de combustible, detener vehiculo de manera progresiva
+        g.setColor(Color.gray); //Medidor de combustible
+        g.fillRect(800, 40, 200, 30);
+
         g.setColor(Color.red); 
-        g.fillRect(800, 10, (int)gasAmount, 30);
+        g.fillRect(800, 40, (int)gasAmount, 30);
 
         g.setColor(Color.black); 
-        g.drawString("Combustible: "+(int)gasAmount, 850,30);
+        g.drawString("Combustible: "+(int)gasAmount, 850,60);
 
         if(isPlaying){
+            points++;
+
             if(gasAmount>0) gasAmount=gasAmount-0.05;
             if(gasAmount<=0) gasOut=true;
 
@@ -206,12 +210,16 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
         }
 
-        //g.setColor(Color.red);
-        //g.fillRect((int)Vehicle.X, (int)Vehicle.Y, 20,20);
+        g.setColor(Color.gray); //Puntuacion
+        g.fillRect(800, 0, 200, 30);
+        
+        g.setColor(Color.black);
+        g.drawString("Puntuacion: "+points, 820, 20);
 
+        g.setColor(Color.gray);
+        g.fillRect(920, 100, 80, 80);
 
-        vehicle.paint(g);
-
+        vehicle.paint(g);   
 
         //Control de fps
         long time = System.currentTimeMillis();
@@ -355,6 +363,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
                 gasList.remove(i);
             }            
             gasAmount = 200;
+            Car.Velocity = 300;
+            Tree.Velocity = 300;
+            points = 0;
             Vehicle.vehiclePosition.x=510;
             Vehicle.vehiclePosition.y=540;
             Vehicle.giro=0;
