@@ -3,7 +3,6 @@ package PanelCentral;
 import Otros.Car;
 import Otros.Generator;
 import Otros.Tree;
-import Otros.Colisions;
 import Otros.Gas;
 
 import javax.swing.*;

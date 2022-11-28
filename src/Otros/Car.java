@@ -66,7 +66,7 @@ public class Car{
 
             if(!InGame.Jump){
 
-                if(new Rectangle(carPosition.x , carPosition.y, 60, 80).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
+                if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
                     InGame.isPlaying = false;   
                 }
 
