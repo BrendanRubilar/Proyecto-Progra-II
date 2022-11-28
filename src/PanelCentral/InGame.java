@@ -355,8 +355,13 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
                 gasList.remove(i);
             }            
             gasAmount = 200;
-            
+            Vehicle.vehiclePosition.x=510;
+            Vehicle.vehiclePosition.y=540;
+            Vehicle.giro=0;
             Status.c1.show(Status.Panels, "1");
+            Status.inGame_theme.stop();
+            Status.menu_theme.setMicrosecondPosition(0);
+            Status.menu_theme.start();
             //System.out.println("SE PRESIONA BOTON");
           
         }

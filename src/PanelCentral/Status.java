@@ -15,7 +15,7 @@ import javax.sound.sampled.FloatControl;
 public class Status extends JPanel implements ActionListener {
 
     //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
-    private Clip menu_theme, inGame_theme;
+    public static Clip menu_theme, inGame_theme;
     public static JPanel Panels, Menu, GameOver;
     JButton Iniciar, Salir,Dificultad;
     JFrame target;
@@ -148,6 +148,7 @@ public class Status extends JPanel implements ActionListener {
         if (e.getSource() == Iniciar) {
             //Cambiamos al panel ProgramaIniciado
             menu_theme.stop();
+            Status.inGame_theme.setMicrosecondPosition(0);
             inGame_theme.loop(-1);
             c1.show(Panels, "2");
             enjuego.requestFocus();

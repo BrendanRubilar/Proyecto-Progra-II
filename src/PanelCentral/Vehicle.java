@@ -5,7 +5,7 @@ import java.awt.Point;
 
 public class Vehicle {
 
-    public static Point vehiclePosition = new Point(250,195);
+    public static Point vehiclePosition = new Point(510,540);
 
     public static double X = 250, Y = 195, Velocity = 300, giro = 0;
 
@@ -45,6 +45,8 @@ public class Vehicle {
     }
 
     public void SetvehiclePosition(int x, int y) {
+        vehiclePosition.x=x;
+        vehiclePosition.y=y;
 
     }
 
