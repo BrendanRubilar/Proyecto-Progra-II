@@ -41,7 +41,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public static double gasAmount = 200;
     public static boolean gasOut = false;
 
-    public static double x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista, (ancho minimo 200)
+    public static int x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista, (ancho minimo 200)
     JButton boton = new JButton();
 
     

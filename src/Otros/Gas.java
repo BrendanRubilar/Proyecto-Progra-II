@@ -2,6 +2,8 @@ package Otros;
 
 import java.awt.*;
 import java.util.Random;
+import java.awt.Point;
+import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
@@ -15,33 +17,34 @@ import PanelCentral.Vehicle;
 
 public class Gas {
     
-    double GasX=40, GasY=0;
     Random r = new Random();
+    Point gas = new Point(40,0);
     private Clip gasPlus;
+    
 
     public Gas(){
 
-        double aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
-        double aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
-        GasX = r.nextDouble(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
+        int aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
+        int aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
+        gas.x = r.nextInt(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
 
     }
 
     public void paint(Graphics g){
 
         ImageIcon tree = new ImageIcon("Multimedia//Gas.png");
-        g.drawImage(tree.getImage(), (int)GasX, (int)GasY,60,60,null); 
+        g.drawImage(tree.getImage(), (int)gas.x, (int) gas.y,60,60,null); 
 
     }
 
     public void moveDown(){
-        if(GasY<=2000){
-            GasY= GasY + Car.Velocity * InGame.delta_time;
+        if(gas.y<=2000){
+            gas.y = (int) (gas.y + Car.Velocity * InGame.delta_time);
             
-            if(((Vehicle.X >= GasX-60 && Vehicle.X < GasX + 60) && (Vehicle.Y >= GasY-60 && Vehicle.Y < GasY + 60)) || (Vehicle.X == GasX && Vehicle.Y == GasY)){
+            if(((Vehicle.vehiclePosition.x >= gas.x-60 && Vehicle.vehiclePosition.x < gas.x + 60) && (Vehicle.vehiclePosition.y >= gas.y-60 && Vehicle.vehiclePosition.y < gas.y + 60)) || (Vehicle.vehiclePosition.x == gas.x && Vehicle.vehiclePosition.x == gas.y)){
                 //System.out.println("COLISIOOOOOON!!!!!");
                 gasSound();
-                GasY = 1990;
+                gas.y = 1990;
                 InGame.gasAmount = InGame.gasAmount + 50;
                 if(InGame.gasAmount>200) InGame.gasAmount=200;
 
@@ -52,12 +55,12 @@ public class Gas {
     }
 
     public void setYNearToLimit(){
-        GasY = 1998;
+        gas.y = 1998;
     }
     
 
     public Boolean deleteTime(){
-        if(GasY>=2000){
+        if(gas.y>=2000){
             return true;
         }else{
             return false;

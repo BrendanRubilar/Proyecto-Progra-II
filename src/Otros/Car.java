@@ -2,13 +2,14 @@ package Otros;
 
 import java.awt.*;
 import java.util.Random;
+import java.awt.Point;
 
 import PanelCentral.InGame;
 import PanelCentral.Vehicle;
 public class Car{
     boolean c = false;
     Vehicle vehicle;
-    double carX=300,carY=0;
+    Point carPosition = new Point(300,0);
     public static double Velocity=300;
     Random r = new Random();
 
@@ -16,24 +17,24 @@ public class Car{
         
         //Estos condicionales indican a que altura se generaran los autos, asi no chocan entre ellos
         if(a==1){ 
-            double aux=r.nextDouble(200-90)+90;
+            int aux=r.nextInt(200-90)+90;
             aux=aux * -1;
-            carY = aux;
+            carPosition.y = aux;
         }
         if(a==2){ 
-            double aux=r.nextDouble(300-285)+285;
+            int aux=r.nextInt(300-285)+285;
             aux=aux * -1;
-            carY = aux;
+            carPosition.y = aux;
         }
         if(a==3){ 
-            double aux=r.nextDouble(400-385)+385;
+            int aux=r.nextInt(400-385)+385;
             aux=aux * -1;
-            carY = aux;
+            carPosition.y = aux;
         }
 
-        double aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
-        double aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
-        carX = r.nextDouble(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
+        int aux = (int) (InGame.w+InGame.x-70); //Punto maximo en donde puede aparecer
+        int aux2 = (int) (InGame.x+30); //Punto minimo en donde puede aparecer
+        carPosition.x = r.nextInt(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
     }
 
     public void paint(Graphics g){
@@ -43,29 +44,29 @@ public class Car{
         Graphics2D wheel4 = (Graphics2D) g;
 
         wheel1.setColor(Color.BLACK);
-        wheel1.fillRoundRect((int)carX-5, (int)carY+5, 10, 20,5,10);
+        wheel1.fillRoundRect((int)carPosition.x-5, (int)carPosition.y+5, 10, 20,5,10);
 
         wheel2.setColor(Color.BLACK);
-        wheel2.fillRoundRect((int)carX+55, (int)carY+10, 10, 20,5,10);
+        wheel2.fillRoundRect((int)carPosition.x+55, (int)carPosition.y+10, 10, 20,5,10);
 
         wheel3.setColor(Color.BLACK);
-        wheel3.fillRoundRect((int)carX-5, (int)carY+50, 10, 20,5,10);
+        wheel3.fillRoundRect((int)carPosition.x-5, (int)carPosition.y+50, 10, 20,5,10);
 
         wheel4.setColor(Color.BLACK);
-        wheel4.fillRoundRect((int)carX+55, (int)carY+50, 10, 20,5,10);
+        wheel4.fillRoundRect((int)carPosition.x+55, (int)carPosition.y+50, 10, 20,5,10);
         
         g.setColor(Color.BLUE);
-        g.fillRoundRect((int)carX, (int)carY, (int)60, (int)85,(int)55,(int)15);
+        g.fillRoundRect((int)carPosition.x, (int)carPosition.y, (int)60, (int)85,(int)55,(int)15);
 
     }
 
     public void moveDown(){
-        if(carY<=2000){
-            carY= carY + Velocity * InGame.delta_time;
+        if(carPosition.y<=2000){
+            carPosition.y= (int) (carPosition.y + Velocity * InGame.delta_time);
 
             if(!InGame.Jump){
 
-                if(((Vehicle.X >= carX-60 && Vehicle.X < carX + 60) && (Vehicle.Y >= carY-85 && Vehicle.Y < carY + 85)) || (Vehicle.X == carX && Vehicle.Y == carY)){
+                if(new Rectangle(carPosition.x , carPosition.y, 60, 80).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, Vehicle.W, Vehicle.H))){
                     InGame.isPlaying = false;   
                 }
 
@@ -76,12 +77,12 @@ public class Car{
     }
 
     public void setYNearToLimit(){
-        carY = 1998;
+        carPosition.y = 1998;
     }
     
 
     public Boolean deleteTime(){
-        if(carY>=2000){
+        if(carPosition.y>=2000){
             return true;
         }else{
             return false;
