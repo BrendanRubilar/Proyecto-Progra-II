@@ -7,9 +7,9 @@ public class Vehicle {
 
     public static Point vehiclePosition = new Point(250,195);
 
-    public static double X = 250, Y = 195, Velocity = 300, giro = 0;
+    public static double Velocity = 300, giro = 0;
 
-    public static int H = 80, W = 60;
+    public static double H = 80, W = 60;
 
     public Vehicle() {
 
@@ -40,7 +40,7 @@ public class Vehicle {
 
         car.rotate(Math.toRadians(giro)*(0.1), vehiclePosition.x + 30, vehiclePosition.y+80);
         car.setColor(Color.yellow);
-        car.fillRoundRect((int)vehiclePosition.x, (int)vehiclePosition.y, (int)W, (int)H,(int)W-5,(int)H-60);
+        car.fillRoundRect((int)vehiclePosition.x, (int)vehiclePosition.y, (int)W, (int)H, (int)W-5, (int)H-60);
 
     }
 
@@ -108,8 +108,8 @@ public class Vehicle {
 
     public void Jump(InGame auxInGame){
         
-        if(W>=60) W= (int) (Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+60);
-        if(H>=80) H= (int) (Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+80);
+        if(W>=60) W=  (Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+60);
+        if(H>=80) H=  (Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+80);
         
         if(H<=80 || W<=60){
             auxInGame.setJumpFalse();
