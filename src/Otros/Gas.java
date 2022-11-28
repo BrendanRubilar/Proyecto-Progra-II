@@ -16,17 +16,14 @@ import PanelCentral.Vehicle;
 public class Gas {
     
     double GasX=40, GasY=0;
-    static double Velocity=300;
     Random r = new Random();
     private Clip gasPlus;
 
     public Gas(){
 
-        
         double aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
         double aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
         GasX = r.nextDouble(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
-
 
     }
 
@@ -39,9 +36,9 @@ public class Gas {
 
     public void moveDown(){
         if(GasY<=2000){
-            GasY= GasY + Velocity * InGame.delta_time;
+            GasY= GasY + Car.Velocity * InGame.delta_time;
             
-            if(((Vehicle.X >= GasX && Vehicle.X < GasX + 60) && (Vehicle.Y >= GasY && Vehicle.Y < GasY + 60)) || (Vehicle.X == GasX && Vehicle.Y == GasY)){
+            if(((Vehicle.X >= GasX-60 && Vehicle.X < GasX + 60) && (Vehicle.Y >= GasY-60 && Vehicle.Y < GasY + 60)) || (Vehicle.X == GasX && Vehicle.Y == GasY)){
                 //System.out.println("COLISIOOOOOON!!!!!");
                 gasSound();
                 GasY = 1990;
@@ -53,6 +50,11 @@ public class Gas {
         }
 
     }
+
+    public void setYNearToLimit(){
+        GasY = 1998;
+    }
+    
 
     public Boolean deleteTime(){
         if(GasY>=2000){

@@ -90,6 +90,7 @@ public class Vehicle {
         }
         if((Y <= 600 && X >= 0 && X<=290) || (Y<=600 && X >= 790 && X<=1080)){
             Y = Y + (Velocity*0.66) * InGame.delta_time;
+
         }
         if(giro>0.2){
             giro=giro-0.02;

@@ -63,17 +63,22 @@ public class Car{
         if(carY<=2000){
             carY= carY + Velocity * InGame.delta_time;
 
-            if(((Vehicle.X >= carX && Vehicle.X < carX + 60) && (Vehicle.Y >= carY && Vehicle.Y < carY + 85)) || (Vehicle.X == carX && Vehicle.Y == carY)){
-                //System.out.println("COLISIOOOOOON!!!!!");
+            if(!InGame.Jump){
 
-                InGame.objetsOnMovement = false;
+                if(((Vehicle.X >= carX-60 && Vehicle.X < carX + 60) && (Vehicle.Y >= carY-85 && Vehicle.Y < carY + 85)) || (Vehicle.X == carX && Vehicle.Y == carY)){
+                    InGame.isPlaying = false;   
+                }
 
             }
-
         } 
 
 
     }
+
+    public void setYNearToLimit(){
+        carY = 1998;
+    }
+    
 
     public Boolean deleteTime(){
         if(carY>=2000){

@@ -47,7 +47,7 @@ public class Generator extends Thread {
             if(InGame.isPlaying){
 
                 if(Status.dificultad==0){
-                    //System.out.println("Auto generado " + new Date()); 
+                   
                     cars.add(new Car(0));
                     cars.add(new Car(1));
                 }
@@ -63,6 +63,7 @@ public class Generator extends Thread {
                     cars.add(new Car(2));
                     cars.add(new Car(3));
                 }
+                //System.out.println("Auto generado " + new Date()); 
 
             }
         }

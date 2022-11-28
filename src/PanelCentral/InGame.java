@@ -16,14 +16,17 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import java.io.File;
+import java.awt.event.*;
+
 
 
 //ESTA CLASE ES UN PANEL QUE REPRESENTARÁ IN GAME, SE HACE COMO CLASE PARA PODER USAR EL METODO PAINT 
-public class InGame extends JPanel implements KeyListener {
+public class InGame extends JPanel implements KeyListener,ActionListener{
 
     Vehicle vehicle;
-    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown, Jump=false;
-    public static boolean objetsOnMovement=true, isPlaying = false;
+    boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown;
+    public static boolean Jump=false;
+    public static boolean isPlaying = false;
     JLabel rayas = new JLabel();
     Generator generador;
     double timerAuxiliar=0;
@@ -31,7 +34,6 @@ public class InGame extends JPanel implements KeyListener {
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
     private ArrayList<Gas> gasList;
-
     
     long last_time = System.currentTimeMillis();
     //Esto se puede reordenar arriba mas tarde
@@ -40,8 +42,9 @@ public class InGame extends JPanel implements KeyListener {
     public static boolean gasOut = false;
 
     public static double x = 290, y = 0, w= 500, h=1000; //Ubicacion de la pista, (ancho minimo 200)
+    JButton boton = new JButton();
 
-    Button boton = new Button("Volver al menu");
+    
 
     public InGame() {
         cars = new ArrayList<Car>();
@@ -54,8 +57,11 @@ public class InGame extends JPanel implements KeyListener {
         this.addKeyListener(this);
         this.setFocusable(true);
         generador.start();
-
-
+        boton.setBounds(400,400,200,100);
+        this.add(boton);
+        boton.setVisible(false);
+        boton.addActionListener(this);
+        
 
     }
 
@@ -73,7 +79,6 @@ public class InGame extends JPanel implements KeyListener {
     //DIBUJAR EN EL PANEL 
     public void paint(Graphics g) {
         super.paint(g);
-        isPlaying = true;
   
 
         g.setColor(Color.GREEN); //Cesped
@@ -85,41 +90,21 @@ public class InGame extends JPanel implements KeyListener {
         g.setColor(Color.gray); //Medidor de combustible
         g.fillRect(800, 10, 200, 30);
 
-        g.setColor(Color.red); 
-        g.fillRect(800, 10, (int)gasAmount, 30);
-
-        g.setColor(Color.black); 
-        g.drawString("Combustible: "+(int)gasAmount, 850,30);
-        
-        //Control de combustible, detener vehiculo de manera progresiva
-        if(objetsOnMovement){
-            if(gasAmount>0) gasAmount=gasAmount-0.05;
-            if(gasAmount<=0) gasOut=true;
-
-            if(gasOut){
-                Vehicle.Velocity--;
-                Tree.Velocity--;
-            } 
-
-            if(Vehicle.Velocity<=0) objetsOnMovement = false;
-
-        }
-
-
-        if(!objetsOnMovement){
-            
-            g.drawString("FIN DE LA PARTIDA", 400,300);
-            isPlaying = false;
-            //boton.setBounds(400,400,200,100); //ESTOY TESTEANDO CREAR UN BOTON PARA VOLVER AL MENU (No olviden Reiniciar booleanos si quieren intentarlo)
-            //this.add(boton);
-
-        }
+        g.setColor(Color.white); //Decoracion, falta añadir efecto de movimiento
+        g.fillRect((int)x+(int)w/2, 10, 15, 70);
+        g.fillRect((int)x+(int)w/2, 90, 15, 70);
+        g.fillRect((int)x+(int)w/2, 170, 15, 70);
+        g.fillRect((int)x+(int)w/2, 250, 15, 70);
+        g.fillRect((int)x+(int)w/2, 330, 15, 70);
+        g.fillRect((int)x+(int)w/2, 410, 15, 70);
+        g.fillRect((int)x+(int)w/2, 490, 15, 70);
+        g.fillRect((int)x+(int)w/2, 570, 15, 70);
 
         if(!cars.isEmpty()){
             for (int i = 0; i < cars.size(); i++) {
                 cars.get(i).paint(g);
 
-                if(objetsOnMovement){
+                if(isPlaying){
                      cars.get(i).moveDown();
                 }
 
@@ -134,7 +119,7 @@ public class InGame extends JPanel implements KeyListener {
             for (int i = 0; i < trees.size(); i++) {
                 trees.get(i).paint(g);
 
-                if(objetsOnMovement){
+                if(isPlaying){
                      trees.get(i).moveDown();
                 }
                
@@ -149,7 +134,7 @@ public class InGame extends JPanel implements KeyListener {
             for (int i = 0; i < gasList.size(); i++){
                 gasList.get(i).paint(g);
 
-                if(objetsOnMovement){
+                if(isPlaying){
                     gasList.get(i).moveDown();
                 }
 
@@ -161,9 +146,9 @@ public class InGame extends JPanel implements KeyListener {
             }
         }
 
-        vehicle.paint(g);
+        
 
-        if(objetsOnMovement==true){
+        if(isPlaying){
             if(MoveLeft){
                 vehicle.MoveLeft();
              }
@@ -187,6 +172,45 @@ public class InGame extends JPanel implements KeyListener {
                  timerAuxiliar=0;
              }
         }
+
+
+        //Control de combustible, detener vehiculo de manera progresiva
+        g.setColor(Color.red); 
+        g.fillRect(800, 10, (int)gasAmount, 30);
+
+        g.setColor(Color.black); 
+        g.drawString("Combustible: "+(int)gasAmount, 850,30);
+
+        if(isPlaying){
+            if(gasAmount>0) gasAmount=gasAmount-0.05;
+            if(gasAmount<=0) gasOut=true;
+
+            if(gasOut){
+                Vehicle.Velocity--;
+                Tree.Velocity--;
+            } 
+
+            if(Vehicle.Velocity<=0) isPlaying = false;
+
+        }
+
+
+        if(!isPlaying){
+            
+            g.drawString("FIN DE LA PARTIDA", 400,300);
+            isPlaying = false;
+            
+            boton.setVisible(true);
+            g.setColor(Color.black); 
+            g.fillRect(440, 400, 200, 100);
+
+        }
+
+        //g.setColor(Color.red);
+        //g.fillRect((int)Vehicle.X, (int)Vehicle.Y, 20,20);
+
+
+        vehicle.paint(g);
 
 
         //Control de fps
@@ -265,6 +289,7 @@ public class InGame extends JPanel implements KeyListener {
                     Jump=true;
                     JumpSound();
                 }
+               
                 
                 break;
         }
@@ -303,5 +328,40 @@ public class InGame extends JPanel implements KeyListener {
         }
 
     }
+
+    public void actionPerformed(ActionEvent e) {
+
+        if (e.getSource() == boton) {
+
+            //Restablecemos todo antes de volver al panel de menu
+            //Se envian todos los objetos cerca a su limite (Donde no hacen nada)
+            for (int i = 0; i < cars.size(); i++){
+                cars.get(i).setYNearToLimit();
+            }
+            for (int i = 0; i < trees.size(); i++){
+                trees.get(i).setYNearToLimit();
+            }
+            for (int i = 0; i < gasList.size(); i++){
+                gasList.get(i).setYNearToLimit();
+            }
+            //Se eliminan todos los objetos de sus arraylist (Ahora java deberia borrarlos eventualmente)
+            for (int i = 0; i < cars.size(); i++){
+                cars.remove(i);
+            }
+            for (int i = 0; i < trees.size(); i++){
+                trees.remove(i);
+            }
+            for (int i = 0; i < gasList.size(); i++){
+                gasList.remove(i);
+            }            
+            gasAmount = 200;
+            
+            Status.c1.show(Status.Panels, "1");
+            //System.out.println("SE PRESIONA BOTON");
+          
+        }
+    }
+
+
 
 }

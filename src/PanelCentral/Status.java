@@ -16,11 +16,11 @@ public class Status extends JPanel implements ActionListener {
 
     //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
     private Clip menu_theme, inGame_theme;
-    JPanel Panels, Menu, GameOver;
+    public static JPanel Panels, Menu, GameOver;
     JButton Iniciar, Salir,Dificultad;
     JFrame target;
     public static int dificultad=1; // 0-Facil | 1-Medio | 2-Dificil
-    CardLayout c1 = new CardLayout();
+    public static CardLayout c1 = new CardLayout();
 
     InGame enjuego = new InGame(); //Panel in game
 
@@ -142,7 +142,6 @@ public class Status extends JPanel implements ActionListener {
         gainControl.setValue(20f * (float) Math.log10(volume));
     }
 //-------------------------------------------------------------------------------------------------
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
@@ -153,7 +152,8 @@ public class Status extends JPanel implements ActionListener {
             c1.show(Panels, "2");
             enjuego.requestFocus();
             appIsRunning = true;
-
+            InGame.isPlaying=true;
+            
         }
         if (e.getSource() == Dificultad){
 

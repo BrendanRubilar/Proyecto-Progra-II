@@ -46,14 +46,19 @@ public class Tree {
     public void moveDown(){
         if(Y<=2000) Y= Y + Velocity * InGame.delta_time;
 
-        if(((Vehicle.X >= X && Vehicle.X < X + 60) && (Vehicle.Y >= Y && Vehicle.Y < Y + 60)) || (Vehicle.X == X && Vehicle.Y == Y)){
+        if(((Vehicle.X >= X-60 && Vehicle.X < X + 60) && (Vehicle.Y >= Y-60 && Vehicle.Y < Y + 60)) || (Vehicle.X == X && Vehicle.Y == Y)){
             System.out.println("COLISIOOOOOON!!!!!");
 
-            InGame.objetsOnMovement = false;
+            InGame.isPlaying = false;
 
         }
         
     }
+
+    public void setYNearToLimit(){
+        Y = 1998;
+    }
+    
 
     public Boolean deleteTime(){
         if(Y>=2000){
