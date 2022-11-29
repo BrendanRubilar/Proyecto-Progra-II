@@ -4,8 +4,8 @@ import Otros.Car;
 import Otros.Generator;
 import Otros.Tree;
 import Otros.Gas;
+import Otros.Shoot;
 import Otros.ShootPower;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,7 +26,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
     Vehicle vehicle;
     boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown;
-    public static boolean Jump=false;
+    public static boolean Jump=false, shooting=false;
     public static boolean isPlaying = false;
     JLabel rayas = new JLabel();
     Generator generador;
@@ -35,6 +35,10 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
     private ArrayList<Gas> gasList;
+    private ArrayList<ShootPower> rocketBoxes;
+    private ArrayList<Shoot> shootsList;
+
+
     
     long last_time = System.currentTimeMillis();
     //Esto se puede reordenar arriba mas tarde
@@ -51,6 +55,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         cars = new ArrayList<Car>();
         trees = new ArrayList<Tree>();
         gasList = new ArrayList<Gas>();
+        rocketBoxes = new ArrayList<ShootPower>();
+        shootsList = new ArrayList<Shoot>();
 
         generador = new Generator(this);
         this.setLayout(null);
@@ -74,6 +80,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     }
     public ArrayList getArrayGas(){
         return gasList;
+    }
+    public ArrayList getArrayBoxes(){
+        return rocketBoxes;
     }
 
     //DIBUJAR EN EL PANEL 
@@ -146,6 +155,21 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             }
         }
 
+        if(!rocketBoxes.isEmpty()){
+            for (int i = 0; i < rocketBoxes.size(); i++){
+                rocketBoxes.get(i).paint(g);
+
+                if(isPlaying){
+                    rocketBoxes.get(i).moveDown();
+                }
+
+                if(rocketBoxes.get(i).deleteTime()){ 
+                    rocketBoxes.remove(i);
+                 }
+                //System.out.println("Arraylist: "+rocketBoxes.size());
+            }
+        }
+
         
 
         if(isPlaying){
@@ -161,9 +185,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
              }
              
              if(MoveDown){
-                 vehicle.MoveDown();
-                 ShootPower shoot = new ShootPower();
-                 shoot.paint(g);
+                vehicle.MoveDown();
              }
              if(Jump){
                  timerAuxiliar= timerAuxiliar+0.017;
@@ -173,6 +195,28 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
                  vehicle.setSize(80, 60);
                  timerAuxiliar=0;
              }
+             
+
+             if(shooting){
+
+                if(!shootsList.isEmpty()){
+                    for (int i = 0; i < shootsList.size(); i++){
+                        shootsList.get(i).paint(g);
+                       
+                        shootsList.get(i).moveUp();          
+                    }
+                }
+        
+             }else{
+                if(!shootsList.isEmpty()){
+                    for (int i = 0; i < shootsList.size(); i++){
+                        if(shootsList.get(i).deleteTime()){ 
+                            shootsList.remove(i);
+                         }
+                    }
+                }
+             }
+
         }
 
 
@@ -219,8 +263,13 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         g.setColor(Color.black);
         g.drawString("Puntuacion: "+points, 820, 20);
 
-        g.setColor(Color.gray);
-        g.fillRect(920, 100, 80, 80);
+        g.setColor(Color.gray); //Inventario de poderes
+        g.fillRect(910, 100, 90, 90);
+
+        if(ShootPower.ThePlayerHasRocket){
+            ImageIcon tree = new ImageIcon("Multimedia//coheteIcon.png");
+            g.drawImage(tree.getImage(), 910, 100,90,90,null); 
+        }
 
         vehicle.paint(g);   
 
@@ -268,7 +317,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
       
     }
 
-    //Control del teclado LISTA DE CODIGOS: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list
+    //Control del teclado LISTA DE CODIGOS:     
     @Override
     public void keyPressed(KeyEvent e) {
 
@@ -296,13 +345,20 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
             case 32:
 
-                if(!Jump){ 
-                    Jump=true;
-                    JumpSound();
+                //SALTO LISTO, FALTA AÑADIR LA CLASE PARA USARLO
+                //if(!Jump){ 
+                 //   Jump=true;
+                   // JumpSound();
+                //}
+
+                if(ShootPower.ThePlayerHasRocket){
+                    shooting = true;
+                    shootsList.add(new Shoot());
+                    ShootPower.ThePlayerHasRocket = false;
                 }
-               
-                
                 break;
+
+
         }
     }
 

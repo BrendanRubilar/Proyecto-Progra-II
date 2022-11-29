@@ -13,6 +13,7 @@ public class Car{
     boolean c = false;
     Vehicle vehicle;
     Point carPosition = new Point(300,0);
+    double carW=100, carH = 100;
     public static double Velocity=300;
     Random r = new Random();
     boolean destroy=false;
@@ -64,7 +65,9 @@ public class Car{
             g.fillRoundRect((int)carPosition.x, (int)carPosition.y, (int)60, (int)85,(int)55,(int)15);
         }else{
             ImageIcon tree = new ImageIcon("Multimedia//Explosion.png");
-            g.drawImage(tree.getImage(), (int)carPosition.x, (int) carPosition.y,100,100,null); 
+            g.drawImage(tree.getImage(), (int)carPosition.x, (int) carPosition.y,(int)carW,(int)carH,null); 
+
+            
         }
 
       
@@ -79,25 +82,37 @@ public class Car{
 
             if(!InGame.Jump){
 
-                if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
-                    InGame.isPlaying = false;  
-                    destroy= true; 
+                if(!destroy){
+
+                    if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
+                        InGame.isPlaying = false;  
+                        destroy= true; 
+                        
+                    }
+                    if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Shoot.shoot.x, Shoot.shoot.y, 35, 50))){
+                        destroy=true;
+                        InGame.shooting = false;
+                        Shoot.shoot.y = -2000;
+                    }
+
+                }else{
+                    if(carW>0){
+                        carW = carW - 0.6;
+                    }
+                    if(carH>0){
+                        carH = carH - 0.6;
+                    }
                 }
-                if(new Rectangle(carPosition.x , carPosition.y, 60, 80).intersects(new Rectangle(ShootPower.shoot.x, ShootPower.shoot.y, 35, 50))){
-                    destroy=true;
-                }
+
 
             }
         } 
-
-
     }
 
     public void setYNearToLimit(){
         carPosition.y = 1998;
     }
     
-
     public Boolean deleteTime(){
         if(carPosition.y>=2000){
             return true;
@@ -105,6 +120,5 @@ public class Car{
             return false;
         }
     }
-
 }
 
