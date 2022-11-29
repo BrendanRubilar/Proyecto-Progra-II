@@ -261,7 +261,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
 
         if(!isPlaying){
-            
+            Status.inGame_theme.stop();
+            Status.GameOver_theme.start();
             g.drawString("FIN DE LA PARTIDA", 480,380);
             isPlaying = false;
             
@@ -447,11 +448,14 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             ShootPower.ThePlayerHasRocket = false;
             JumpPower.ThePlayerHasJump = false;
             points = 0;
+            
             Vehicle.vehiclePosition.x=510;
             Vehicle.vehiclePosition.y=540;
             Vehicle.giro=0;
+
             Status.c1.show(Status.Panels, "1");
-            Status.inGame_theme.stop();
+            Status.GameOver_theme.stop();
+            Status.GameOver_theme.setMicrosecondPosition(0);
             Status.menu_theme.setMicrosecondPosition(0);
             Status.menu_theme.start();
             //System.out.println("SE PRESIONA BOTON");

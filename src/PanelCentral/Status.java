@@ -15,7 +15,7 @@ import javax.sound.sampled.FloatControl;
 public class Status extends JPanel implements ActionListener {
 
     //Creamos un panel contenedor, un panel Menu y un panel InGame (Este ultimo es una clase)
-    public static Clip menu_theme, inGame_theme;
+    public static Clip menu_theme, inGame_theme, GameOver_theme;
     public static JPanel Panels, Menu, GameOver;
     JButton Iniciar, Salir,Dificultad;
     JFrame target;
@@ -60,19 +60,19 @@ public class Status extends JPanel implements ActionListener {
     public void InitMenuComponents() {
         //Creamos los botones del menu
         Iniciar = new JButton();
-        Iniciar.setBounds(350, 100, 300, 50);
+        Iniciar.setBounds(390, 100, 300, 50);
         Iniciar.setText("Jugar");
         Iniciar.addActionListener(this);
         Menu.add(Iniciar);
 
         Dificultad = new JButton();
-        Dificultad.setBounds(350, 200, 300, 50);
+        Dificultad.setBounds(390, 200, 300, 50);
         Dificultad.setText("Dificultad: Media");
         Dificultad.addActionListener(this);
         Menu.add(Dificultad);
 
         Salir = new JButton();
-        Salir.setBounds(350, 300, 300, 50);
+        Salir.setBounds(390, 300, 300, 50);
         Salir.setText("Salir");
         Salir.addActionListener(this);
         Menu.add(Salir);
@@ -88,11 +88,11 @@ public class Status extends JPanel implements ActionListener {
     public void InitRunningComponents() {
         //Creamos todos los elementos del panel ProgramaIniciado
         JLabel test = new JLabel();
-        test.setOpaque(true);
-        test.setBackground(Color.red);
-        test.setBounds(100, 100, 50, 50);
-        enjuego.add(test);
-
+        ImageIcon intro = new ImageIcon("Multimedia//Introgame.gif");
+        test.setIcon(new ImageIcon(intro.getImage()));
+        test.setOpaque(false);
+        test.setBounds(0, 0, 1080, 720);
+        Menu.add(test);
     }
 
     private void InitMusic(){
@@ -101,14 +101,17 @@ public class Status extends JPanel implements ActionListener {
             // Se obtiene un Clip de sonido
             menu_theme = AudioSystem.getClip();
             inGame_theme = AudioSystem.getClip();
+            GameOver_theme = AudioSystem.getClip();
             
  
             // Se carga con un fichero wav
             menu_theme.open(AudioSystem.getAudioInputStream(new File("Multimedia//main_theme.wav")));
             inGame_theme.open(AudioSystem.getAudioInputStream(new File("Multimedia//ingameTheme.wav")));
+            GameOver_theme.open(AudioSystem.getAudioInputStream(new File("Multimedia//GameO.wav")));
             
             setVolumeMenu(0.15f);
             setVolumeGame(0.15f);
+            setVolumeGameOver(0.15f);
 
             // Comienza la reproducción
             menu_theme.loop(-1);
@@ -139,6 +142,17 @@ public class Status extends JPanel implements ActionListener {
         if (volume < 0f || volume > 1f)
             throw new IllegalArgumentException("Volume not valid: " + volume);
         FloatControl gainControl = (FloatControl) inGame_theme.getControl(FloatControl.Type.MASTER_GAIN);        
+        gainControl.setValue(20f * (float) Math.log10(volume));
+    }
+    public float getVolumeGameOver() {
+        FloatControl gainControl = (FloatControl) GameOver_theme.getControl(FloatControl.Type.MASTER_GAIN);        
+        return (float) Math.pow(10f, gainControl.getValue() / 20f);
+    }
+
+    public void setVolumeGameOver(float volume) {
+        if (volume < 0f || volume > 1f)
+            throw new IllegalArgumentException("Volume not valid: " + volume);
+        FloatControl gainControl = (FloatControl) GameOver_theme.getControl(FloatControl.Type.MASTER_GAIN);        
         gainControl.setValue(20f * (float) Math.log10(volume));
     }
 //-------------------------------------------------------------------------------------------------
