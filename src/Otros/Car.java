@@ -4,7 +4,6 @@ import java.awt.*;
 import java.util.Random;
 
 import javax.swing.ImageIcon;
-
 import java.awt.Point;
 
 import PanelCentral.InGame;
@@ -14,7 +13,7 @@ public class Car{
     Vehicle vehicle;
     Point carPosition = new Point(300,0);
     double carW=100, carH = 100;
-    public static double Velocity=300;
+    public static double Velocity=350;
     Random r = new Random();
     boolean destroy=false;
 
@@ -22,7 +21,7 @@ public class Car{
         
         //Estos condicionales indican a que altura se generaran los autos, asi no chocan entre ellos
         if(a==1){ 
-            int aux=r.nextInt(200-90)+90;
+            int aux=r.nextInt(200-100)+100;
             aux=aux * -1;
             carPosition.y = aux;
         }
@@ -66,13 +65,8 @@ public class Car{
         }else{
             ImageIcon tree = new ImageIcon("Multimedia//Explosion.png");
             g.drawImage(tree.getImage(), (int)carPosition.x, (int) carPosition.y,(int)carW,(int)carH,null); 
-
             
         }
-
-      
-
-        
 
     }
 

@@ -3,6 +3,8 @@ package PanelCentral;
 import java.awt.*;
 import java.awt.Point;
 
+import javax.swing.ImageIcon;
+
 import Otros.JumpPower;
 
 public class Vehicle {
@@ -12,6 +14,8 @@ public class Vehicle {
     public static double Velocity = 300, giro = 0;
 
     public static double H = 80, W = 60;
+
+    public static boolean destroy=false;
 
     public Vehicle() {
 
@@ -24,25 +28,34 @@ public class Vehicle {
         Graphics2D wheel3 = (Graphics2D) g;
         Graphics2D wheel4 = (Graphics2D) g;
 
-        wheel1.rotate(Math.toRadians(giro)*10, vehiclePosition.x+30, vehiclePosition.y+10);
-        wheel1.setColor(Color.BLACK);
-        wheel1.fillRoundRect((int)vehiclePosition.x-5, (int)vehiclePosition.y+5, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
+        if(!destroy){
+            wheel1.rotate(Math.toRadians(giro)*10, vehiclePosition.x+30, vehiclePosition.y+10);
+            wheel1.setColor(Color.BLACK);
+            wheel1.fillRoundRect((int)vehiclePosition.x-5, (int)vehiclePosition.y+5, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
+    
+            wheel2.rotate(Math.toRadians(giro)*10, vehiclePosition.x+30, vehiclePosition.y+10);
+            wheel2.setColor(Color.BLACK);
+            wheel2.fillRoundRect((int)vehiclePosition.x+55, (int)vehiclePosition.y+5, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
+    
+            wheel3.rotate(Math.toRadians(giro), vehiclePosition.x+30, vehiclePosition.y+50);
+            wheel3.setColor(Color.BLACK);
+            wheel3.fillRoundRect((int)vehiclePosition.x-5, (int)vehiclePosition.y+50, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
+    
+            wheel4.rotate(Math.toRadians(giro), vehiclePosition.x+30, vehiclePosition.y+50);
+            wheel4.setColor(Color.BLACK);
+            wheel4.fillRoundRect((int)vehiclePosition.x+55, (int)vehiclePosition.y+50, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
+    
+            car.rotate(Math.toRadians(giro)*(0.1), vehiclePosition.x + 30, vehiclePosition.y+80);
+            car.setColor(Color.yellow);
+            car.fillRoundRect((int)vehiclePosition.x, (int)vehiclePosition.y, (int)W, (int)H, (int)W-5, (int)H-60);
+        }else{
+            ImageIcon VehicleIco = new ImageIcon("Multimedia//Explosion.png");
+            g.drawImage(VehicleIco.getImage(), (int)vehiclePosition.x, (int) vehiclePosition.y,(int)W,(int)W,null); 
 
-        wheel2.rotate(Math.toRadians(giro)*10, vehiclePosition.x+30, vehiclePosition.y+10);
-        wheel2.setColor(Color.BLACK);
-        wheel2.fillRoundRect((int)vehiclePosition.x+55, (int)vehiclePosition.y+5, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
+            
+        }
 
-        wheel3.rotate(Math.toRadians(giro), vehiclePosition.x+30, vehiclePosition.y+50);
-        wheel3.setColor(Color.BLACK);
-        wheel3.fillRoundRect((int)vehiclePosition.x-5, (int)vehiclePosition.y+50, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
 
-        wheel4.rotate(Math.toRadians(giro), vehiclePosition.x+30, vehiclePosition.y+50);
-        wheel4.setColor(Color.BLACK);
-        wheel4.fillRoundRect((int)vehiclePosition.x+55, (int)vehiclePosition.y+50, (int)W-50, (int)H-60,(int)W-55,(int)H-70);
-
-        car.rotate(Math.toRadians(giro)*(0.1), vehiclePosition.x + 30, vehiclePosition.y+80);
-        car.setColor(Color.yellow);
-        car.fillRoundRect((int)vehiclePosition.x, (int)vehiclePosition.y, (int)W, (int)H, (int)W-5, (int)H-60);
 
     }
 
@@ -125,6 +138,10 @@ public class Vehicle {
     public void setSize(int H, int W){
         this.H=H;
         this.W=W; 
+    }
+
+    public void setDestroyTrue(){
+        destroy = true;
     }
 
 
