@@ -2,6 +2,7 @@ package PanelCentral;
 
 import Otros.Car;
 import Otros.Generator;
+import Otros.JumpPower;
 import Otros.Tree;
 import Otros.Gas;
 import Otros.Shoot;
@@ -17,9 +18,8 @@ import javax.sound.sampled.Clip;
 import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import java.io.File;
+import java.lang.reflect.Array;
 import java.awt.event.*;
-
-
 
 //ESTA CLASE ES UN PANEL QUE REPRESENTARÁ IN GAME, SE HACE COMO CLASE PARA PODER USAR EL METODO PAINT 
 public class InGame extends JPanel implements KeyListener,ActionListener{
@@ -37,9 +37,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     private ArrayList<Gas> gasList;
     private ArrayList<ShootPower> rocketBoxes;
     private ArrayList<Shoot> shootsList;
+    private ArrayList<JumpPower> jumpBoxes;
 
-
-    
     long last_time = System.currentTimeMillis();
     //Esto se puede reordenar arriba mas tarde
     public static double delta_time = 0; 
@@ -57,6 +56,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         gasList = new ArrayList<Gas>();
         rocketBoxes = new ArrayList<ShootPower>();
         shootsList = new ArrayList<Shoot>();
+        jumpBoxes = new ArrayList<JumpPower>();
+
 
         generador = new Generator(this);
         this.setLayout(null);
@@ -83,6 +84,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     }
     public ArrayList getArrayBoxes(){
         return rocketBoxes;
+    }
+    public ArrayList getArrayJumpBoxes(){
+        return jumpBoxes;
     }
 
     //DIBUJAR EN EL PANEL 
@@ -169,8 +173,18 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
                 //System.out.println("Arraylist: "+rocketBoxes.size());
             }
         }
+        if(!jumpBoxes.isEmpty()){
+            for (int i = 0; i < jumpBoxes.size(); i++){
+                jumpBoxes.get(i).paint(g);
 
-        
+                if(isPlaying){
+                    jumpBoxes.get(i).moveDown();
+                }
+                if(jumpBoxes.get(i).deleteTime()){ 
+                    jumpBoxes.remove(i);
+                 }
+            }
+        }
 
         if(isPlaying){
             if(MoveLeft){
@@ -248,12 +262,14 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
         if(!isPlaying){
             
-            g.drawString("FIN DE LA PARTIDA", 400,300);
+            g.drawString("FIN DE LA PARTIDA", 480,380);
             isPlaying = false;
             
             boton.setVisible(true);
-            g.setColor(Color.black); 
+            g.setColor(Color.blue); 
             g.fillRect(440, 400, 200, 100);
+            g.setColor(Color.black);
+            g.drawString("VOLVER AL MENU", 480,460);
 
         }
 
@@ -269,6 +285,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         if(ShootPower.ThePlayerHasRocket){
             ImageIcon tree = new ImageIcon("Multimedia//coheteIcon.png");
             g.drawImage(tree.getImage(), 910, 100,90,90,null); 
+        }else if(JumpPower.ThePlayerHasJump){
+            ImageIcon tree = new ImageIcon("Multimedia//jump.png");
+            g.drawImage(tree.getImage(), 910, 100,90,90,null);
         }
 
         vehicle.paint(g);   
@@ -345,12 +364,13 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
             case 32:
 
-                //SALTO LISTO, FALTA AÑADIR LA CLASE PARA USARLO
-                //if(!Jump){ 
-                 //   Jump=true;
-                   // JumpSound();
-                //}
-
+                if(JumpPower.ThePlayerHasJump){
+                    if(!Jump){ 
+                        Jump=true;
+                        JumpSound();
+                    }
+                }
+                
                 if(ShootPower.ThePlayerHasRocket){
                     shooting = true;
                     shootsList.add(new Shoot());
@@ -424,6 +444,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             gasAmount = 200;
             Car.Velocity = 300;
             Tree.Velocity = 300;
+            ShootPower.ThePlayerHasRocket = false;
+            JumpPower.ThePlayerHasJump = false;
             points = 0;
             Vehicle.vehiclePosition.x=510;
             Vehicle.vehiclePosition.y=540;

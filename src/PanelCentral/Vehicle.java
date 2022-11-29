@@ -3,6 +3,8 @@ package PanelCentral;
 import java.awt.*;
 import java.awt.Point;
 
+import Otros.JumpPower;
+
 public class Vehicle {
 
     public static Point vehiclePosition = new Point(510,540);
@@ -115,6 +117,7 @@ public class Vehicle {
         
         if(H<=80 || W<=60){
             auxInGame.setJumpFalse();
+            JumpPower.ThePlayerHasJump = false;
         }
 
     }

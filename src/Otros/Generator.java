@@ -18,6 +18,7 @@ public class Generator extends Thread {
     private ArrayList<Tree> trees;
     private ArrayList<Gas> gasList;
     private ArrayList<ShootPower> rocketBoxes;
+    private ArrayList<JumpPower> jumpBoxes;
 
 
     private InGame InGamePointer;
@@ -29,6 +30,7 @@ public class Generator extends Thread {
         trees = InGamePointer.getArrayTrees();
         gasList = InGamePointer.getArrayGas();
         rocketBoxes = InGamePointer.getArrayBoxes();
+        jumpBoxes = InGamePointer.getArrayJumpBoxes();
 
     }
     @Override
@@ -38,6 +40,8 @@ public class Generator extends Thread {
         timer.schedule(velocityController, 0, 3000); //Aumenta velocidad de autos
         timer.schedule(gasGenerator, 0, 4000); 
         timer.schedule(rocketBoxGenerator, 0, 5000); 
+        timer.schedule(jumpBoxesGenerator, 0, 5000); 
+
 
 
         
@@ -121,6 +125,20 @@ public class Generator extends Thread {
                 if(aux==1){
                     System.out.println("Se crea una caja de cohetes");
                     rocketBoxes.add(new ShootPower());
+                }
+            }
+        }
+    };
+    TimerTask jumpBoxesGenerator = new TimerTask() {
+        @Override
+        public void run() {
+
+            if(InGame.isPlaying){
+
+                int aux = r.nextInt(2);
+                if(aux==1){
+                    System.out.println("Se crea una caja de Saltos");
+                    jumpBoxes.add(new JumpPower());
                 }
             }
         }
