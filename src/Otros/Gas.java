@@ -3,11 +3,7 @@ package Otros;
 import java.awt.*;
 import java.util.Random;
 import java.awt.Point;
-import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
-
-import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
@@ -21,20 +17,15 @@ public class Gas {
     Point gas = new Point(40,0);
     private Clip gasPlus;
     
-
     public Gas(){
-
         int aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
         int aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
         gas.x = r.nextInt(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
-
     }
 
     public void paint(Graphics g){
-
         ImageIcon tree = new ImageIcon("Multimedia//Gas.png");
         g.drawImage(tree.getImage(), (int)gas.x, (int) gas.y,60,60,null); 
-
     }
 
     public void moveDown(){
@@ -47,18 +38,14 @@ public class Gas {
                 gas.y = 1990;
                 InGame.gasAmount = InGame.gasAmount + 50;
                 if(InGame.gasAmount>200) InGame.gasAmount=200;
-
             }
-
         }
-
     }
 
     public void setYNearToLimit(){
         gas.y = 1998;
     }
     
-
     public Boolean deleteTime(){
         if(gas.y>=2000){
             return true;
@@ -76,5 +63,4 @@ public class Gas {
             System.out.println("No funcionó, verifique si tiene el archivo de audio en carpeta Multimedia " + e);
         }
     }
-
 }

@@ -3,17 +3,9 @@ package Otros;
 import java.awt.*;
 import java.util.Random;
 import java.awt.Point;
-import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
-import javax.sound.sampled.AudioFileFormat;
-import javax.sound.sampled.AudioSystem;
-import javax.sound.sampled.Clip;
-import java.io.File;
-
 import PanelCentral.InGame;
 import PanelCentral.Vehicle;
-
 public class Shoot {
 
     Random r = new Random();
@@ -26,10 +18,8 @@ public class Shoot {
     }
 
     public void paint(Graphics g){
-
         ImageIcon tree = new ImageIcon("Multimedia//rocket.png");
         g.drawImage(tree.getImage(), (int)shoot.x, (int) shoot.y,35,50,null); 
-
     }
 
     public void moveUp(){
@@ -40,8 +30,6 @@ public class Shoot {
             shoot.y = -2000;
             InGame.shooting = false;
         }
-        
-
     }
 
     public Boolean deleteTime(){
@@ -51,8 +39,4 @@ public class Shoot {
             return false;
         }
     }
-
-
-
-    
 }

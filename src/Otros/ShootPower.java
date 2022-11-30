@@ -3,18 +3,13 @@ package Otros;
 import java.awt.*;
 import java.util.Random;
 import java.awt.Point;
-import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
-
-import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
 import PanelCentral.InGame;
 import PanelCentral.Vehicle;
-
 public class ShootPower {
     Random r = new Random();
     Point rocketBox = new Point(40,0);
@@ -27,14 +22,10 @@ public class ShootPower {
         int aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
         rocketBox.x = r.nextInt(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
 
-
     }
     public void paint(Graphics g){
-
         ImageIcon rocketBoxIco = new ImageIcon("Multimedia//rocketBox.png");
         g.drawImage(rocketBoxIco.getImage(), (int)rocketBox.x, (int) rocketBox.y,60,60,null); 
-        
-
     }
     public void moveDown(){
         if(rocketBox.y<=2000){

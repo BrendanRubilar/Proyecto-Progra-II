@@ -3,18 +3,13 @@ package Otros;
 import java.awt.*;
 import java.util.Random;
 import java.awt.Point;
-import java.awt.Rectangle;
-
 import javax.swing.ImageIcon;
-
-import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
 import PanelCentral.InGame;
 import PanelCentral.Vehicle;
-
 public class JumpPower {
 
     Random r = new Random();
@@ -29,11 +24,8 @@ public class JumpPower {
     }
 
     public void paint(Graphics g){
-
         ImageIcon jumpBoxIco = new ImageIcon("Multimedia//jumpBox.png");
         g.drawImage(jumpBoxIco.getImage(), (int)jumpBox.x, (int) jumpBox.y,60,60,null); 
-        
-
     }
 
     public void moveDown(){
@@ -46,11 +38,8 @@ public class JumpPower {
                 ThePlayerHasJump=true;
                 if(ShootPower.ThePlayerHasRocket) ShootPower.ThePlayerHasRocket=false;
                 jumpBox.y = 1990;
-                
             }
-
         }
-
     }
 
     public Boolean deleteTime(){

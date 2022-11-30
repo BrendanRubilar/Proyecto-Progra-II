@@ -2,7 +2,6 @@ package Otros;
 
 import java.awt.*;
 import java.util.Random;
-
 import javax.swing.ImageIcon;
 import java.awt.Point;
 
@@ -18,8 +17,6 @@ public class Car{
     boolean destroy=false;
 
     public Car(int a){
-        
-        //Estos condicionales indican a que altura se generaran los autos, asi no chocan entre ellos
         if(a==1){ 
             int aux=r.nextInt(200-100)+100;
             aux=aux * -1;
@@ -36,9 +33,9 @@ public class Car{
             carPosition.y = aux;
         }
 
-        int aux = (int) (InGame.w+InGame.x-70); //Punto maximo en donde puede aparecer
-        int aux2 = (int) (InGame.x+30); //Punto minimo en donde puede aparecer
-        carPosition.x = r.nextInt(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
+        int aux = (int) (InGame.w+InGame.x-70); 
+        int aux2 = (int) (InGame.x+30); 
+        carPosition.x = r.nextInt(aux-aux2)+aux2;
     }
 
     public void paint(Graphics g){
@@ -65,9 +62,7 @@ public class Car{
         }else{
             ImageIcon tree = new ImageIcon("Multimedia//Explosion.png");
             g.drawImage(tree.getImage(), (int)carPosition.x, (int) carPosition.y,(int)carW,(int)carH,null); 
-            
         }
-
     }
 
     public void moveDown(){
@@ -77,7 +72,6 @@ public class Car{
             if(!InGame.Jump){
 
                 if(!destroy){
-
                     if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
                         InGame.isPlaying = false;  
                         destroy= true; 
@@ -88,7 +82,6 @@ public class Car{
                         InGame.shooting = false;
                         Shoot.shoot.y = -2000;
                     }
-
                 }else{
                     if(carW>0){
                         carW = carW - 0.6;
@@ -97,8 +90,6 @@ public class Car{
                         carH = carH - 0.6;
                     }
                 }
-
-
             }
         } 
     }
@@ -114,5 +105,6 @@ public class Car{
             return false;
         }
     }
+
 }
 

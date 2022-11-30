@@ -2,24 +2,17 @@ package PanelCentral;
 
 import java.awt.*;
 import java.awt.Point;
-
 import javax.swing.ImageIcon;
 
 import Otros.JumpPower;
-
 public class Vehicle {
 
     public static Point vehiclePosition = new Point(510,540);
-
     public static double Velocity = 300, giro = 0;
-
     public static double H = 80, W = 60;
-
     public static boolean destroy=false;
 
-    public Vehicle() {
-
-    }
+    public Vehicle() {}
 
     public void paint(Graphics g) {
         Graphics2D car = (Graphics2D) g;
@@ -50,19 +43,13 @@ public class Vehicle {
             car.fillRoundRect((int)vehiclePosition.x, (int)vehiclePosition.y, (int)W, (int)H, (int)W-5, (int)H-60);
         }else{
             ImageIcon VehicleIco = new ImageIcon("Multimedia//Explosion.png");
-            g.drawImage(VehicleIco.getImage(), (int)vehiclePosition.x, (int) vehiclePosition.y,(int)W,(int)W,null); 
-
-            
+            g.drawImage(VehicleIco.getImage(), (int)vehiclePosition.x, (int) vehiclePosition.y,(int)W,(int)W,null);  
         }
-
-
-
     }
 
     public void SetvehiclePosition(int x, int y) {
         vehiclePosition.x=x;
         vehiclePosition.y=y;
-
     }
 
     public void MoveUp() {
@@ -122,7 +109,6 @@ public class Vehicle {
         }
     }
 
-
     public void Jump(InGame auxInGame){
         
         if(W>=60) W=  (Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+60);
@@ -132,7 +118,6 @@ public class Vehicle {
             auxInGame.setJumpFalse();
             JumpPower.ThePlayerHasJump = false;
         }
-
     }
 
     public void setSize(int H, int W){
@@ -143,6 +128,5 @@ public class Vehicle {
     public void setDestroyTrue(){
         destroy = true;
     }
-
 
 }

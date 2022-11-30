@@ -4,7 +4,6 @@ import PanelCentral.InGame;
 import PanelCentral.Status;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.Date;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -20,7 +19,6 @@ public class Generator extends Thread {
     private ArrayList<ShootPower> rocketBoxes;
     private ArrayList<JumpPower> jumpBoxes;
 
-
     private InGame InGamePointer;
     Random r = new Random();
 
@@ -35,16 +33,12 @@ public class Generator extends Thread {
     }
     @Override
     public void run() {
-        timer.schedule(carGenerator, 0, 2000); //Genera autos 
-        timer.schedule(treeGenerator, 0, 1000); //Genera arboles
-        timer.schedule(velocityController, 0, 3000); //Aumenta velocidad de autos
+        timer.schedule(carGenerator, 0, 2000); 
+        timer.schedule(treeGenerator, 0, 1000); 
+        timer.schedule(velocityController, 0, 3000); 
         timer.schedule(gasGenerator, 0, 4000); 
         timer.schedule(rocketBoxGenerator, 0, 5000); 
-        timer.schedule(jumpBoxesGenerator, 0, 5000); 
-
-
-
-        
+        timer.schedule(jumpBoxesGenerator, 0, 5000);         
     }
     TimerTask carGenerator = new TimerTask() {
         @Override
@@ -68,7 +62,6 @@ public class Generator extends Thread {
                     cars.add(new Car(2));
                     cars.add(new Car(3));
                 }
-                //System.out.println("Auto generado " + new Date()); 
 
             }
         }
@@ -78,25 +71,23 @@ public class Generator extends Thread {
         @Override
         public void run() {
             if(InGame.isPlaying && !InGame.isOnPause){
-                //System.out.println("Arbol generado " + new Date());
+                
                 trees.add(new Tree(0));
                 trees.add(new Tree(1));
             }
         }
     };
 
-    TimerTask velocityController = new TimerTask() { //Aumenta la velocidad de los autos y arboles cada x tiempo
+    TimerTask velocityController = new TimerTask() { 
         @Override
         public void run(){
             //Aumenta de manera progresiva la velocidad de los vehiculos 
             if(InGame.isPlaying && !InGame.isOnPause){
-                if(Car.Velocity<=800){ //Limite en un punto que aun sea jugable...
+                if(Car.Velocity<=800){ 
                     Car.Velocity = Car.Velocity+8;
-                    //System.out.println("VelocityUP! to" + Car.Velocity);
                 }
                 if(Tree.Velocity<=700){
                     Tree.Velocity = Tree.Velocity+8;
-                    //System.out.println("VelocityUP! to" + Tree.Velocity);
                 }
             }
         }   
@@ -106,8 +97,8 @@ public class Generator extends Thread {
         public void run() {
 
             if(InGame.isPlaying && !InGame.isOnPause){
-
                 int aux = r.nextInt(2);
+
                 if(aux==1){
                     System.out.println("Se crea gas");
                     gasList.add(new Gas());
@@ -120,8 +111,8 @@ public class Generator extends Thread {
         public void run() {
 
             if(InGame.isPlaying && !InGame.isOnPause){
-
                 int aux = r.nextInt(2);
+
                 if(aux==1){
                     System.out.println("Se crea una caja de cohetes");
                     rocketBoxes.add(new ShootPower());
@@ -134,8 +125,8 @@ public class Generator extends Thread {
         public void run() {
 
             if(InGame.isPlaying && !InGame.isOnPause){
-
                 int aux = r.nextInt(2);
+
                 if(aux==1){
                     System.out.println("Se crea una caja de Saltos");
                     jumpBoxes.add(new JumpPower());
@@ -143,7 +134,5 @@ public class Generator extends Thread {
             }
         }
     };
-
-
 
 }
