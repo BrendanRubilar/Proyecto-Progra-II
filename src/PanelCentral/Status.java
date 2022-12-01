@@ -17,10 +17,11 @@ public class Status extends JPanel implements ActionListener {
     public static JPanel Panels, Menu, GameOver;
     JButton Iniciar, Salir, Dificultad;
     JFrame target;
+    static JLabel Puntaje;
     public static int dificultad=1; 
     public static CardLayout c1 = new CardLayout();
 
-    private String puntaje;
+    private static int highScore = Score.readHighscore();
 
     InGame enjuego = new InGame();
 
@@ -70,19 +71,8 @@ public class Status extends JPanel implements ActionListener {
 
     public void InitRunningComponents() {
 
-        /* 
-        JLabel MejorPuntaje = new JLabel();
-        ImageIcon imagenMejorPuntaje = new ImageIcon("Multimedia//mejorPuntaje.png");
-        MejorPuntaje.setBounds(390,350,300,200);
-        MejorPuntaje.setIcon(new ImageIcon(imagenMejorPuntaje.getImage().getScaledInstance(MejorPuntaje.getWidth(),MejorPuntaje.getHeight(),java.awt.Image.SCALE_SMOOTH)));
-        Menu.add(MejorPuntaje);
-        */
-
-        puntaje = String.valueOf(Score.readHighscore());
-
-        JLabel Puntaje = new JLabel("Mejor puntaje: " + puntaje);
-        Puntaje.setBounds(470,350,300,100);
-        Puntaje.setBackground(Color.green);
+        Puntaje = new JLabel("Mejor puntaje: " + highScore);
+        Puntaje.setBounds(475,350,300,100);
         Menu.add(Puntaje);
 
         JLabel test = new JLabel();
@@ -91,7 +81,12 @@ public class Status extends JPanel implements ActionListener {
         test.setOpaque(false);
         test.setBounds(0, 0, 1080, 720);
         Menu.add(test);
+    }
 
+    public static void UpdateHighScoreOnMenu(int newHS){
+        highScore = newHS;
+        String HS = String.valueOf(highScore);
+        Puntaje.setText("Mejor puntaje: " + HS);
     }
 
     private void InitMusic(){
@@ -163,6 +158,7 @@ public class Status extends JPanel implements ActionListener {
             c1.show(Panels, "2");
             enjuego.requestFocus();
             appIsRunning = true;
+            
             InGame.isPlaying=true;
             
         }

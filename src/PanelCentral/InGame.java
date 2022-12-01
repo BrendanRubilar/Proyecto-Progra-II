@@ -31,7 +31,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public static boolean Jump=false, shooting=false,gasOut = false,isOnPause=false,isPlaying = false;
     public static double delta_time = 0,gasAmount = 200; 
     public static int x = 290, y = 0, w= 500, h=1000, points=0; 
-    
+
     private int highScore;
     private Clip jump_clip;
     private ArrayList<Car> cars; 
@@ -58,6 +58,12 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         vehicle = new Vehicle();
         this.setFocusable(true);
         highScore=Score.readHighscore();
+
+        JLabel Puntaje = new JLabel("Mejor puntaje: " + highScore);
+        Puntaje.setBounds(470,350,300,100);
+        Puntaje.setBackground(Color.green);
+        this.add(Puntaje);
+
         generador.start();
         boton.setBounds(400,400,200,100);
         boton2.setBounds(800,400,60,60);
@@ -387,6 +393,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Vehicle.vehiclePosition.y=540;
         Vehicle.giro=0;
         Vehicle.destroy = false;
+        Status.UpdateHighScoreOnMenu(highScore);
         Status.c1.show(Status.Panels, "1");
         Status.GameOver_theme.stop();
         Status.GameOver_theme.setMicrosecondPosition(0);
