@@ -3,6 +3,7 @@ package PanelCentral;
 import Otros.Car;
 import Otros.Generator;
 import Otros.JumpPower;
+import Otros.Score;
 import Otros.Tree;
 import Otros.Gas;
 import Otros.Shoot;
@@ -30,6 +31,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public static boolean Jump=false, shooting=false,gasOut = false,isOnPause=false,isPlaying = false;
     public static double delta_time = 0,gasAmount = 200; 
     public static int x = 290, y = 0, w= 500, h=1000, points=0; 
+    public int highScore;
 
     private Clip jump_clip;
     private ArrayList<Car> cars; 
@@ -55,6 +57,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         this.setLayout(null);
         vehicle = new Vehicle();
         this.setFocusable(true);
+        highScore=Score.readHighscore();
         generador.start();
         boton.setBounds(400,400,200,100);
         boton2.setBounds(800,400,60,60);
