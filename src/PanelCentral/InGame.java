@@ -31,8 +31,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public static boolean Jump=false, shooting=false,gasOut = false,isOnPause=false,isPlaying = false;
     public static double delta_time = 0,gasAmount = 200; 
     public static int x = 290, y = 0, w= 500, h=1000, points=0; 
-    public int highScore;
-
+    
+    private int highScore;
     private Clip jump_clip;
     private ArrayList<Car> cars; 
     private ArrayList<Tree> trees;
@@ -330,6 +330,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             Vehicle.giro=0;
             Status.inGame_theme.stop();
             Status.GameOver_theme.start();
+            Score.writeHighscore(points,highScore);
             g.drawString("FIN DE LA PARTIDA", 480,380);
             
             g.setColor(Color.blue); 
@@ -375,6 +376,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public void resetGame(){
         gasAmount = 200;
         points = 0;
+        highScore = Score.readHighscore();
         isOnPause = false;
         isPlaying = false;
         Car.Velocity = 350;

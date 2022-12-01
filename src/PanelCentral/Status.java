@@ -1,6 +1,10 @@
 package PanelCentral;
 
+import Otros.Score;
+
 import java.awt.CardLayout;
+import java.awt.Color;
+
 import javax.swing.*;
 import java.awt.event.*;
 import javax.sound.sampled.AudioSystem;
@@ -11,10 +15,12 @@ public class Status extends JPanel implements ActionListener {
 
     public static Clip menu_theme, inGame_theme, GameOver_theme;
     public static JPanel Panels, Menu, GameOver;
-    JButton Iniciar, Salir,Dificultad;
+    JButton Iniciar, Salir, Dificultad;
     JFrame target;
     public static int dificultad=1; 
     public static CardLayout c1 = new CardLayout();
+
+    private String puntaje;
 
     InGame enjuego = new InGame();
 
@@ -63,12 +69,29 @@ public class Status extends JPanel implements ActionListener {
     }
 
     public void InitRunningComponents() {
+
+        /* 
+        JLabel MejorPuntaje = new JLabel();
+        ImageIcon imagenMejorPuntaje = new ImageIcon("Multimedia//mejorPuntaje.png");
+        MejorPuntaje.setBounds(390,350,300,200);
+        MejorPuntaje.setIcon(new ImageIcon(imagenMejorPuntaje.getImage().getScaledInstance(MejorPuntaje.getWidth(),MejorPuntaje.getHeight(),java.awt.Image.SCALE_SMOOTH)));
+        Menu.add(MejorPuntaje);
+        */
+
+        puntaje = String.valueOf(Score.readHighscore());
+
+        JLabel Puntaje = new JLabel("Mejor puntaje: " + puntaje);
+        Puntaje.setBounds(470,350,300,100);
+        Puntaje.setBackground(Color.green);
+        Menu.add(Puntaje);
+
         JLabel test = new JLabel();
         ImageIcon intro = new ImageIcon("Multimedia//Introgame.gif");
         test.setIcon(new ImageIcon(intro.getImage()));
         test.setOpaque(false);
         test.setBounds(0, 0, 1080, 720);
         Menu.add(test);
+
     }
 
     private void InitMusic(){

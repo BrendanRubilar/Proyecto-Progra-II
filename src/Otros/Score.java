@@ -3,7 +3,6 @@ package Otros;
 import java.io.*;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.io.IOException;
 
 public class Score {
 
@@ -47,7 +46,7 @@ public class Score {
         return highScore;
     }
 
-    public void writeHighscore(int score, int highScore){
+    public static void writeHighscore(int score, int highScore){
 
         if (score>highScore){
 
