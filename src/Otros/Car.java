@@ -7,6 +7,12 @@ import java.awt.Point;
 
 import PanelCentral.InGame;
 import PanelCentral.Vehicle;
+
+/**
+ * Esta clase establece los parámetros para generar los autos que 
+ * son obstaculos en el juego.
+ */
+
 public class Car{
     boolean c = false;
     Vehicle vehicle;
@@ -15,6 +21,15 @@ public class Car{
     public static double Velocity=350;
     Random r = new Random();
     boolean destroy=false;
+
+    /**
+     * Constuctor para los autos NPC (Car)
+     * @param a El parámetro a sirve para establecer distintas posiciones para generar
+     * autos NPC en el eje y. 1 para generar autos cerca del jugador, 2 para generarlos un poco
+     * más lejos y 3 para generarlos aún más lejos.
+     */
+
+
 
     public Car(int a){
         if(a==1){ 
@@ -38,7 +53,15 @@ public class Car{
         carPosition.x = r.nextInt(aux-aux2)+aux2;
     }
 
+    /**
+     * Método para pintar, en este caso sirve para pintar las ruedas y el auto.
+     * También sirve para cuando colisiona con el auto del jugador se cree una imagen con una explosión.
+     * 
+     * @param g Parámetro necesario para la ejecución de paint (java.awt.Graphics).
+     */
+
     public void paint(Graphics g){
+        
         Graphics2D wheel1 = (Graphics2D) g;
         Graphics2D wheel2 = (Graphics2D) g;
         Graphics2D wheel3 = (Graphics2D) g;
@@ -65,6 +88,14 @@ public class Car{
         }
     }
 
+    /**
+     * 
+     * Método para que los autos NPC bajen por la pantalla con respecto al tiempo
+     * También sirve para detectar las colisiones con el poder del misil y la colisión
+     * y terminar el juego.
+     * 
+     */
+
     public void moveDown(){
         if(carPosition.y<=2000){
             carPosition.y= (int) (carPosition.y + Velocity * InGame.delta_time);
@@ -74,7 +105,7 @@ public class Car{
                 if(!destroy){
                     if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
                         InGame.isPlaying = false;  
-                        destroy= true; 
+                        destroy = true; 
                         
                     }
                     if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Shoot.shoot.x, Shoot.shoot.y, 35, 50))){
@@ -94,9 +125,22 @@ public class Car{
         } 
     }
 
+    /**
+     * 
+     * Envía el auto al limite del eje Y.
+     * 
+     */
+
     public void setYNearToLimit(){
         carPosition.y = 1998;
     }
+
+    /**
+     * 
+     * Método que devuelve un booleano dependiendo de si el auto NPC salió del límite en y (2000)
+     * @return Retorna true o false para saber si el auto salió
+     * 
+     */
     
     public Boolean deleteTime(){
         if(carPosition.y>=2000){
