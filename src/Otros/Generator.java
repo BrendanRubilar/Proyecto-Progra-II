@@ -13,22 +13,13 @@ pista y asi no generar autos fuera de ella. */
 public class Generator extends Thread {
 
     Timer timer = new Timer();
-    private ArrayList<Car> cars; 
-    private ArrayList<Tree> trees;
-    private ArrayList<Gas> gasList;
-    private ArrayList<ShootPower> rocketBoxes;
-    private ArrayList<JumpPower> jumpBoxes;
 
-    private InGame InGamePointer;
+
     Random r = new Random();
 
-    public Generator(InGame a) {
-        InGamePointer = a;
-        cars  = InGamePointer.getArrayCars();
-        trees = InGamePointer.getArrayTrees();
-        gasList = InGamePointer.getArrayGas();
-        rocketBoxes = InGamePointer.getArrayBoxes();
-        jumpBoxes = InGamePointer.getArrayJumpBoxes();
+    public Generator() {
+
+
 
     }
     @Override
@@ -47,20 +38,20 @@ public class Generator extends Thread {
 
                 if(Status.dificultad==0){
                    
-                    cars.add(new Car(0));
-                    cars.add(new Car(1));
+                    InGame.cars.add(new Car(0));
+                    InGame.cars.add(new Car(1));
                 }
                 if(Status.dificultad==1){
-                    cars.add(new Car(0));
-                    cars.add(new Car(1));
-                    cars.add(new Car(2));
+                    InGame.cars.add(new Car(0));
+                    InGame.cars.add(new Car(1));
+                    InGame.cars.add(new Car(2));
 
                 }
                 if(Status.dificultad==2){
-                    cars.add(new Car(0));
-                    cars.add(new Car(1));
-                    cars.add(new Car(2));
-                    cars.add(new Car(3));
+                    InGame.cars.add(new Car(0));
+                    InGame.cars.add(new Car(1));
+                    InGame.cars.add(new Car(2));
+                    InGame.cars.add(new Car(3));
                 }
 
             }
@@ -72,8 +63,8 @@ public class Generator extends Thread {
         public void run() {
             if(InGame.isPlaying && !InGame.isOnPause){
                 
-                trees.add(new Tree(0));
-                trees.add(new Tree(1));
+                InGame.trees.add(new Tree(0));
+                InGame.trees.add(new Tree(1));
             }
         }
     };
@@ -101,7 +92,7 @@ public class Generator extends Thread {
 
                 if(aux==1){
                     System.out.println("Se crea gas");
-                    gasList.add(new Gas());
+                    InGame.gasList.add(new Gas());
                 }
             }
         }
@@ -115,7 +106,7 @@ public class Generator extends Thread {
 
                 if(aux==1){
                     System.out.println("Se crea una caja de cohetes");
-                    rocketBoxes.add(new ShootPower());
+                    InGame.rocketBoxes.add(new ShootPower());
                 }
             }
         }
@@ -129,7 +120,7 @@ public class Generator extends Thread {
 
                 if(aux==1){
                     System.out.println("Se crea una caja de Saltos");
-                    jumpBoxes.add(new JumpPower());
+                    InGame.jumpBoxes.add(new JumpPower());
                 }
             }
         }

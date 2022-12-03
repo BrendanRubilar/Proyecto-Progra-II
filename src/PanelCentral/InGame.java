@@ -34,12 +34,12 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
     private int highScore;
     private Clip jump_clip;
-    private ArrayList<Car> cars; 
-    private ArrayList<Tree> trees;
-    private ArrayList<Gas> gasList;
-    private ArrayList<ShootPower> rocketBoxes;
-    private ArrayList<Shoot> shootsList;
-    private ArrayList<JumpPower> jumpBoxes;
+    public static ArrayList<Car> cars; 
+    public static ArrayList<Tree> trees;
+    public static ArrayList<Gas> gasList;
+    public static ArrayList<ShootPower> rocketBoxes;
+    public static ArrayList<Shoot> shootsList;
+    public static ArrayList<JumpPower> jumpBoxes;
 
     JButton boton = new JButton();
     JButton boton2 = new JButton();
@@ -53,7 +53,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         shootsList = new ArrayList<Shoot>();
         jumpBoxes = new ArrayList<JumpPower>();
 
-        generador = new Generator(this);
+        generador = new Generator();
+
         this.setLayout(null);
         vehicle = new Vehicle();
         this.setFocusable(true);
@@ -80,23 +81,6 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         boton2.addActionListener(this);
         boton3.addActionListener(this);
         this.addKeyListener(this);
-    }
-
-    public ArrayList getArrayCars(){
-        return cars;
-    }
-
-    public ArrayList getArrayTrees(){
-        return trees;
-    }
-    public ArrayList getArrayGas(){
-        return gasList;
-    }
-    public ArrayList getArrayBoxes(){
-        return rocketBoxes;
-    }
-    public ArrayList getArrayJumpBoxes(){
-        return jumpBoxes;
     }
 
     //DIBUJAR EN EL PANEL 
