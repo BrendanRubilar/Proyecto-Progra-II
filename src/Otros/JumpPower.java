@@ -10,6 +10,14 @@ import java.io.File;
 
 import PanelCentral.InGame;
 import PanelCentral.Vehicle;
+
+/**
+ * 
+ * Clase JumpPower. Es una habilidad que permite "saltar" por una cantidad de segundos, permitiendo
+ * no colisionar con obstaculos.
+ * 
+ */
+
 public class JumpPower {
 
     Random r = new Random();
@@ -17,16 +25,35 @@ public class JumpPower {
     private Clip gasPlus;
     public static boolean ThePlayerHasJump = false;
 
+    /**
+     * Constructor de JumpPower
+     */
+
     public JumpPower(){
         int aux = InGame.w+InGame.x-70; //Punto maximo en donde puede aparecer
         int aux2 = InGame.x+30; //Punto minimo en donde puede aparecer
         jumpBox.x = r.nextInt(aux-aux2)+aux2; //Crear una posicion aleatoria para el auto
     }
 
+    /**
+     * 
+     * Método para pintar, en este caso dibuja la imagen donde aparece el poder de salto.
+     * 
+     * @param g Parámetro necesario para la ejecución de paint (java.awt.Graphics).
+     */
+
     public void paint(Graphics g){
         ImageIcon jumpBoxIco = new ImageIcon("Multimedia//jumpBox.png");
         g.drawImage(jumpBoxIco.getImage(), (int)jumpBox.x, (int) jumpBox.y,60,60,null); 
     }
+
+    /**
+     * 
+     * Método para que la imagen baje por la pantalla con respecto al tiempo
+     * También sirve para detectar la colisión entre el auto del jugador y la imagen
+     * que representa el poder. También hace que se obtenga dicho poder y se guarde para usarlo
+     * 
+     */
 
     public void moveDown(){
         if(jumpBox.y<=2000){
@@ -42,6 +69,13 @@ public class JumpPower {
         }
     }
 
+    /**
+     * 
+     * Método que devuelve un booleano dependiendo de si la imagen de salto salió del límite en y (2000)
+     * @return Retorna true o false para saber si la imagen salió
+     * 
+     */
+
     public Boolean deleteTime(){
         if(jumpBox.y>=2000){
             return true;
@@ -49,6 +83,10 @@ public class JumpPower {
             return false;
         }
     }
+
+    /**
+     * Método que simula el efecto de sonido del impulso al saltar.
+     */
 
     private void gasSound(){
         try{
