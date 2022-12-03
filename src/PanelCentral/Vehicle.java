@@ -12,8 +12,15 @@ public class Vehicle {
     public static double H = 80, W = 60;
     public static boolean destroy=false;
 
-    public Vehicle() {}
+    private static Vehicle instance;
 
+    public Vehicle() {}
+    public static Vehicle getInstance(){
+        if(instance == null){
+            instance = new Vehicle();
+        }
+        return instance;
+    }
     public void paint(Graphics g) {
         Graphics2D car = (Graphics2D) g;
         Graphics2D wheel1 = (Graphics2D) g;
@@ -47,10 +54,6 @@ public class Vehicle {
         }
     }
 
-    public void SetvehiclePosition(int x, int y) {
-        vehiclePosition.x=x;
-        vehiclePosition.y=y;
-    }
 
     public void MoveUp() {
         
@@ -94,10 +97,10 @@ public class Vehicle {
     }
 
     public void MoveDown() {
-        if (vehiclePosition.y <= 600 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
+        if (vehiclePosition.y <= 580 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
             vehiclePosition.y = (int) (vehiclePosition.y + (Velocity) * InGame.delta_time);
         }
-        if((vehiclePosition.y <= 600 && vehiclePosition.x >= 0 && vehiclePosition.x<=290) || (vehiclePosition.y<=600 && vehiclePosition.x >= 790 && vehiclePosition.x<=1080)){
+        if((vehiclePosition.y <= 580 && vehiclePosition.x >= 0 && vehiclePosition.x<=290) || (vehiclePosition.y<=600 && vehiclePosition.x >= 790 && vehiclePosition.x<=1080)){
             vehiclePosition.y = (int) (vehiclePosition.y + (Velocity*0.66) * InGame.delta_time);
         }
         if(giro>0.2){
@@ -107,6 +110,7 @@ public class Vehicle {
         }else{
             giro=0;
         }
+        
     }
 
     public void Jump(InGame auxInGame){
@@ -127,6 +131,13 @@ public class Vehicle {
 
     public void setDestroyTrue(){
         destroy = true;
+    }
+    
+    public static void CorrectVehiclePositionX() throws InvalidPositionException{
+        if(vehiclePosition.x<20 ||vehiclePosition.x>980)  throw new InvalidPositionException("Error en los limites de juego");  
+    }
+    public static void CorrectVehiclePositionY() throws InvalidPositionException{
+        if(vehiclePosition.y<20 ||vehiclePosition.x>580)  throw new InvalidPositionException("Error en los limites de juego");  
     }
 
 }

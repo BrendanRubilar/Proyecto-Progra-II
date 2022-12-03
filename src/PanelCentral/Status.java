@@ -21,7 +21,7 @@ public class Status extends JPanel implements ActionListener {
     public static int dificultad=1; 
     public static CardLayout c1 = new CardLayout();
 
-    private static int highScore = Score.readHighscore();
+    public static int highScore = Score.readHighscore();
 
     InGame enjuego = InGame.getInstance();
 
