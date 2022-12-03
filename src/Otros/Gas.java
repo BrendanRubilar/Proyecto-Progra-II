@@ -70,7 +70,7 @@ public class Gas {
 
     /**
      * 
-     * Envía el bidón al límite del eje y
+     * Envía el bidón al límite del eje y.
      * 
      */
 
@@ -80,8 +80,8 @@ public class Gas {
 
     /**
      * 
-     * Método que devuelve un booleano dependiendo de si el auto NPC salió del límite en y (2000)
-     * @return Retorna true o false para saber si el auto salió
+     * Método que devuelve un booleano dependiendo de si la imagen salió del límite en y (2000).
+     * @return Retorna true o false para saber si el auto salió.
      * 
      */
     
@@ -92,12 +92,11 @@ public class Gas {
             return false;
         }
     }
-
+    
     /**
      * 
      * Método para reproducir el archivo gota.wav de la carpeta Multimedia el cual simula
-     * un sonido de goteo, representando así la obtención del bidón y agregando la gasolina
-     * al tanque del auto del jugador.
+     * un sonido de goteo, representando así la obtención del bidón.
      * 
      */
 

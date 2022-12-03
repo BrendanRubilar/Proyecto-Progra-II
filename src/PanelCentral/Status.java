@@ -11,6 +11,11 @@ import java.io.File;
 import javax.sound.sampled.FloatControl;
 public class Status extends JPanel implements ActionListener {
 
+    /**
+     * Clase Status. Su función es inicializar los componentes de la ventana donde se muestra
+     * toda la parte gráfica del código (botones, paints, el juego en general).
+     */
+
     private static Status instance;
 
     public static Clip menu_theme, inGame_theme, GameOver_theme;
@@ -27,8 +32,18 @@ public class Status extends JPanel implements ActionListener {
 
     boolean appIsRunning = false;
 
+    /**
+     * Constructor de Status.
+     */
+
     private Status() {
     }
+
+    /**
+     * Se inician los paneles con la música, botones y labels.
+     * 
+     * @param target Recibe target desde Window donde se coloca todo lo generado por Start
+     */
 
     public void Start(JFrame target){
         this.target = target;
@@ -45,6 +60,12 @@ public class Status extends JPanel implements ActionListener {
         }
         return instance;
     }
+
+    /**
+     * 
+     * Genera los paneles a utilizar en el programa y el Menú. Panels 
+     * 
+     */
 
     public void InitPanels() {
         Panels = new JPanel();

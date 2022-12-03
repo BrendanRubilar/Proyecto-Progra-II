@@ -19,6 +19,12 @@ import javax.sound.sampled.AudioSystem;
 import java.io.File;
 import java.awt.event.*;
 
+/**
+ * 
+ * Clase InGame. 
+ * 
+ */
+
 public class InGame extends JPanel implements KeyListener,ActionListener{
 
     private static InGame instance;
