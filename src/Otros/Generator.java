@@ -4,7 +4,6 @@ import PanelCentral.InGame;
 import PanelCentral.Status;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.ArrayList;
 import java.util.Random;
 
 /*Esta clase es de suma importancia en el juego ya que controla el tiempo en el que aparecen los objetos y
@@ -12,16 +11,22 @@ aumenta la dificultad. Tener en cuenta que la generacion de objetos es capaz de 
 pista y asi no generar autos fuera de ella. */
 public class Generator extends Thread {
 
+    private static Generator instance;
+
     Timer timer = new Timer();
-
-
     Random r = new Random();
 
     public Generator() {
-
-
-
+        this.start();
     }
+
+    public static Generator getInstance(){
+        if(instance == null){
+            instance = new Generator();
+        }
+        return instance;
+    }
+
     @Override
     public void run() {
         timer.schedule(carGenerator, 0, 2000); 

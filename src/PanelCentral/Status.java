@@ -3,8 +3,6 @@ package PanelCentral;
 import Otros.Score;
 
 import java.awt.CardLayout;
-import java.awt.Color;
-
 import javax.swing.*;
 import java.awt.event.*;
 import javax.sound.sampled.AudioSystem;
@@ -12,6 +10,8 @@ import javax.sound.sampled.Clip;
 import java.io.File;
 import javax.sound.sampled.FloatControl;
 public class Status extends JPanel implements ActionListener {
+
+    private static Status instance;
 
     public static Clip menu_theme, inGame_theme, GameOver_theme;
     public static JPanel Panels, Menu, GameOver;
@@ -23,19 +23,27 @@ public class Status extends JPanel implements ActionListener {
 
     private static int highScore = Score.readHighscore();
 
-    InGame enjuego = new InGame();
+    InGame enjuego = InGame.getInstance();
 
     boolean appIsRunning = false;
 
-    public Status(JFrame target) {
+    private Status() {
+    }
 
+    public void Start(JFrame target){
         this.target = target;
         InitMusic();
         InitPanels();
         InitMenuComponents();
         InitRunningComponents();
-        
         target.add(Panels);
+    }
+
+    public static Status getInstance(){
+        if(instance == null){
+            instance = new Status();
+        }
+        return instance;
     }
 
     public void InitPanels() {

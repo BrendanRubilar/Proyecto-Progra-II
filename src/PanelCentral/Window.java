@@ -1,7 +1,5 @@
 package PanelCentral;
 
-import java.awt.Color;
-import java.awt.Graphics;
 import javax.swing.*;
 
 public class Window extends JFrame {
@@ -14,7 +12,9 @@ public class Window extends JFrame {
         setTitle("FORZA HORIZON 5");
         setResizable(false);
         setIconImage(new ImageIcon("Multimedia//icono.jpg").getImage());
-        Status StatusController = new Status(this);
+        Status StatusController = Status.getInstance();
+        StatusController.Start(this);
+
         setVisible(true);
 
     }

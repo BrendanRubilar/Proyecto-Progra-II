@@ -21,8 +21,9 @@ import java.awt.event.*;
 
 public class InGame extends JPanel implements KeyListener,ActionListener{
 
+    private static InGame instance;
+
     Vehicle vehicle;
-    Generator generador;
     JLabel rayas = new JLabel();
     long last_time = System.currentTimeMillis();   
     double timerAuxiliar=0, rectY=10, rectY2=90,rectY3=170,rectY4=250,rectY5=330,rectY6=410,rectY7=490,rectY8=570,rectY9=650, rectY10 = 730, rectY11=810;
@@ -45,7 +46,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     JButton boton2 = new JButton();
     JButton boton3 = new JButton();
 
-    public InGame() {
+    private InGame() {
         cars = new ArrayList<Car>();
         trees = new ArrayList<Tree>();
         gasList = new ArrayList<Gas>();
@@ -53,7 +54,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         shootsList = new ArrayList<Shoot>();
         jumpBoxes = new ArrayList<JumpPower>();
 
-        generador = new Generator();
+        Generator timeController = Generator.getInstance();
 
         this.setLayout(null);
         vehicle = new Vehicle();
@@ -65,7 +66,6 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Puntaje.setBackground(Color.green);
         this.add(Puntaje);
 
-        generador.start();
         boton.setBounds(400,400,200,100);
         boton2.setBounds(800,400,60,60);
         boton3.setBounds(860,400,60,60);
@@ -81,6 +81,13 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         boton2.addActionListener(this);
         boton3.addActionListener(this);
         this.addKeyListener(this);
+    }
+
+    public static InGame getInstance(){
+        if(instance == null){
+            instance = new InGame();
+        }
+        return instance;
     }
 
     //DIBUJAR EN EL PANEL 
