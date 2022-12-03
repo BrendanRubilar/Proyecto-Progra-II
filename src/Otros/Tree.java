@@ -9,10 +9,22 @@ import java.awt.Rectangle;
  
 import javax.swing.ImageIcon;
 import PanelCentral.InGame;
+
+/**
+ * Clase Tree. Su función es establecer los parámetros para que se generen árboles
+ * que son obstaculos para el usuario.
+ */
 public class Tree {
 
     Point trees = new Point(40,0);
     public static double Velocity=300;
+
+    /**
+     * 
+     * Constructor de Tree.
+     * @param aux El parámetro utilizado sirve para generar árboles a la izquierda o a la derecha 
+     * (0 y 1 respectivamente).
+     */
 
     public Tree(int aux){
 
@@ -29,12 +41,27 @@ public class Tree {
         }
 
     }
+
+    /**
+     * 
+     * Método para pintar, en este caso dibuja la imagen de los árboles.
+     * 
+     * @param g Parámetro necesario para la ejecución de paint (java.awt.Graphics).
+     */
    
     public void paint(Graphics g){
         ImageIcon tree = new ImageIcon("Multimedia//arbusto.png");
         g.drawImage(tree.getImage(), trees.x, trees.y,60,60,null); 
     }
     
+    /**
+     * 
+     * Método para que la imagen baje por la pantalla con respecto al tiempo.
+     * También sirve para detectar la colisión entre el auto del jugador y la imagen
+     * que representa el arbol. También hace que al colisionar se termine la partida.
+     * 
+     */
+
     public void moveDown(){
         if(trees.y<=2000) trees.y = (int) (trees.y + Velocity*(0.5) * InGame.delta_time);
 
@@ -44,9 +71,22 @@ public class Tree {
         }
     }
 
+    /**
+     * 
+     * Envía el árbol al limite del eje Y.
+     * 
+     */
+
     public void setYNearToLimit(){
         trees.y = 1998;
     }
+
+    /**
+     * 
+     * Método que devuelve un booleano dependiendo de si el árbol salió del límite en y (2000).
+     * @return Retorna true o false para saber si el árbol salió.
+     * 
+     */
     
     public Boolean deleteTime(){
         if(trees.y>=2000){

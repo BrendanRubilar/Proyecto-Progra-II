@@ -49,7 +49,7 @@ public class JumpPower {
 
     /**
      * 
-     * Método para que la imagen baje por la pantalla con respecto al tiempo
+     * Método para que la imagen baje por la pantalla con respecto al tiempo.
      * También sirve para detectar la colisión entre el auto del jugador y la imagen
      * que representa el poder. También hace que se obtenga dicho poder y se guarde para usarlo
      * 
@@ -71,8 +71,8 @@ public class JumpPower {
 
     /**
      * 
-     * Método que devuelve un booleano dependiendo de si la imagen de salto salió del límite en y (2000)
-     * @return Retorna true o false para saber si la imagen salió
+     * Método que devuelve un booleano dependiendo de si la imagen de salto salió del límite en y (2000).
+     * @return Retorna true o false para saber si la imagen salió.
      * 
      */
 
@@ -85,7 +85,10 @@ public class JumpPower {
     }
 
     /**
-     * Método que simula el efecto de sonido del impulso al saltar.
+     * 
+     * Método para reproducir el archivo gota.wav de la carpeta Multimedia el cual simula
+     * un sonido de goteo, representando así la obtención del poder de JumpPower.
+     * 
      */
 
     private void gasSound(){

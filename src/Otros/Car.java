@@ -91,7 +91,7 @@ public class Car{
     /**
      * 
      * Método para que los autos NPC bajen por la pantalla con respecto al tiempo
-     * También sirve para detectar las colisiones con el poder del misil y la colisión
+     * También sirve para detectar las colisiones con el poder del misil y la colisión con el auto del jugador
      * y terminar el juego.
      * 
      */
@@ -137,8 +137,8 @@ public class Car{
 
     /**
      * 
-     * Método que devuelve un booleano dependiendo de si el auto NPC salió del límite en y (2000)
-     * @return Retorna true o false para saber si el auto salió
+     * Método que devuelve un booleano dependiendo de si el auto NPC salió del límite en y (2000).
+     * @return Retorna true o false para saber si el auto salió.
      * 
      */
     
