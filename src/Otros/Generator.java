@@ -6,27 +6,38 @@ import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Random;
 
-/*Esta clase es de suma importancia en el juego ya que controla el tiempo en el que aparecen los objetos y
-aumenta la dificultad. Tener en cuenta que la generacion de objetos es capaz de detectar los limites de la 
-pista y asi no generar autos fuera de ella. */
+/**
+ * Esta clase es de suma importancia en el juego ya que controla el tiempo en el que aparecen los objetos y
+ *aumenta la dificultad. Tener en cuenta que la generacion de objetos es capaz de detectar los limites de la 
+ *pista y asi no generar autos fuera de ella. 
+ */
 public class Generator extends Thread {
 
     private static Generator instance;
 
     Timer timer = new Timer();
     Random r = new Random();
-
+    /**
+     * Constructor de Generator, se inicia el hilo y asi comienzan a funcionar los temporizadores.
+     * 
+     */
     public Generator() {
         this.start();
     }
-
+    /**
+     * Patron Singleton para generar solo una instancia de esta clase
+     * 
+     */
     public static Generator getInstance(){
         if(instance == null){
             instance = new Generator();
         }
         return instance;
     }
-
+    /**
+     * Metodo run de la clase, el temporizador inicia diferentes tareas cada cierto tiempo
+     * 
+     */
     @Override
     public void run() {
         timer.schedule(carGenerator, 0, 2000); 
@@ -36,6 +47,10 @@ public class Generator extends Thread {
         timer.schedule(rocketBoxGenerator, 0, 5000); 
         timer.schedule(jumpBoxesGenerator, 0, 5000);         
     }
+    /**
+     * Tarea generar vehiculos, solo si se está en el panel InGame y no se encuentra en pausa se va a generar una
+     * cantidad de vehiculos que depende de la dificultad seleccionada en el menu.
+     */
     TimerTask carGenerator = new TimerTask() {
         @Override
         public void run() {
@@ -62,7 +77,10 @@ public class Generator extends Thread {
             }
         }
     };
-
+    /**
+     * Tarea generar arboles, solo si se está en el panel InGame y no se encuentra en pausa se van a generar arboles
+     * en el pasto.
+     */
     TimerTask treeGenerator = new TimerTask() {
         @Override
         public void run() {
@@ -73,11 +91,12 @@ public class Generator extends Thread {
             }
         }
     };
-
+    /**
+     * Tarea que aumenta la velocidad de los vehiculos y arboles de manera progresiva hasta llegar a cierto limite
+     */
     TimerTask velocityController = new TimerTask() { 
         @Override
         public void run(){
-            //Aumenta de manera progresiva la velocidad de los vehiculos 
             if(InGame.isPlaying && !InGame.isOnPause){
                 if(Car.Velocity<=800){ 
                     Car.Velocity = Car.Velocity+8;
@@ -88,6 +107,10 @@ public class Generator extends Thread {
             }
         }   
     };
+    /**
+     * Tarea que genera gas, solo si se está en el panel InGame y no se encuentra en pausa, el gas aparece en el area de la pista
+     *
+     */
     TimerTask gasGenerator = new TimerTask() {
         @Override
         public void run() {
@@ -102,6 +125,10 @@ public class Generator extends Thread {
             }
         }
     };
+        /**
+     * Tarea que genera cajas de cohetes, solo si se está en el panel InGame y no se encuentra en pausa, aparecen en el area de la pista
+     *
+     */
     TimerTask rocketBoxGenerator = new TimerTask() {
         @Override
         public void run() {
@@ -116,6 +143,10 @@ public class Generator extends Thread {
             }
         }
     };
+     /**
+     * Tarea que genera cajas de Salto, solo si se está en el panel InGame y no se encuentra en pausa, aparecen en el area de la pista
+     *
+     */
     TimerTask jumpBoxesGenerator = new TimerTask() {
         @Override
         public void run() {
