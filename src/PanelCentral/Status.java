@@ -1,9 +1,14 @@
 package PanelCentral;
 
+import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Font;
+import java.awt.Image;
+
+import javax.swing.*;
+
 import Otros.Score;
 
-import java.awt.CardLayout;
-import javax.swing.*;
 import java.awt.event.*;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
@@ -80,29 +85,58 @@ public class Status extends JPanel implements ActionListener {
 
     public void InitMenuComponents() {
         Iniciar = new JButton();
-        Iniciar.setBounds(390, 100, 300, 50);
+        Iniciar.setBounds(300, 100, 500, 60);
         Iniciar.setText("Jugar");
+        ImageIcon Start = new ImageIcon("Multimedia//botones.png");
+        Iniciar.setIcon(new ImageIcon(Start.getImage().getScaledInstance(Iniciar.getWidth(), Iniciar.getHeight(), Image.SCALE_SMOOTH)));
         Iniciar.addActionListener(this);
+        Iniciar.setOpaque(false);
+        Iniciar.setContentAreaFilled(false);
+        Iniciar.setBorderPainted(false);
         Menu.add(Iniciar);
 
         Dificultad = new JButton();
-        Dificultad.setBounds(390, 200, 300, 50);
+        Dificultad.setBounds(300, 200, 500, 60);
+        ImageIcon difficult = new ImageIcon("Multimedia//botones.png");
+        Dificultad.setIcon(new ImageIcon(difficult.getImage().getScaledInstance(Dificultad.getWidth(), Dificultad.getHeight(), Image.SCALE_SMOOTH)));
         Dificultad.setText("Dificultad: Media");
         Dificultad.addActionListener(this);
+        Dificultad.setOpaque(false);
+        Dificultad.setContentAreaFilled(false);
+        Dificultad.setBorderPainted(false);
         Menu.add(Dificultad);
 
         Salir = new JButton();
-        Salir.setBounds(390, 300, 300, 50);
+        Salir.setBounds(300, 300, 500, 60);
+        ImageIcon SalirButton = new ImageIcon("Multimedia//botones.png");
+        Salir.setIcon(new ImageIcon(SalirButton.getImage().getScaledInstance(Salir.getWidth(), Salir.getHeight(), Image.SCALE_SMOOTH)));
         Salir.setText("Salir");
         Salir.addActionListener(this);
+        Salir.setOpaque(false);
+        Salir.setContentAreaFilled(false);
+        Salir.setBorderPainted(false);
         Menu.add(Salir);
     }
 
     public void InitRunningComponents() {
 
-        Puntaje = new JLabel("Mejor puntaje: " + highScore);
-        Puntaje.setBounds(475,350,300,100);
+        JLabel HIGH_SCORE = new JLabel();
+        HIGH_SCORE.setBounds(385,370,325,225);
+        ImageIcon score = new ImageIcon("Multimedia//mejorPuntaje.png");
+        HIGH_SCORE.setIcon(new ImageIcon(score.getImage().getScaledInstance(HIGH_SCORE.getWidth(), HIGH_SCORE.getHeight(), Image.SCALE_SMOOTH)));
+        Menu.add(HIGH_SCORE);
+
+        Puntaje = new JLabel("" + highScore);
+        Puntaje.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 56));
+        Puntaje.setForeground(Color.WHITE); 
+        Puntaje.setBounds(480,500,300,100);
         Menu.add(Puntaje);
+
+        JLabel marcoPT = new JLabel();
+        marcoPT.setBounds(305,440,500,200);
+        ImageIcon huella = new ImageIcon("Multimedia//puntuacion.png");
+        marcoPT.setIcon(new ImageIcon(huella.getImage().getScaledInstance(marcoPT.getWidth(), marcoPT.getHeight(), Image.SCALE_SMOOTH)));
+        Menu.add(marcoPT);
 
         JLabel test = new JLabel();
         ImageIcon intro = new ImageIcon("Multimedia//Introgame.gif");
@@ -110,15 +144,19 @@ public class Status extends JPanel implements ActionListener {
         test.setOpaque(false);
         test.setBounds(0, 0, 1080, 720);
         Menu.add(test);
+
     }
 
     public static void UpdateHighScoreOnMenu(int newHS){
+
         highScore = newHS;
         String HS = String.valueOf(highScore);
         Puntaje.setText("Mejor puntaje: " + HS);
+
     }
 
     private void InitMusic(){
+
         try {
             // Se obtiene un Clip de sonido
             menu_theme = AudioSystem.getClip();
@@ -141,28 +179,40 @@ public class Status extends JPanel implements ActionListener {
             System.out.println("No funcionó, verifique si tiene el archivo de audio en carpeta Multimedia " + e);
         }
     }
+
     //Codigo para ajustar el volumen-------------------------------------------------------------------
+
     public float getVolumeMenu() {
+
         FloatControl gainControl = (FloatControl) menu_theme.getControl(FloatControl.Type.MASTER_GAIN);        
         return (float) Math.pow(10f, gainControl.getValue() / 20f);
+
     }
 
     public void setVolumeMenu(float volume) {
+
         if (volume < 0f || volume > 1f)
             throw new IllegalArgumentException("Volume not valid: " + volume);
         FloatControl gainControl = (FloatControl) menu_theme.getControl(FloatControl.Type.MASTER_GAIN);        
         gainControl.setValue(20f * (float) Math.log10(volume));
+
     }
+
     public float getVolumeGame() {
+
         FloatControl gainControl = (FloatControl) inGame_theme.getControl(FloatControl.Type.MASTER_GAIN);        
         return (float) Math.pow(10f, gainControl.getValue() / 20f);
+
     }
 
     public void setVolumeGame(float volume) {
+
         if (volume < 0f || volume > 1f)
             throw new IllegalArgumentException("Volume not valid: " + volume);
         FloatControl gainControl = (FloatControl) inGame_theme.getControl(FloatControl.Type.MASTER_GAIN);        
-        gainControl.setValue(20f * (float) Math.log10(volume));
+        gainControl
+        .setValue(20f * (float) Math.log10(volume));
+
     }
     public float getVolumeGameOver() {
         FloatControl gainControl = (FloatControl) GameOver_theme.getControl(FloatControl.Type.MASTER_GAIN);        

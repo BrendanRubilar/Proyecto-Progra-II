@@ -1,7 +1,7 @@
 package Otros;
 
-import PanelCentral.InGame;
-import PanelCentral.Status;
+import PanelCentral.*;
+import Objetos.*;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Random;

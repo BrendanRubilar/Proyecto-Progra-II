@@ -1,6 +1,10 @@
-import Otros.*;
 import PanelCentral.*;
 import org.junit.*;
+
+import Objetos.*;
+import Otros.InvalidPositionException;
+import Otros.Score;
+
 import static org.junit.Assert.*;
 
 public class ValidateTest {

@@ -1,15 +1,17 @@
 package PanelCentral;
 
-import Otros.Car;
+import javax.swing.*;
+
+import Objetos.Car;
+import Objetos.Gas;
+import Objetos.Shoot;
+import Objetos.ShootPower;
+import Objetos.Tree;
+import Objetos.Vehicle;
 import Otros.Generator;
 import Otros.JumpPower;
 import Otros.Score;
-import Otros.Tree;
-import Otros.Gas;
-import Otros.Shoot;
-import Otros.ShootPower;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
@@ -34,6 +36,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     long last_time = System.currentTimeMillis();   
     double timerAuxiliar=0, rectY=10, rectY2=90,rectY3=170,rectY4=250,rectY5=330,rectY6=410,rectY7=490,rectY8=570,rectY9=650, rectY10 = 730, rectY11=810;
     boolean aux = false, MoveUp, MoveLeft, MoveRight, MoveDown;
+    Color VerdeHoja, AzulAgua, GrisGrava; 
 
     public static boolean Jump=false, shooting=false,gasOut = false,isOnPause=false,isPlaying = false;
     public static double delta_time = 0,gasAmount = 200; 
@@ -59,6 +62,10 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         rocketBoxes = new ArrayList<ShootPower>();
         shootsList = new ArrayList<Shoot>();
         jumpBoxes = new ArrayList<JumpPower>();
+
+        VerdeHoja = new Color(37, 201, 40);
+        AzulAgua = new Color(17, 155, 240);
+        GrisGrava = new Color ( 85, 85, 85);
 
         Generator timeController = Generator.getInstance();
 
@@ -100,13 +107,13 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public void paint(Graphics g) {
         super.paint(g);
         
-        g.setColor(Color.GREEN); //Cesped
+        g.setColor(VerdeHoja); //Cesped
         g.fillRect(0, 0, 1080, 720);
 
         g.setColor(Color.GRAY); //Pista
         g.fillRect((int)x, (int)y, (int)w, (int)h);
 
-        g.setColor(Color.blue);
+        g.setColor(AzulAgua);
         g.fillRect(0, 0, 20, 1080);
         g.fillRect(1050, 0, 20, 1080);
        
@@ -332,7 +339,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
             Vehicle.giro=0;
             Status.inGame_theme.stop();
-            Status.GameOver_theme.start();
+            Status.GameOver_theme.loop(-1);
             Score.writeHighscore(points,highScore);
             g.drawString("FIN DE LA PARTIDA", 480,380);
             

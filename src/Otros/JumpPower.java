@@ -8,9 +8,8 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
-import PanelCentral.InGame;
-import PanelCentral.Vehicle;
-
+import PanelCentral.*;
+import Objetos.*;
 /**
  * 
  * Clase JumpPower. Es una habilidad que permite "saltar" por una cantidad de segundos, permitiendo

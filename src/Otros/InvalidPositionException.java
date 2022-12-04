@@ -1,4 +1,4 @@
-package PanelCentral;
+package Otros;
 
 public class InvalidPositionException extends Exception{
 

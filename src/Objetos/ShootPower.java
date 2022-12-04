@@ -1,15 +1,17 @@
-package Otros;
+package Objetos;
 
 import java.awt.*;
 import java.util.Random;
 import java.awt.Point;
 import javax.swing.ImageIcon;
+
+import Otros.JumpPower;
+
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import java.io.File;
 
 import PanelCentral.InGame;
-import PanelCentral.Vehicle;
 
 /**
  * 

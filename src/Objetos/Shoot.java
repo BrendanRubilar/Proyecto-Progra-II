@@ -1,11 +1,10 @@
-package Otros;
+package Objetos;
 
 import java.awt.*;
 import java.util.Random;
 import java.awt.Point;
 import javax.swing.ImageIcon;
 import PanelCentral.InGame;
-import PanelCentral.Vehicle;
 
 /**
  * Clase Shoot. Esta clase es el misil que se dispara para destruir un auto NPC.
