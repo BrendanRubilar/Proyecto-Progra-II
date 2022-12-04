@@ -30,6 +30,7 @@ public class Status extends JPanel implements ActionListener {
     static JLabel Puntaje;
     public static int dificultad=1; 
     public static CardLayout c1 = new CardLayout();
+    JLabel texto2 = new JLabel();
 
     public static int highScore = Score.readHighscore();
 
@@ -86,7 +87,6 @@ public class Status extends JPanel implements ActionListener {
     public void InitMenuComponents() {
         Iniciar = new JButton();
         Iniciar.setBounds(300, 100, 500, 60);
-        Iniciar.setText("Jugar");
         ImageIcon Start = new ImageIcon("Multimedia//botones.png");
         Iniciar.setIcon(new ImageIcon(Start.getImage().getScaledInstance(Iniciar.getWidth(), Iniciar.getHeight(), Image.SCALE_SMOOTH)));
         Iniciar.addActionListener(this);
@@ -94,17 +94,25 @@ public class Status extends JPanel implements ActionListener {
         Iniciar.setContentAreaFilled(false);
         Iniciar.setBorderPainted(false);
         Menu.add(Iniciar);
+        JLabel texto1 = new JLabel();
+        texto1.setBounds(520, 100, 500, 60);
+        texto1.setText("Jugar");
+        Menu.add(texto1);
+        Menu.setComponentZOrder(texto1,0);
 
         Dificultad = new JButton();
         Dificultad.setBounds(300, 200, 500, 60);
         ImageIcon difficult = new ImageIcon("Multimedia//botones.png");
         Dificultad.setIcon(new ImageIcon(difficult.getImage().getScaledInstance(Dificultad.getWidth(), Dificultad.getHeight(), Image.SCALE_SMOOTH)));
-        Dificultad.setText("Dificultad: Media");
         Dificultad.addActionListener(this);
         Dificultad.setOpaque(false);
         Dificultad.setContentAreaFilled(false);
         Dificultad.setBorderPainted(false);
         Menu.add(Dificultad);
+        texto2.setBounds(500, 200, 500, 60);
+        texto2.setText("Dificultad: Normal");
+        Menu.add(texto2);
+        Menu.setComponentZOrder(texto2,0);
 
         Salir = new JButton();
         Salir.setBounds(300, 300, 500, 60);
@@ -116,6 +124,11 @@ public class Status extends JPanel implements ActionListener {
         Salir.setContentAreaFilled(false);
         Salir.setBorderPainted(false);
         Menu.add(Salir);
+        JLabel texto3 = new JLabel();
+        texto3.setBounds(520, 300, 500, 60);
+        texto3.setText("Salir");
+        Menu.add(texto3);
+        Menu.setComponentZOrder(texto3,0);
     }
 
     public void InitRunningComponents() {
@@ -151,7 +164,7 @@ public class Status extends JPanel implements ActionListener {
 
         highScore = newHS;
         String HS = String.valueOf(highScore);
-        Puntaje.setText("Mejor puntaje: " + HS);
+        Puntaje.setText("" + HS);
 
     }
 
@@ -245,9 +258,9 @@ public class Status extends JPanel implements ActionListener {
 
             dificultad++;
             if(dificultad>=3) dificultad=0;
-            if(dificultad==0) Dificultad.setText("Dificultad: Facil");
-            if(dificultad==1) Dificultad.setText("Dificultad: Media");
-            if(dificultad==2) Dificultad.setText("Dificultad: Dificil");
+            if(dificultad==0) texto2.setText("Dificultad: Facil");
+            if(dificultad==1) texto2.setText("Dificultad: Media");
+            if(dificultad==2) texto2.setText("Dificultad: Dificil");
             System.out.println(dificultad);
         }
 

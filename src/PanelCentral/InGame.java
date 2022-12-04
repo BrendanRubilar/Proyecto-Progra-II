@@ -112,10 +112,6 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
         g.setColor(Color.GRAY); //Pista
         g.fillRect((int)x, (int)y, (int)w, (int)h);
-
-        g.setColor(AzulAgua);
-        g.fillRect(0, 0, 20, 1080);
-        g.fillRect(1050, 0, 20, 1080);
        
         g.setColor(Color.white); //Decoracion, falta añadir efecto de movimiento
         g.fillRect((int)x+(int)w/2, (int)rectY, 15, 70);
@@ -295,8 +291,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         g.setColor(Color.black);
         g.drawString("Puntuacion: "+points, 820, 20);
 
-        g.setColor(Color.gray); //Inventario de poderes
-        g.fillRect(910, 100, 90, 90);
+
+        ImageIcon inventoryIcon = new ImageIcon("Multimedia//poder.png");
+        g.drawImage(inventoryIcon.getImage(), 910, 100,90,90,null); 
 
         if(ShootPower.ThePlayerHasRocket){
             ImageIcon tree = new ImageIcon("Multimedia//coheteIcon.png");
@@ -316,18 +313,19 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             boton3.setVisible(true);
             boton3.setEnabled(true);
 
-            g.setColor(Color.black); //Puntuacion
+            g.setColor(Color.black); 
             g.fillRect(800, 400, 60, 60);
             g.setColor(Color.white);
             g.drawString("Pista: -20", 800,420);
 
-            g.setColor(Color.black); //Puntuacion
+            g.setColor(Color.black); 
             g.fillRect(870, 400, 60, 60);
             g.setColor(Color.white);
             g.drawString("Pista: +20", 870,420);
 
-            g.setColor(Color.blue); 
-            g.fillRect(440, 400, 200, 100);
+            ImageIcon buttonIco = new ImageIcon("Multimedia//botones.png");
+            g.drawImage(buttonIco.getImage(),440, 400, 200, 100,null);
+
             g.setColor(Color.black);
             g.drawString("VOLVER AL MENU", 480,460);
         }
@@ -343,8 +341,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             Score.writeHighscore(points,highScore);
             g.drawString("FIN DE LA PARTIDA", 480,380);
             
-            g.setColor(Color.blue); 
-            g.fillRect(440, 400, 200, 100);
+            ImageIcon buttonIco = new ImageIcon("Multimedia//botones.png");
+            g.drawImage(buttonIco.getImage(),440, 400, 200, 100,null);
+
             g.setColor(Color.black);
             g.drawString("VOLVER AL MENU", 480,460);
         }
