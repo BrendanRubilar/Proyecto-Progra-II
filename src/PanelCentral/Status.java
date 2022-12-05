@@ -154,12 +154,20 @@ public class Status extends JPanel implements ActionListener {
         marcoPT.setIcon(new ImageIcon(huella.getImage().getScaledInstance(marcoPT.getWidth(), marcoPT.getHeight(), Image.SCALE_SMOOTH)));
         Menu.add(marcoPT);
 
+        JLabel dog = new JLabel();
+        dog.setBounds(480, 405, 55, 55);
+        ImageIcon doggo = new ImageIcon("Multimedia//doggo.gif");
+        dog.setIcon(new ImageIcon(doggo.getImage().getScaledInstance(dog.getWidth(), dog.getHeight(), Image.SCALE_REPLICATE)));
+        Menu.add(dog);
+
         JLabel test = new JLabel();
         ImageIcon intro = new ImageIcon("Multimedia//Introgame.gif");
         test.setIcon(new ImageIcon(intro.getImage()));
         test.setOpaque(false);
         test.setBounds(0, 0, 1080, 720);
         Menu.add(test);
+
+        
 
     }
 

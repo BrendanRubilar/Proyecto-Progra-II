@@ -43,7 +43,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public static int x = 290, y = 0, w= 500, h=1000, points=0; 
 
     private int highScore;
-    private Clip jump_clip;
+    public static Clip jump_clip;
     public static ArrayList<Car> cars; 
     public static ArrayList<Tree> trees;
     public static ArrayList<Gas> gasList;
@@ -346,6 +346,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             Status.GameOver_theme.loop(-1);
             Score.writeHighscore(points,highScore);
 
+            
+
             g.setColor(Color.BLACK);
             g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 40));
             g.drawString("FIN DE LA PARTIDA", 360,300);
@@ -357,6 +359,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             g.setColor(Color.black);
             g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 18));
             g.drawString("Volver al MENU", 465,445);
+
         }
 
         //Control de fps
@@ -380,7 +383,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Jump = false;
     }
 
-    private void JumpSound(){
+    private void inGameSounds(){
         try{
         jump_clip = AudioSystem.getClip();
         jump_clip.open(AudioSystem.getAudioInputStream(new File("Multimedia//Salto.wav")));
@@ -437,7 +440,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
                 if(JumpPower.ThePlayerHasJump){
                     if(!Jump){ 
                         Jump=true;
-                        JumpSound();
+                        inGameSounds();
                     }
                 }
                 if(ShootPower.ThePlayerHasRocket){

@@ -52,7 +52,7 @@ public class Vehicle {
             car.fillRoundRect((int)vehiclePosition.x, (int)vehiclePosition.y, (int)W, (int)H, (int)W-5, (int)H-60);
         }else{
             ImageIcon VehicleIco = new ImageIcon("Multimedia//Explosion.png");
-            g.drawImage(VehicleIco.getImage(), (int)vehiclePosition.x, (int) vehiclePosition.y,(int)W,(int)W,null);  
+            g.drawImage(VehicleIco.getImage(), (int)vehiclePosition.x, (int) vehiclePosition.y,(int)W,(int)W,null); 
         }
     }
 
