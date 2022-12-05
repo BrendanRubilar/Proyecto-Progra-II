@@ -63,7 +63,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         shootsList = new ArrayList<Shoot>();
         jumpBoxes = new ArrayList<JumpPower>();
 
-        VerdeHoja = new Color(37, 201, 40);
+        VerdeHoja = new Color(15, 201, 30);
         AzulAgua = new Color(17, 155, 240);
         GrisGrava = new Color ( 85, 85, 85);
 
@@ -79,9 +79,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Puntaje.setBackground(Color.green);
         this.add(Puntaje);
 
-        boton.setBounds(400,400,200,100);
-        boton2.setBounds(800,400,60,60);
-        boton3.setBounds(860,400,60,60);
+        boton.setBounds(400,400,280,70);
+        boton2.setBounds(800,400,80,60);
+        boton3.setBounds(900,400,80,60);
         this.add(boton);
         this.add(boton2);
         this.add(boton3);
@@ -235,7 +235,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         g.setColor(Color.red); 
         g.fillRect(800, 40, (int)gasAmount, 30);
 
-        g.setColor(Color.black); 
+        g.setColor(Color.black);
+        g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 12));
         g.drawString("Combustible: "+(int)gasAmount, 850,60);
 
         if(isPlaying && !isOnPause){
@@ -289,7 +290,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         g.fillRect(800, 0, 200, 30);
         
         g.setColor(Color.black);
+        g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 12));
         g.drawString("Puntuacion: "+points, 820, 20);
+        
 
 
         ImageIcon inventoryIcon = new ImageIcon("Multimedia//poder.png");
@@ -314,20 +317,23 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             boton3.setEnabled(true);
 
             g.setColor(Color.black); 
-            g.fillRect(800, 400, 60, 60);
+            g.fillRect(800, 400, 80, 60);
             g.setColor(Color.white);
-            g.drawString("Pista: -20", 800,420);
+            g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 12));
+            g.drawString("Pista: -20", 815,435);
 
             g.setColor(Color.black); 
-            g.fillRect(870, 400, 60, 60);
+            g.fillRect(900, 400, 80, 60);
             g.setColor(Color.white);
-            g.drawString("Pista: +20", 870,420);
+            g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 12));
+            g.drawString("Pista: +20", 915,435);
 
             ImageIcon buttonIco = new ImageIcon("Multimedia//botones.png");
-            g.drawImage(buttonIco.getImage(),440, 400, 200, 100,null);
+            g.drawImage(buttonIco.getImage(),400, 400, 280, 70,null);
 
             g.setColor(Color.black);
-            g.drawString("VOLVER AL MENU", 480,460);
+            g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 18));
+            g.drawString("Volver al MENU", 465,445);
         }
 
         if(!isPlaying && !isOnPause){
@@ -339,13 +345,18 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             Status.inGame_theme.stop();
             Status.GameOver_theme.loop(-1);
             Score.writeHighscore(points,highScore);
-            g.drawString("FIN DE LA PARTIDA", 480,380);
+
+            g.setColor(Color.BLACK);
+            g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 40));
+            g.drawString("FIN DE LA PARTIDA", 360,300);
+            
             
             ImageIcon buttonIco = new ImageIcon("Multimedia//botones.png");
-            g.drawImage(buttonIco.getImage(),440, 400, 200, 100,null);
+            g.drawImage(buttonIco.getImage(),400, 400, 280, 70,null);
 
             g.setColor(Color.black);
-            g.drawString("VOLVER AL MENU", 480,460);
+            g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 18));
+            g.drawString("Volver al MENU", 465,445);
         }
 
         //Control de fps
@@ -400,6 +411,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Status.c1.show(Status.Panels, "1");
         Status.GameOver_theme.stop();
         Status.GameOver_theme.setMicrosecondPosition(0);
+        Status.inGame_theme.setMicrosecondPosition(0);
+        Status.inGame_theme.stop();
         Status.menu_theme.setMicrosecondPosition(0);
         Status.menu_theme.start(); 
     }

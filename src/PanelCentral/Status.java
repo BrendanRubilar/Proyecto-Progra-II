@@ -97,6 +97,7 @@ public class Status extends JPanel implements ActionListener {
         JLabel texto1 = new JLabel();
         texto1.setBounds(520, 100, 500, 60);
         texto1.setText("Jugar");
+        texto1.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 20));
         Menu.add(texto1);
         Menu.setComponentZOrder(texto1,0);
 
@@ -109,8 +110,9 @@ public class Status extends JPanel implements ActionListener {
         Dificultad.setContentAreaFilled(false);
         Dificultad.setBorderPainted(false);
         Menu.add(Dificultad);
-        texto2.setBounds(500, 200, 500, 60);
+        texto2.setBounds(465, 200, 500, 60);
         texto2.setText("Dificultad: Normal");
+        texto2.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 20));
         Menu.add(texto2);
         Menu.setComponentZOrder(texto2,0);
 
@@ -118,15 +120,16 @@ public class Status extends JPanel implements ActionListener {
         Salir.setBounds(300, 300, 500, 60);
         ImageIcon SalirButton = new ImageIcon("Multimedia//botones.png");
         Salir.setIcon(new ImageIcon(SalirButton.getImage().getScaledInstance(Salir.getWidth(), Salir.getHeight(), Image.SCALE_SMOOTH)));
-        Salir.setText("Salir");
         Salir.addActionListener(this);
         Salir.setOpaque(false);
         Salir.setContentAreaFilled(false);
         Salir.setBorderPainted(false);
         Menu.add(Salir);
+
         JLabel texto3 = new JLabel();
         texto3.setBounds(520, 300, 500, 60);
         texto3.setText("Salir");
+        texto3.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 20));
         Menu.add(texto3);
         Menu.setComponentZOrder(texto3,0);
     }
@@ -245,7 +248,7 @@ public class Status extends JPanel implements ActionListener {
         if (e.getSource() == Iniciar) {
             //Cambiamos al panel ProgramaIniciado
             menu_theme.stop();
-            Status.inGame_theme.setMicrosecondPosition(0);
+            inGame_theme.setMicrosecondPosition(0);
             inGame_theme.loop(-1);
             c1.show(Panels, "2");
             enjuego.requestFocus();
@@ -258,9 +261,9 @@ public class Status extends JPanel implements ActionListener {
 
             dificultad++;
             if(dificultad>=3) dificultad=0;
-            if(dificultad==0) texto2.setText("Dificultad: Facil");
+            if(dificultad==0) texto2.setText("Dificultad: Fácil");
             if(dificultad==1) texto2.setText("Dificultad: Media");
-            if(dificultad==2) texto2.setText("Dificultad: Dificil");
+            if(dificultad==2) texto2.setText("Dificultad: Difícil");
             System.out.println(dificultad);
         }
 

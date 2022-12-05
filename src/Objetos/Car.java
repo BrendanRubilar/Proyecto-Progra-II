@@ -38,12 +38,12 @@ public class Car{
         if(a==2){ 
             int aux=r.nextInt(300-285)+285;
             aux=aux * -1;
-            carPosition.y = aux - 5;
+            carPosition.y = aux - 10;
         }
         if(a==3){ 
             int aux=r.nextInt(400-385)+385;
             aux=aux * -1;
-            carPosition.y = aux - 10;
+            carPosition.y = aux - 20;
         }
 
         int aux = (int) (InGame.w+InGame.x-70); 
