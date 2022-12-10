@@ -28,7 +28,6 @@ public class Car{
      * más lejos y 3 para generarlos aún más lejos.
      */
 
-
     public Car(int a){
         if(a==1){ 
             int aux=r.nextInt(200-100)+100;

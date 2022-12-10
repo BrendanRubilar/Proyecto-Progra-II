@@ -16,13 +16,21 @@ public class Vehicle {
 
     private static Vehicle instance;
 
-    public Vehicle() {}
+    /**
+    *Constructor y metodo get Instance de vehiculo para aplicar Singleton y llamar al mismo objeto
+    *en diferentes partes del programa.
+    */
+    private Vehicle() {}
     public static Vehicle getInstance(){
         if(instance == null){
             instance = new Vehicle();
         }
         return instance;
     }
+    /**
+     * Metodo grafico del vehiculo, se dibuja su forma y ruedas o se dibuja la imagen
+     * de explosión dependiendo de un booleano.
+     */
     public void paint(Graphics g) {
         Graphics2D car = (Graphics2D) g;
         Graphics2D wheel1 = (Graphics2D) g;
@@ -56,7 +64,10 @@ public class Vehicle {
         }
     }
 
-
+    /**
+     * Metodo de mover vehiculo arriba siempre y cuando el vehiculo no se salga de los limites,
+     * y controla el giro.
+     */
     public static void MoveUp() {
         
         if (vehiclePosition.y >= 20 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
@@ -74,6 +85,10 @@ public class Vehicle {
         }
     }
 
+    /**
+     * Movimiento de vehiculo a la derecha siempre y cuando el vehiculo no se salga de los limites
+     *  y controla el giro.
+     */
     public static void MoveRight() {
         if (vehiclePosition.x>=290 && vehiclePosition.x<=790) {
              vehiclePosition.x = (int) (vehiclePosition.x + (Velocity) * InGame.delta_time);
@@ -86,6 +101,10 @@ public class Vehicle {
         }  
     }
 
+    /**
+     * Movimiento de vehiculo a la Izquierda siempre y cuando el vehiculo no se salga de los limites
+     *  y controla el giro.
+     */
     public static void MoveLeft() {
         if ((vehiclePosition.x>=20 && vehiclePosition.x<=290) || vehiclePosition.x >= 790) {
             vehiclePosition.x = (int) (vehiclePosition.x - (Velocity*0.66) * InGame.delta_time);
@@ -98,6 +117,10 @@ public class Vehicle {
         }
     }
 
+    /**
+     * Movimiento de vehiculo hacia abajo siempre y cuando el vehiculo no se salga de los limites
+     *  y controla el giro.
+     */
     public static void MoveDown() {
         if (vehiclePosition.y <= 580 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
             vehiclePosition.y = (int) (vehiclePosition.y + (Velocity) * InGame.delta_time);
@@ -115,6 +138,11 @@ public class Vehicle {
         
     }
 
+    /**
+    *Metodo saltar del vehiculo, en base a una función el auto crecera hasta cierto punto, 
+    *luego comenzará a decrecer hasta cierto valor y modificará un booleano para dar a 
+    *entender al programa que ya no se encuentra en el aire.
+    */
     public void Jump(InGame auxInGame){
         
         if(W>=60) W=  (Math.sin(auxInGame.getTimerAuxiliar())*4*Math.PI+60);
@@ -126,15 +154,27 @@ public class Vehicle {
         }
     }
 
+    /**
+     * Metodo para controlar el tamaño del vehiculo, se utiliza
+     * para restablecer el tamaño al inicar el juego y evitar problemas 
+     * con el metodo salto.
+     */
     public void setSize(int H, int W){
         this.H=H;
         this.W=W; 
     }
 
+    /**
+     * Metodo que controla un booleano del vehiculo, este
+     * controla que es lo que se dibujará, vehiculo normal
+     * o destruido.
+     */
     public void setDestroyTrue(){
         destroy = true;
     }
-    
+    /**
+     * Metodos para testear JUnit.
+     */
     public static void CorrectVehiclePositionX() throws InvalidPositionException{
         if(vehiclePosition.x<20 ||vehiclePosition.x>980)  throw new InvalidPositionException("Error en los limites de juego");  
     }

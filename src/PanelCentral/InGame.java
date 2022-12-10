@@ -21,12 +21,6 @@ import javax.sound.sampled.AudioSystem;
 import java.io.File;
 import java.awt.event.*;
 
-/**
- * 
- * Clase InGame. 
- * 
- */
-
 public class InGame extends JPanel implements KeyListener,ActionListener{
 
     private static InGame instance;
@@ -54,7 +48,10 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     JButton boton = new JButton();
     JButton boton2 = new JButton();
     JButton boton3 = new JButton();
-
+    /**
+    * Constructor de la clase, se inicializan las arraylist de objetos,
+    * el generador de objetos, el vehiculo y botones.
+    */
     private InGame() {
         cars = new ArrayList<Car>();
         trees = new ArrayList<Tree>();
@@ -70,7 +67,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Generator timeController = Generator.getInstance();
 
         this.setLayout(null);
-        vehicle = new Vehicle();
+        vehicle = Vehicle.getInstance();
         this.setFocusable(true);
         highScore=Score.readHighscore();
 
@@ -96,6 +93,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         this.addKeyListener(this);
     }
 
+    /**
+     * Metodo de patron Singleton para devolver la misma clase
+     */
     public static InGame getInstance(){
         if(instance == null){
             instance = new InGame();
@@ -103,7 +103,11 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         return instance;
     }
 
-    //DIBUJAR EN EL PANEL 
+    /**
+     * Metodo de dibujo de la clase, aqui se desarrolla el loop del juego
+     * se dibujan todos los objetos, la pista, los botones, se controla
+     * el uso de combustible, el estado del juego, el control de objetos.
+     */
     public void paint(Graphics g) {
         super.paint(g);
         
@@ -346,12 +350,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             Status.GameOver_theme.loop(-1);
             Score.writeHighscore(points,highScore);
 
-            
-
             g.setColor(Color.BLACK);
             g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 40));
             g.drawString("FIN DE LA PARTIDA", 360,300);
-            
             
             ImageIcon buttonIco = new ImageIcon("Multimedia//botones.png");
             g.drawImage(buttonIco.getImage(),400, 400, 280, 70,null);
@@ -374,15 +375,22 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
 
         repaint();
     }
-
+    /**
+     * Metodo que retorna un valor double
+     * @return esta variable se utiliza en el metodo de salto del vehiculo
+     */
     public double getTimerAuxiliar(){
         return timerAuxiliar;
     }
-
+    /**
+     * Metodo que modifica el booleano que controla el cuando se puede usar salto
+     */
     public void setJumpFalse(){
         Jump = false;
     }
-
+    /**
+     * Metodo de control de sonido al realizar acciones
+     */
     private void inGameSounds(){
         try{
         jump_clip = AudioSystem.getClip();
@@ -395,7 +403,11 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             
     @Override
     public void keyTyped(KeyEvent e) {}
-
+    
+    /**
+     * Metodo que restablece todos los parametros a sus valores
+     * originales, asi se puede volver al jugar sin problemas.
+     */
     public void resetGame(){
         gasAmount = 200;
         points = 0;
@@ -420,7 +432,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Status.menu_theme.start(); 
     }
 
-    //Control del teclado LISTA DE CODIGOS: https://stackoverflow.com/questions/15313469/java-keyboard-keycodes-list
+    /**
+     * Metodo que controla el movimiento del vehiculo y el uso de poderes.
+     */
     @Override
     public void keyPressed(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -459,7 +473,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
                 break;
         }
     }
-
+    /**
+     * Metodo de control de vehiculo (Soltar teclas)
+     */
     @Override
     public void keyReleased(KeyEvent e) {
         switch (e.getKeyCode()) {
@@ -480,6 +496,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         }
     }
 
+    /**
+     * Metodo para dar funcionalidades a los botones de pausa o perder.
+     */
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == boton) {
             //Restablecemos todo antes de volver al panel de menu
