@@ -10,7 +10,7 @@ public class Window extends JFrame {
         setSize(1080, 720);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-        setTitle("FORZA HORIZON 5");
+        setTitle("ForzaRacing: MostWanted");
         setResizable(false);
         setIconImage(new ImageIcon("Multimedia//icono.jpg").getImage());
         Status StatusController = Status.getInstance();
