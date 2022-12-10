@@ -70,6 +70,16 @@ public class ShootPower {
         }
     }
 
+
+  /**
+     * 
+     * Envía a las cajas de poder al límite del eje y.
+     * 
+     */
+    public void setYNearToLimit(){
+        rocketBox.y = 1998;
+    }
+
     /**
      * 
      * Método que devuelve un booleano dependiendo de si la imagen salió del límite en y (2000).

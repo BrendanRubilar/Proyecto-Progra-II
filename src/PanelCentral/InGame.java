@@ -493,6 +493,9 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             for (int i = 0; i < gasList.size(); i++){
                 gasList.get(i).setYNearToLimit();
             }
+            for (int i = 0; i < rocketBoxes.size(); i++){
+                rocketBoxes.get(i).setYNearToLimit();
+            }
             //Se eliminan todos los objetos de sus arraylist (Ahora java deberia borrarlos eventualmente)
             for (int i = 0; i < cars.size(); i++){
                 cars.remove(i);
@@ -502,7 +505,10 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             }
             for (int i = 0; i < gasList.size(); i++){
                 gasList.remove(i);
-            }            
+            }
+            for (int i = 0; i < shootsList.size(); i++){
+                shootsList.remove(i);
+            }                        
             resetGame();
         }
 

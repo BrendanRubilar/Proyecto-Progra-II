@@ -1,9 +1,8 @@
-import PanelCentral.*;
 import org.junit.*;
 
 import Objetos.*;
-import Otros.InvalidPositionException;
-import Otros.Score;
+import Otros.*;
+import PanelCentral.*;
 
 import static org.junit.Assert.*;
 
@@ -11,11 +10,10 @@ public class ValidateTest {
     
     public ValidateTest() {
     }
-    private Vehicle car1,car2;
+    public Vehicle car1;
     @BeforeClass
     public static void setUpClass() {
         Vehicle car1 = Vehicle.getInstance();
-        Vehicle car2 = Vehicle.getInstance();
     }
     
     @AfterClass
@@ -25,12 +23,12 @@ public class ValidateTest {
     @Before
     public void setUp() {
         Status.highScore=0;
-        car1.vehiclePosition.x=0;
-        car2.vehiclePosition.y=0;
-    }
+   }
     
     @After
     public void tearDown() {
+        car1.vehiclePosition.x=100;
+        car1.vehiclePosition.y=100;
     }
 
     @Test
@@ -40,11 +38,53 @@ public class ValidateTest {
 
     @Test(expected = InvalidPositionException.class)
     public void CorrectVehiclePositionXTest()throws Exception{
-        Vehicle.CorrectVehiclePositionX(); 
+        car1.vehiclePosition.x=0;
+        car1.CorrectVehiclePositionX(); 
     }
     @Test(expected = InvalidPositionException.class)
     public void CorrectVehiclePositionYTest()throws Exception{
-        Vehicle.CorrectVehiclePositionY(); 
+        car1.vehiclePosition.y=0;
+        car1.CorrectVehiclePositionY(); 
+    }
+    @Test
+    public void MoveUpTest(){
+        int i=0;
+        
+        while(i<10000){
+            car1.MoveUp();
+            i++;
+        }
+        assertEquals(20, car1.vehiclePosition.y, 0.01);
+    }
+    @Test
+    public void MoveRightTest(){
+        int i=0;
+        
+        while(i<10000){
+            car1.MoveRight();
+            i++;
+        }
+        assertEquals(980, car1.vehiclePosition.x, 0.01);
+    }
+    @Test
+    public void MoveLeftTest(){
+        int i=0;
+        
+        while(i<10000){
+            car1.MoveLeft();
+            i++;
+        }
+        assertEquals(20, car1.vehiclePosition.x, 0.01);
+    }
+    @Test
+    public void MoveDownTest(){
+        int i=0;
+        
+        while(i<10000){
+            car1.MoveDown();
+            i++;
+        }
+        assertEquals(580, car1.vehiclePosition.y, 0.01);
     }
     
 }

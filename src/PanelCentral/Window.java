@@ -1,6 +1,7 @@
 package PanelCentral;
 
 import javax.swing.*;
+import java.awt.event.*;
 
 public class Window extends JFrame {
 
@@ -14,9 +15,9 @@ public class Window extends JFrame {
         setIconImage(new ImageIcon("Multimedia//icono.jpg").getImage());
         Status StatusController = Status.getInstance();
         StatusController.Start(this);
-
         setVisible(true);
-
+        ControlVentana window = new ControlVentana();
+        addWindowListener(window);
     }
 
 }

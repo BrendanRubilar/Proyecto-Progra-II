@@ -57,7 +57,7 @@ public class Vehicle {
     }
 
 
-    public void MoveUp() {
+    public static void MoveUp() {
         
         if (vehiclePosition.y >= 20 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
             vehiclePosition.y = (int) (vehiclePosition.y - Velocity * InGame.delta_time);
@@ -74,7 +74,7 @@ public class Vehicle {
         }
     }
 
-    public void MoveRight() {
+    public static void MoveRight() {
         if (vehiclePosition.x>=290 && vehiclePosition.x<=790) {
              vehiclePosition.x = (int) (vehiclePosition.x + (Velocity) * InGame.delta_time);
         }
@@ -86,7 +86,7 @@ public class Vehicle {
         }  
     }
 
-    public void MoveLeft() {
+    public static void MoveLeft() {
         if ((vehiclePosition.x>=20 && vehiclePosition.x<=290) || vehiclePosition.x >= 790) {
             vehiclePosition.x = (int) (vehiclePosition.x - (Velocity*0.66) * InGame.delta_time);
         }
@@ -98,7 +98,7 @@ public class Vehicle {
         }
     }
 
-    public void MoveDown() {
+    public static void MoveDown() {
         if (vehiclePosition.y <= 580 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
             vehiclePosition.y = (int) (vehiclePosition.y + (Velocity) * InGame.delta_time);
         }
