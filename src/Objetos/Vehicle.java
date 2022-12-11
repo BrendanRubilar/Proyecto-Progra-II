@@ -9,9 +9,9 @@ import Otros.JumpPower;
 import PanelCentral.InGame;
 public class Vehicle {
 
-    public static Point vehiclePosition = new Point(510,540);
+    public  Point vehiclePosition = new Point(510,540);
     public static double Velocity = 300, giro = 0;
-    public static double H = 80, W = 60;
+    public  double H = 80, W = 60;
     public static boolean destroy=false;
 
     private static Vehicle instance;
@@ -68,7 +68,7 @@ public class Vehicle {
      * Metodo de mover vehiculo arriba siempre y cuando el vehiculo no se salga de los limites,
      * y controla el giro.
      */
-    public static void MoveUp() {
+    public void MoveUp() {
         
         if (vehiclePosition.y >= 20 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
             vehiclePosition.y = (int) (vehiclePosition.y - Velocity * InGame.delta_time);
@@ -89,12 +89,12 @@ public class Vehicle {
      * Movimiento de vehiculo a la derecha siempre y cuando el vehiculo no se salga de los limites
      *  y controla el giro.
      */
-    public static void MoveRight() {
-        if (vehiclePosition.x>=290 && vehiclePosition.x<=790) {
-             vehiclePosition.x = (int) (vehiclePosition.x + (Velocity) * InGame.delta_time);
+    public void MoveRight() {
+        if (instance.vehiclePosition.x>=290 && instance.vehiclePosition.x<=790) {
+             instance.vehiclePosition.x = (int) (instance.vehiclePosition.x + (Velocity) * InGame.delta_time);
         }
-        if (vehiclePosition.x<=290 || (vehiclePosition.x >= 790 && vehiclePosition.x <= 980)) {
-            vehiclePosition.x = (int) (vehiclePosition.x + (Velocity*0.66) * InGame.delta_time);
+        if (instance.vehiclePosition.x<=290 || (instance.vehiclePosition.x >= 790 && instance.vehiclePosition.x <= 980)) {
+            instance.vehiclePosition.x = (int) (instance.vehiclePosition.x + (Velocity*0.66) * InGame.delta_time);
         }   
         if(giro<=1){
             giro = giro + 0.05;
@@ -105,12 +105,12 @@ public class Vehicle {
      * Movimiento de vehiculo a la Izquierda siempre y cuando el vehiculo no se salga de los limites
      *  y controla el giro.
      */
-    public static void MoveLeft() {
-        if ((vehiclePosition.x>=20 && vehiclePosition.x<=290) || vehiclePosition.x >= 790) {
-            vehiclePosition.x = (int) (vehiclePosition.x - (Velocity*0.66) * InGame.delta_time);
+    public void MoveLeft() {
+        if ((instance.vehiclePosition.x>=20 && instance.vehiclePosition.x<=290) || instance.vehiclePosition.x >= 790) {
+            instance.vehiclePosition.x = (int) (instance.vehiclePosition.x - (Velocity*0.66) * InGame.delta_time);
         }
-        if(vehiclePosition.x>=290 && vehiclePosition.x<=790){ 
-            vehiclePosition.x = (int) (vehiclePosition.x - (Velocity) * InGame.delta_time); 
+        if(instance.vehiclePosition.x>=290 && instance.vehiclePosition.x<=790){ 
+            instance.vehiclePosition.x = (int) (instance.vehiclePosition.x - (Velocity) * InGame.delta_time); 
         }   
         if(giro>=-1){
             giro = giro - 0.05;
@@ -121,12 +121,12 @@ public class Vehicle {
      * Movimiento de vehiculo hacia abajo siempre y cuando el vehiculo no se salga de los limites
      *  y controla el giro.
      */
-    public static void MoveDown() {
-        if (vehiclePosition.y <= 580 && vehiclePosition.x>=290 && vehiclePosition.x<=790) {
-            vehiclePosition.y = (int) (vehiclePosition.y + (Velocity) * InGame.delta_time);
+    public void MoveDown() {
+        if (instance.vehiclePosition.y <= 580 && instance.vehiclePosition.x>=290 && instance.vehiclePosition.x<=790) {
+            instance.vehiclePosition.y = (int) (instance.vehiclePosition.y + (Velocity) * InGame.delta_time);
         }
-        if((vehiclePosition.y <= 580 && vehiclePosition.x >= 0 && vehiclePosition.x<=290) || (vehiclePosition.y<=600 && vehiclePosition.x >= 790 && vehiclePosition.x<=1080)){
-            vehiclePosition.y = (int) (vehiclePosition.y + (Velocity*0.66) * InGame.delta_time);
+        if((instance.vehiclePosition.y <= 580 && instance.vehiclePosition.x >= 0 && instance.vehiclePosition.x<=290) || (instance.vehiclePosition.y<=600 && instance.vehiclePosition.x >= 790 && instance.vehiclePosition.x<=1080)){
+            instance.vehiclePosition.y = (int) (instance.vehiclePosition.y + (Velocity*0.66) * InGame.delta_time);
         }
         if(giro>0.2){
             giro=giro-0.02;
@@ -175,11 +175,18 @@ public class Vehicle {
     /**
      * Metodos para testear JUnit.
      */
-    public static void CorrectVehiclePositionX() throws InvalidPositionException{
-        if(vehiclePosition.x<20 ||vehiclePosition.x>980)  throw new InvalidPositionException("Error en los limites de juego");  
+    public void CorrectVehiclePositionX() throws InvalidPositionException{
+        if(instance.vehiclePosition.x<20 ||instance.vehiclePosition.x>980)  throw new InvalidPositionException("Error en los limites de juego");  
     }
-    public static void CorrectVehiclePositionY() throws InvalidPositionException{
-        if(vehiclePosition.y<20 ||vehiclePosition.x>580)  throw new InvalidPositionException("Error en los limites de juego");  
+    public void CorrectVehiclePositionY() throws InvalidPositionException{
+        if(instance.vehiclePosition.y<20 ||instance.vehiclePosition.x>580)  throw new InvalidPositionException("Error en los limites de juego");  
+    }
+
+    public int getSizeH(){
+        return (int)H;
+    }
+    public int getSizeW(){
+        return (int)W;
     }
 
 }

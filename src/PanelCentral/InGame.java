@@ -394,7 +394,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     private void inGameSounds(){
         try{
         jump_clip = AudioSystem.getClip();
-        jump_clip.open(AudioSystem.getAudioInputStream(new File("Multimedia//Salto.wav")));
+        jump_clip.open(AudioSystem.getAudioInputStream(new File("Multimedia//SaltoV2.wav")));
         jump_clip.start();
         }catch(Exception e){
             System.out.println("No funcionó, verifique si tiene el archivo de audio en carpeta Multimedia " + e);
@@ -409,6 +409,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
      * originales, asi se puede volver al jugar sin problemas.
      */
     public void resetGame(){
+        Vehicle instance= Vehicle.getInstance();
         gasAmount = 200;
         points = 0;
         highScore = Score.readHighscore();
@@ -418,8 +419,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         Tree.Velocity = 300;
         ShootPower.ThePlayerHasRocket = false;
         JumpPower.ThePlayerHasJump = false;
-        Vehicle.vehiclePosition.x=510;
-        Vehicle.vehiclePosition.y=540;
+        instance.vehiclePosition.x=510;
+        instance.vehiclePosition.y=540;
         Vehicle.giro=0;
         Vehicle.destroy = false;
         Status.UpdateHighScoreOnMenu(highScore);

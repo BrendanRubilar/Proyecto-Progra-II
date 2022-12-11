@@ -23,6 +23,7 @@ public class ShootPower {
     Point rocketBox = new Point(40,0);
     private Clip gasPlus;
     public static boolean ThePlayerHasRocket = false;
+    Vehicle instance=Vehicle.getInstance();
 
     /**
      * 
@@ -61,7 +62,7 @@ public class ShootPower {
         if(rocketBox.y<=2000){
             rocketBox.y = (int) (rocketBox.y + Car.Velocity * InGame.delta_time);
             
-            if(((Vehicle.vehiclePosition.x >= rocketBox.x-60 && Vehicle.vehiclePosition.x < rocketBox.x + 60) && (Vehicle.vehiclePosition.y >= rocketBox.y-60 && Vehicle.vehiclePosition.y < rocketBox.y + 60)) || (Vehicle.vehiclePosition.x == rocketBox.x && Vehicle.vehiclePosition.x == rocketBox.y)){
+            if(((instance.vehiclePosition.x >= rocketBox.x-60 && instance.vehiclePosition.x < rocketBox.x + 60) && (instance.vehiclePosition.y >= rocketBox.y-60 && instance.vehiclePosition.y < rocketBox.y + 60)) || (instance.vehiclePosition.x == rocketBox.x && instance.vehiclePosition.x == rocketBox.y)){
                 gasSound();
                 ThePlayerHasRocket=true;
                 if(JumpPower.ThePlayerHasJump) JumpPower.ThePlayerHasJump=false;

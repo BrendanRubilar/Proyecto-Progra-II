@@ -14,12 +14,12 @@ import PanelCentral.InGame;
 
 public class Car{
     boolean c = false;
-    Vehicle vehicle;
     Point carPosition = new Point(300,0);
     double carW=100, carH = 100;
     public static double Velocity=350;
     Random r = new Random();
     boolean destroy=false;
+    Vehicle instance= Vehicle.getInstance();
 
     /**
      * Constuctor para los autos NPC (Car)
@@ -100,7 +100,7 @@ public class Car{
             if(!InGame.Jump){
 
                 if(!destroy){
-                    if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
+                    if(new Rectangle(carPosition.x+4 , carPosition.y+3, 57, 75).intersects(new Rectangle(instance.vehiclePosition.x, instance.vehiclePosition.y, (int)instance.W, (int)instance.H))){
                         InGame.isPlaying = false;  
                         destroy = true; 
                         

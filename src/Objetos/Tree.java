@@ -16,6 +16,7 @@ public class Tree {
 
     Point trees = new Point(40,0);
     public static double Velocity=300;
+    Vehicle instance=Vehicle.getInstance();
 
     /**
      * 
@@ -63,7 +64,7 @@ public class Tree {
     public void moveDown(){
         if(trees.y<=2000) trees.y = (int) (trees.y + Velocity*(0.5) * InGame.delta_time);
 
-        if(new Rectangle(trees.x,trees.y,60,60).intersects(new Rectangle(Vehicle.vehiclePosition.x, Vehicle.vehiclePosition.y, (int)Vehicle.W, (int)Vehicle.H))){
+        if(new Rectangle(trees.x,trees.y,60,60).intersects(new Rectangle(instance.vehiclePosition.x, instance.vehiclePosition.y, (int)instance.W, (int)instance.H))){
             InGame.isPlaying = false;
             Vehicle.destroy = true;
         }

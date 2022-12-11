@@ -15,14 +15,15 @@ public class Shoot {
     Random r = new Random();
     public static Point shoot = new Point(0,0);
     int Velocity= 300;
+    Vehicle instance= Vehicle.getInstance();
 
     /**
      * Constructor de Shoot. Asigna al misil la misma posición que el auto del jugador.
      */
     
     public Shoot(){
-       shoot.x = Vehicle.vehiclePosition.x;
-       shoot.y = Vehicle.vehiclePosition.y;
+       shoot.x = instance.vehiclePosition.x;
+       shoot.y = instance.vehiclePosition.y;
     }
 
     /**

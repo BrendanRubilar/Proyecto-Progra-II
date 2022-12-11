@@ -23,6 +23,7 @@ public class Gas {
     Random r = new Random();
     Point gas = new Point(40,0);
     private Clip gasPlus;
+    Vehicle instance= Vehicle.getInstance();
 
     /**
     * 
@@ -58,7 +59,7 @@ public class Gas {
         if(gas.y<=2000){
             gas.y = (int) (gas.y + Car.Velocity * InGame.delta_time);
             
-            if(((Vehicle.vehiclePosition.x >= gas.x-60 && Vehicle.vehiclePosition.x < gas.x + 60) && (Vehicle.vehiclePosition.y >= gas.y-60 && Vehicle.vehiclePosition.y < gas.y + 60)) || (Vehicle.vehiclePosition.x == gas.x && Vehicle.vehiclePosition.x == gas.y)){
+            if(((instance.vehiclePosition.x >= gas.x-60 && instance.vehiclePosition.x < gas.x + 60) && (instance.vehiclePosition.y >= gas.y-60 && instance.vehiclePosition.y < gas.y + 60)) || (instance.vehiclePosition.x == gas.x && instance.vehiclePosition.x == gas.y)){
                 gasSound();
                 gas.y = 1990;
                 InGame.gasAmount = InGame.gasAmount + 50;

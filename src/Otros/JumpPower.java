@@ -23,6 +23,7 @@ public class JumpPower {
     Point jumpBox = new Point(40,0);
     private Clip gasPlus;
     public static boolean ThePlayerHasJump = false;
+    Vehicle instance = Vehicle.getInstance();
 
     /**
      * Constructor de JumpPower
@@ -58,7 +59,7 @@ public class JumpPower {
         if(jumpBox.y<=2000){
             jumpBox.y = (int) (jumpBox.y + Car.Velocity * InGame.delta_time);
             
-            if(((Vehicle.vehiclePosition.x >= jumpBox.x-60 && Vehicle.vehiclePosition.x < jumpBox.x + 60) && (Vehicle.vehiclePosition.y >= jumpBox.y-60 && Vehicle.vehiclePosition.y < jumpBox.y + 60)) || (Vehicle.vehiclePosition.x == jumpBox.x && Vehicle.vehiclePosition.x == jumpBox.y)){
+            if(((instance.vehiclePosition.x >= jumpBox.x-60 && instance.vehiclePosition.x < jumpBox.x + 60) && (instance.vehiclePosition.y >= jumpBox.y-60 && instance.vehiclePosition.y < jumpBox.y + 60)) || (instance.vehiclePosition.x == jumpBox.x && instance.vehiclePosition.x == jumpBox.y)){
                 
                 gasSound();
                 ThePlayerHasJump=true;
