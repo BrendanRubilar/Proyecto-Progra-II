@@ -182,6 +182,9 @@ public class Vehicle {
         if(instance.vehiclePosition.y<20 ||instance.vehiclePosition.x>580)  throw new InvalidPositionException("Error en los limites de juego");  
     }
 
+    /**
+     * Métodos para obtener el ancho y largo del vehiculo.
+     */
     public int getSizeH(){
         return (int)H;
     }

@@ -37,7 +37,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     public static int x = 290, y = 0, w= 500, h=1000, points=0; 
 
     private int highScore;
-    public static Clip jump_clip;
+    private Clip jump_clip;
     public static ArrayList<Car> cars; 
     public static ArrayList<Tree> trees;
     public static ArrayList<Gas> gasList;

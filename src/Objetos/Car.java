@@ -5,7 +5,12 @@ import java.util.Random;
 import javax.swing.ImageIcon;
 import java.awt.Point;
 
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.AudioSystem;
+import java.io.File;
+
 import PanelCentral.InGame;
+import PanelCentral.Status;
 
 /**
  * Esta clase establece los parámetros para generar los autos que 
@@ -17,9 +22,11 @@ public class Car{
     Point carPosition = new Point(300,0);
     double carW=100, carH = 100;
     public static double Velocity=350;
+    private Clip kaboom;
     Random r = new Random();
     boolean destroy=false;
     Vehicle instance= Vehicle.getInstance();
+    
 
     /**
      * Constuctor para los autos NPC (Car)
@@ -81,7 +88,8 @@ public class Car{
             g.fillRoundRect((int)carPosition.x, (int)carPosition.y, (int)60, (int)85,(int)55,(int)15);
         }else{
             ImageIcon tree = new ImageIcon("Multimedia//Explosion.png");
-            g.drawImage(tree.getImage(), (int)carPosition.x, (int) carPosition.y,(int)carW,(int)carH,null); 
+            g.drawImage(tree.getImage(), (int)carPosition.x, (int) carPosition.y,(int)carW,(int)carH,null);
+            
         }
     }
 
@@ -109,6 +117,7 @@ public class Car{
                         destroy=true;
                         InGame.shooting = false;
                         Shoot.shoot.y = -2000;
+                        explosion();
                     }
                 }else{
                     if(carW>0){
@@ -144,6 +153,23 @@ public class Car{
             return true;
         }else{
             return false;
+        }
+    }
+
+/**
+     * 
+     * Método para reproducir el archivo boom.wav de la carpeta Multimedia el cual simula
+     * un sonido de explosion, representando así la destrucción de un auto.
+     * 
+     */
+
+    private void explosion(){
+        try{
+            kaboom = AudioSystem.getClip();
+            kaboom.open(AudioSystem.getAudioInputStream(new File("Multimedia//boom.wav")));
+            kaboom.loop(0);
+        }catch (Exception e){
+            System.out.println("No funcionó, verifique si tiene el archivo de audio en carpeta Multimedia " + e);
         }
     }
 
