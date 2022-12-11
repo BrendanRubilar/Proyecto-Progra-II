@@ -1,7 +1,6 @@
 package PanelCentral;
 
 import javax.swing.*;
-import java.awt.event.*;
 
 public class Window extends JFrame {
 

@@ -10,7 +10,6 @@ import javax.sound.sampled.AudioSystem;
 import java.io.File;
 
 import PanelCentral.InGame;
-import PanelCentral.Status;
 
 /**
  * Esta clase establece los parámetros para generar los autos que 

@@ -74,7 +74,7 @@ public class Vehicle {
             vehiclePosition.y = (int) (vehiclePosition.y - Velocity * InGame.delta_time);
         }
         if (vehiclePosition.y>=20 && vehiclePosition.x >= 0 && vehiclePosition.x<=290 || vehiclePosition.y>=20 && vehiclePosition.x >= 790 && vehiclePosition.x<=1080) {
-            vehiclePosition.y = (int) (vehiclePosition.y - (Velocity*0.66)* InGame.delta_time); 
+            vehiclePosition.y = (int) (vehiclePosition.y - (Velocity*0.66)* InGame.delta_time);
         }
         if (giro>0.2){
             giro=giro-0.02;

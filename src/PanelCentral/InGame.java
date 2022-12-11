@@ -33,7 +33,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
     Color VerdeHoja, AzulAgua, GrisGrava; 
 
     public static boolean Jump=false, shooting=false,gasOut = false,isOnPause=false,isPlaying = false;
-    public static double delta_time = 0,gasAmount = 200; 
+    public static double delta_time = 0.016,gasAmount = 200; 
     public static int x = 290, y = 0, w= 500, h=1000, points=0; 
 
     private int highScore;

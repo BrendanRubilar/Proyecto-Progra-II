@@ -1,15 +1,11 @@
 
 package Objetos;
-
-import static Objetos.Vehicle.Velocity;
-import static Objetos.Vehicle.giro;
-import PanelCentral.*;
-import java.awt.Graphics;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import PanelCentral.*;
 
 import Otros.InvalidPositionException;
 
@@ -60,10 +56,10 @@ public class VehicleTest {
     @Test
     public void testMoveUp() {
         System.out.println("MoveUp");
-        for(int i=0;i<1000;i++){
+        for(int i=0;i<10000;i++){
             car1.MoveUp();
         }
-        assertEquals(20,car1.vehiclePosition.y);
+        assertEquals(20,car1.vehiclePosition.y,5.0);
     }
 
     /**
@@ -75,7 +71,7 @@ public class VehicleTest {
         for(int i=0;i<1000;i++){
             car1.MoveRight();
         }
-        assertEquals(980,car1.vehiclePosition.x);
+        assertEquals(980,car1.vehiclePosition.x, 5.0);
        
     }
 
@@ -88,7 +84,7 @@ public class VehicleTest {
         for(int i=0;i<1000;i++){
             car1.MoveLeft();
         }
-        assertEquals(20,car1.vehiclePosition.x);
+        assertEquals(20,car1.vehiclePosition.x,5.0);
     }
 
     /**
@@ -100,7 +96,7 @@ public class VehicleTest {
         for(int i=0;i<1000;i++){
             car1.MoveDown();
         }
-        assertEquals(580,car1.vehiclePosition.y);
+        assertEquals(580,car1.vehiclePosition.y,5.0);
     }
 
     /**
