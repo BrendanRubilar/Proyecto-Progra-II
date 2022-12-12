@@ -27,11 +27,14 @@ public class VehicleTest {
     
     @Before
     public void setUp() {
-        car1 = Vehicle.getInstance(); 
+        car1 = Vehicle.getInstance();
+        
     }
     
     @After
     public void tearDown() {
+        car1.vehiclePosition.x=510;
+        car1.vehiclePosition.x=540;
     }
 
     /**
@@ -56,10 +59,10 @@ public class VehicleTest {
     @Test
     public void testMoveUp() {
         System.out.println("MoveUp");
-        for(int i=0;i<10000;i++){
+        for(int i=0;i<1000;i++){
             car1.MoveUp();
         }
-        assertEquals(20,car1.vehiclePosition.y,5.0);
+        assertEquals(20,car1.vehiclePosition.y,20.0);
     }
 
     /**
@@ -71,7 +74,7 @@ public class VehicleTest {
         for(int i=0;i<1000;i++){
             car1.MoveRight();
         }
-        assertEquals(980,car1.vehiclePosition.x, 5.0);
+        assertEquals(980,car1.vehiclePosition.x, 20.0);
        
     }
 
@@ -84,7 +87,7 @@ public class VehicleTest {
         for(int i=0;i<1000;i++){
             car1.MoveLeft();
         }
-        assertEquals(20,car1.vehiclePosition.x,5.0);
+        assertEquals(20,car1.vehiclePosition.x,20.0);
     }
 
     /**
@@ -96,7 +99,7 @@ public class VehicleTest {
         for(int i=0;i<1000;i++){
             car1.MoveDown();
         }
-        assertEquals(580,car1.vehiclePosition.y,5.0);
+        assertEquals(580,car1.vehiclePosition.y,20.0);
     }
 
     /**

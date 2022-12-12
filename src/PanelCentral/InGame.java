@@ -117,19 +117,15 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         g.setColor(Color.GRAY); //Pista
         g.fillRect((int)x, (int)y, (int)w, (int)h);
        
-        g.setColor(Color.white); //Decoracion, falta añadir efecto de movimiento
-        g.fillRect((int)x+(int)w/2, (int)rectY, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY2, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY3, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY4, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY5, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY6, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY7, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY8, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY9, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY10, 15, 70);
-        g.fillRect((int)x+(int)w/2, (int)rectY11, 15, 70);
+        g.setColor(Color.white); //Decoracion pista
+        g.fillRect((int)x+(int)w/2, 0, 15, 720);
 
+        g.setColor(Color.white); //Decoracion pista
+        g.fillRect((int)x, 0, 15, 720);
+
+        g.setColor(Color.white); //Decoracion pista
+        g.fillRect((int)x+(int)w, 0, 15, 720);
+        
         if(!cars.isEmpty()){
             for (int i = 0; i < cars.size(); i++) {
                 cars.get(i).paint(g);
@@ -252,30 +248,7 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             boton2.setEnabled(false);
             boton3.setEnabled(false);
 
-            rectY=rectY + 150 *delta_time;
-            rectY2=rectY2 + 150 *delta_time;
-            rectY3=rectY3 + 150 *delta_time;
-            rectY4=rectY4 + 150 *delta_time;
-            rectY5=rectY5 + 150 *delta_time;
-            rectY6=rectY6 + 150 *delta_time;
-            rectY7=rectY7 + 150*delta_time;
-            rectY8=rectY8 + 150*delta_time;
-            rectY9=rectY9 + 150*delta_time;
-            rectY10=rectY10 + 150*delta_time;
-            rectY11=rectY11 + 150*delta_time;
-
-            if(rectY>=720) rectY = -80;
-            if(rectY2>=720) rectY2 = -80;
-            if(rectY3>=720) rectY3 = -80;
-            if(rectY4>=720) rectY4 = -80;
-            if(rectY5>=720) rectY5 = -80;
-            if(rectY6>=720) rectY6 = -80;
-            if(rectY7>=720) rectY7 = -80;
-            if(rectY8>=720) rectY8 = -80;
-            if(rectY9>=720) rectY9 = -80;
-            if(rectY10>=720) rectY10 = -80;
-            if(rectY11>=720) rectY11 = -80;
-
+         
             points++;
 
             if(gasAmount>0) gasAmount=gasAmount-0.05;
@@ -297,7 +270,6 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
         g.setFont(new Font("Cascadia Mono SemiBold", Font.BOLD, 12));
         g.drawString("Puntuacion: "+points, 820, 20);
         
-
 
         ImageIcon inventoryIcon = new ImageIcon("Multimedia//poder.png");
         g.drawImage(inventoryIcon.getImage(), 910, 100,90,90,null); 
@@ -526,8 +498,8 @@ public class InGame extends JPanel implements KeyListener,ActionListener{
             for (int i = 0; i < gasList.size(); i++){
                 gasList.remove(i);
             }
-            for (int i = 0; i < shootsList.size(); i++){
-                shootsList.remove(i);
+            for (int i = 0; i < rocketBoxes.size(); i++){
+                rocketBoxes.remove(i);
             }                        
             resetGame();
         }
